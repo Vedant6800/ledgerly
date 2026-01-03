@@ -594,6 +594,7 @@ class Ledgerly {
             <tr class="fade-in">
                 <td class="transaction-date">${this.formatDate(t.date)}</td>
                 <td class="transaction-description">${this.escapeHtml(t.description)}</td>
+                <td class="transaction-category">${this.escapeHtml(t.category)}</td>
                 <td class="transaction-amount ${t.type}">${this.formatCurrency(t.amount)}</td>
                 <td>
                     <div class="transaction-actions">
@@ -632,3 +633,4 @@ let app;
 document.addEventListener('DOMContentLoaded', () => {
     app = new Ledgerly();
 });
+
