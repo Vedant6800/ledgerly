@@ -731,3 +731,12 @@ class GitHubDataManager {
         return await this.loadMonthData(year, month);
     }
 }
+
+// Export for use in main application
+window.GitHubAPIClient = GitHubAPIClient;
+window.GitHubDataManager = GitHubDataManager;
+window.GITHUB_CONFIG = GITHUB_CONFIG;
+window.TokenManager = TokenManager;
+
+
+
