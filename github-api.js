@@ -5,7 +5,7 @@ const GITHUB_CONFIG = {
     owner: 'Vedant6800',        // Replace with your GitHub username
     repo: 'ledgerly',                 // Replace with your repository name
     branch: 'main',                        // Replace with your branch name (main or master)
-    token: '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',              // Replace with your Personal Access Token
+    token: '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',              // Replace with your Personal Access Token
     basePath: 'data'                       // Base path for data files in repo
 };
 
@@ -583,4 +583,5 @@ class GitHubDataManager {
 window.GitHubAPIClient = GitHubAPIClient;
 window.GitHubDataManager = GitHubDataManager;
 window.GITHUB_CONFIG = GITHUB_CONFIG;
+
 
