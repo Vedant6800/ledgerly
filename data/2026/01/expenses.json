@@ -14,5 +14,13 @@
     "amount": 400,
     "createdAt": "2026-01-03T09:35:22.226Z",
     "updatedAt": "2026-01-03T09:35:22.226Z"
+  },
+  {
+    "id": "exp_20260117674337672058004",
+    "date": "2026-01-01",
+    "description": "Mummy Bdy Breakfast",
+    "amount": 160,
+    "createdAt": "2026-01-03T09:49:27.205Z",
+    "updatedAt": "2026-01-03T09:49:27.205Z"
   }
 ]
