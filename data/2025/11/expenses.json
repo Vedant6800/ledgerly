@@ -1,0 +1,43 @@
+[
+  {
+    "id": "exp_2511001",
+    "date": "2025-11-01",
+    "description": "Rent Payment",
+    "amount": 25000,
+    "createdAt": "2025-11-01T10:00:00.000Z",
+    "updatedAt": "2025-11-01T10:00:00.000Z"
+  },
+  {
+    "id": "exp_2511002",
+    "date": "2025-11-03",
+    "description": "Grocery Shopping",
+    "amount": 5200,
+    "createdAt": "2025-11-03T17:20:00.000Z",
+    "updatedAt": "2025-11-03T17:20:00.000Z"
+  },
+  {
+    "id": "exp_2511003",
+    "date": "2025-11-08",
+    "description": "Internet Bill",
+    "amount": 1299,
+    "createdAt": "2025-11-08T12:00:00.000Z",
+    "updatedAt": "2025-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "exp_2511004",
+    "date": "2025-11-15",
+    "description": "Medical Checkup",
+    "amount": 3500,
+    "createdAt": "2025-11-15T11:30:00.000Z",
+    "updatedAt": "2025-11-15T11:30:00.000Z"
+  },
+  {
+    "id": "exp_2511005",
+    "date": "2025-11-25",
+    "description": "Shopping - Clothing",
+    "amount": 8900,
+    "createdAt": "2025-11-25T16:45:00.000Z",
+    "updatedAt": "2025-11-25T16:45:00.000Z"
+  }
+]
+

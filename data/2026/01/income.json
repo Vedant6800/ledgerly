@@ -1,0 +1,19 @@
+[
+  {
+    "id": "inc_2601001",
+    "date": "2026-01-01",
+    "description": "Monthly Salary",
+    "amount": 78000,
+    "createdAt": "2026-01-01T09:00:00.000Z",
+    "updatedAt": "2026-01-01T09:00:00.000Z"
+  },
+  {
+    "id": "inc_2601002",
+    "date": "2026-01-02",
+    "description": "Stock Dividends",
+    "amount": 8500,
+    "createdAt": "2026-01-02T10:15:00.000Z",
+    "updatedAt": "2026-01-02T10:15:00.000Z"
+  }
+]
+

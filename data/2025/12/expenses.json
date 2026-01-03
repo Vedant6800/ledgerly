@@ -1,0 +1,43 @@
+[
+  {
+    "id": "exp_2512001",
+    "date": "2025-12-01",
+    "description": "Rent Payment",
+    "amount": 25000,
+    "createdAt": "2025-12-01T10:00:00.000Z",
+    "updatedAt": "2025-12-01T10:00:00.000Z"
+  },
+  {
+    "id": "exp_2512002",
+    "date": "2025-12-05",
+    "description": "Grocery Shopping",
+    "amount": 6800,
+    "createdAt": "2025-12-05T18:30:00.000Z",
+    "updatedAt": "2025-12-05T18:30:00.000Z"
+  },
+  {
+    "id": "exp_2512003",
+    "date": "2025-12-12",
+    "description": "Electricity Bill",
+    "amount": 3200,
+    "createdAt": "2025-12-12T11:00:00.000Z",
+    "updatedAt": "2025-12-12T11:00:00.000Z"
+  },
+  {
+    "id": "exp_2512004",
+    "date": "2025-12-20",
+    "description": "Christmas Shopping",
+    "amount": 15000,
+    "createdAt": "2025-12-20T15:00:00.000Z",
+    "updatedAt": "2025-12-20T15:00:00.000Z"
+  },
+  {
+    "id": "exp_2512005",
+    "date": "2025-12-28",
+    "description": "New Year Party",
+    "amount": 4500,
+    "createdAt": "2025-12-28T21:00:00.000Z",
+    "updatedAt": "2025-12-28T21:00:00.000Z"
+  }
+]
+

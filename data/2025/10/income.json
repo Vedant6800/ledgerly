@@ -1,0 +1,27 @@
+[
+  {
+    "id": "inc_2510001",
+    "date": "2025-10-01",
+    "description": "Monthly Salary",
+    "amount": 75000,
+    "createdAt": "2025-10-01T09:00:00.000Z",
+    "updatedAt": "2025-10-01T09:00:00.000Z"
+  },
+  {
+    "id": "inc_2510002",
+    "date": "2025-10-15",
+    "description": "Freelance Project Payment",
+    "amount": 18000,
+    "createdAt": "2025-10-15T14:30:00.000Z",
+    "updatedAt": "2025-10-15T14:30:00.000Z"
+  },
+  {
+    "id": "inc_2510003",
+    "date": "2025-10-25",
+    "description": "Investment Dividend",
+    "amount": 5500,
+    "createdAt": "2025-10-25T11:20:00.000Z",
+    "updatedAt": "2025-10-25T11:20:00.000Z"
+  }
+]
+

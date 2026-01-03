@@ -1,0 +1,27 @@
+[
+  {
+    "id": "inc_2511001",
+    "date": "2025-11-01",
+    "description": "Monthly Salary",
+    "amount": 75000,
+    "createdAt": "2025-11-01T09:00:00.000Z",
+    "updatedAt": "2025-11-01T09:00:00.000Z"
+  },
+  {
+    "id": "inc_2511002",
+    "date": "2025-11-12",
+    "description": "Consulting Fee",
+    "amount": 12000,
+    "createdAt": "2025-11-12T15:00:00.000Z",
+    "updatedAt": "2025-11-12T15:00:00.000Z"
+  },
+  {
+    "id": "inc_2511003",
+    "date": "2025-11-20",
+    "description": "Bonus Payment",
+    "amount": 25000,
+    "createdAt": "2025-11-20T10:30:00.000Z",
+    "updatedAt": "2025-11-20T10:30:00.000Z"
+  }
+]
+

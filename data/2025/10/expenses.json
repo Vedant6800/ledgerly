@@ -1,0 +1,43 @@
+[
+  {
+    "id": "exp_2510001",
+    "date": "2025-10-02",
+    "description": "Rent Payment",
+    "amount": 25000,
+    "createdAt": "2025-10-02T10:00:00.000Z",
+    "updatedAt": "2025-10-02T10:00:00.000Z"
+  },
+  {
+    "id": "exp_2510002",
+    "date": "2025-10-05",
+    "description": "Grocery Shopping",
+    "amount": 4500,
+    "createdAt": "2025-10-05T16:45:00.000Z",
+    "updatedAt": "2025-10-05T16:45:00.000Z"
+  },
+  {
+    "id": "exp_2510003",
+    "date": "2025-10-10",
+    "description": "Electricity Bill",
+    "amount": 2800,
+    "createdAt": "2025-10-10T11:00:00.000Z",
+    "updatedAt": "2025-10-10T11:00:00.000Z"
+  },
+  {
+    "id": "exp_2510004",
+    "date": "2025-10-18",
+    "description": "Mobile Recharge",
+    "amount": 599,
+    "createdAt": "2025-10-18T09:30:00.000Z",
+    "updatedAt": "2025-10-18T09:30:00.000Z"
+  },
+  {
+    "id": "exp_2510005",
+    "date": "2025-10-28",
+    "description": "Restaurant Dinner",
+    "amount": 3200,
+    "createdAt": "2025-10-28T20:15:00.000Z",
+    "updatedAt": "2025-10-28T20:15:00.000Z"
+  }
+]
+

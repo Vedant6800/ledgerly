@@ -1,0 +1,27 @@
+[
+  {
+    "id": "inc_2512001",
+    "date": "2025-12-01",
+    "description": "Monthly Salary",
+    "amount": 75000,
+    "createdAt": "2025-12-01T09:00:00.000Z",
+    "updatedAt": "2025-12-01T09:00:00.000Z"
+  },
+  {
+    "id": "inc_2512002",
+    "date": "2025-12-10",
+    "description": "Year-end Bonus",
+    "amount": 50000,
+    "createdAt": "2025-12-10T10:00:00.000Z",
+    "updatedAt": "2025-12-10T10:00:00.000Z"
+  },
+  {
+    "id": "inc_2512003",
+    "date": "2025-12-18",
+    "description": "Freelance Project",
+    "amount": 22000,
+    "createdAt": "2025-12-18T14:20:00.000Z",
+    "updatedAt": "2025-12-18T14:20:00.000Z"
+  }
+]
+

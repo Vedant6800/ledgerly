@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ledgerly - Monthly Income & Expense Ledger</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="header-text">
+                    <h1 class="app-name">Ledgerly</h1>
+                    <p class="app-subtitle">Monthly Income & Expense Ledger</p>
+                </div>
+                <button class="theme-toggle" id="theme-toggle" title="Toggle theme">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+
+            <!-- Loading Indicator -->
+            <div class="loading-overlay" id="loading-overlay">
+                <div class="loading-spinner"></div>
+                <p class="loading-text">Loading data from GitHub...</p>
+            </div>
+
+            <!-- Month Selector -->
+            <section class="month-selector-section">
+                <label for="month-selector" class="month-label">Select Month</label>
+                <input type="month" id="month-selector" class="month-input">
+            </section>
+
+            <!-- Monthly Summary Cards -->
+            <section class="summary-cards">
+                <div class="summary-card income-card">
+                    <p class="card-label">Total Income</p>
+                    <p class="card-value" id="total-income">₹0.00</p>
+                </div>
+                <div class="summary-card expense-card">
+                    <p class="card-label">Total Expenses</p>
+                    <p class="card-value" id="total-expenses">₹0.00</p>
+                </div>
+                <div class="summary-card balance-card">
+                    <p class="card-label">Balance</p>
+                    <p class="card-value" id="balance">₹0.00</p>
+                </div>
+            </section>
+
+            <!-- Transaction Entry Form -->
+            <section class="transaction-form-section">
+                <form id="transaction-form" class="transaction-form">
+                    <div class="form-header">
+                        <h2 class="form-title" id="form-title">Add Transaction</h2>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="transaction-date" class="form-label">Date</label>
+                            <input type="date" id="transaction-date" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Type</label>
+                            <div class="toggle-group">
+                                <button type="button" class="toggle-btn active" data-type="income" id="income-btn">Income</button>
+                                <button type="button" class="toggle-btn" data-type="expense" id="expense-btn">Expense</button>
+                            </div>
+                            <input type="hidden" id="transaction-type" value="income">
+                        </div>
+
+                        <div class="form-group form-group-wide">
+                            <label for="transaction-description" class="form-label">Description</label>
+                            <input type="text" id="transaction-description" class="form-input" placeholder="e.g., Salary, Groceries" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="transaction-amount" class="form-label">Amount</label>
+                            <input type="number" id="transaction-amount" class="form-input" placeholder="0.00" step="0.01" min="0" required>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" id="submit-btn">Add Transaction</button>
+                        <button type="button" class="btn btn-secondary" id="cancel-btn" style="display: none;">Cancel</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Transaction List -->
+            <section class="transaction-list-section">
+                <h2 class="section-title">Transactions</h2>
+
+                <div class="table-container">
+                    <table class="transaction-table" id="transaction-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Amount</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transaction-tbody">
+                            <!-- Transactions will be inserted here -->
+                        </tbody>
+                    </table>
+
+                    <!-- Empty State -->
+                    <div class="empty-state" id="empty-state">
+                        <p class="empty-message">No transactions for this month</p>
+                        <p class="empty-submessage">Add your first transaction to get started</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-text">
+                    Designed & Developed by <span class="footer-name">Vedant Nogja</span>
+                </p>
+                <p class="footer-year">© 2026</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="github-api.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
