@@ -14,7 +14,8 @@
     "description": "RD",
     "amount": 1500,
     "createdAt": "2026-01-03T09:46:17.513Z",
-    "updatedAt": "2026-01-03T09:46:17.513Z"
+    "updatedAt": "2026-01-03T09:46:17.513Z",
+    "category": "Investment"
   },
   {
     "id": "exp_20260117674338961549483",
@@ -22,7 +23,8 @@
     "description": "Groundnut",
     "amount": 115,
     "createdAt": "2026-01-03T09:51:36.154Z",
-    "updatedAt": "2026-01-03T09:51:36.154Z"
+    "updatedAt": "2026-01-03T09:51:36.154Z",
+    "category": "Grocery"
   },
   {
     "id": "exp_20260117674329222267492",
@@ -30,7 +32,8 @@
     "description": "Jagerry",
     "amount": 400,
     "createdAt": "2026-01-03T09:35:22.226Z",
-    "updatedAt": "2026-01-03T09:35:22.226Z"
+    "updatedAt": "2026-01-03T09:35:22.226Z",
+    "category": "Grocery"
   },
   {
     "id": "exp_20260117674337672058004",
@@ -38,7 +41,8 @@
     "description": "Mummy Bdy Breakfast",
     "amount": 160,
     "createdAt": "2026-01-03T09:49:27.205Z",
-    "updatedAt": "2026-01-03T09:49:27.205Z"
+    "updatedAt": "2026-01-03T09:49:27.205Z",
+    "category": "Food"
   },
   {
     "id": "exp_20260117674340038238245",
@@ -46,6 +50,7 @@
     "description": "Panipuri with seji and her sister",
     "amount": 80,
     "createdAt": "2026-01-03T09:53:23.823Z",
-    "updatedAt": "2026-01-03T09:53:23.823Z"
+    "updatedAt": "2026-01-03T09:53:23.823Z",
+    "category": "Food"
   }
 ]
