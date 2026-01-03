@@ -1,0 +1,4 @@
+{
+  "income": ["Salary","Others"],
+  "expenses": ["Food","Rent","Utilities","Entertainment","Transportation","Healthcare","Education","Clothing","Personal Care","Gifts","Donations","Travel","Miscellaneous"]
+}
