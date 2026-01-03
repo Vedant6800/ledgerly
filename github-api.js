@@ -533,6 +533,9 @@ class GitHubDataManager {
             updatedAt: new Date().toISOString()
         };
 
+        // Normalize type to plural form for file operations
+        const fileType = type === 'income' ? 'income' : 'expenses';
+
         // Add to in-memory data
         const targetArray = type === 'income'
             ? this.data[year][month].income
@@ -545,7 +548,7 @@ class GitHubDataManager {
 
         // Update GitHub
         const commitMessage = `Add ${type}: ${transaction.description} (₹${transaction.amount})`;
-        await this.github.updateFile(year, month, type, targetArray, commitMessage);
+        await this.github.updateFile(year, month, fileType, targetArray, commitMessage);
 
         return newTransaction;
     }
@@ -737,6 +740,7 @@ window.GitHubAPIClient = GitHubAPIClient;
 window.GitHubDataManager = GitHubDataManager;
 window.GITHUB_CONFIG = GITHUB_CONFIG;
 window.TokenManager = TokenManager;
+
 
 
 
