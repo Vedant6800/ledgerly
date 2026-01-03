@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260117674535560418521",
+    "date": "2026-01-03",
+    "description": "Moisturiser",
+    "amount": 20,
+    "createdAt": "2026-01-03T15:19:16.042Z",
+    "updatedAt": "2026-01-03T15:19:16.042Z",
+    "category": "Personal Care"
+  },
+  {
     "id": "exp_20260117674335775132556",
     "date": "2026-01-02",
     "description": "RD",
