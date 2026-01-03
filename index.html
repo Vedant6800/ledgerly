@@ -15,12 +15,62 @@
                     <h1 class="app-name">Ledgerly</h1>
                     <p class="app-subtitle">Monthly Income & Expense Ledger</p>
                 </div>
-                <button class="theme-toggle" id="theme-toggle" title="Toggle theme">
-                    <span class="theme-icon">🌙</span>
-                </button>
+                <div class="header-actions">
+                    <button class="btn-icon" id="token-settings-btn" title="GitHub Token Settings">
+                        <span>🔑</span>
+                    </button>
+                    <button class="theme-toggle" id="theme-toggle" title="Toggle theme">
+                        <span class="theme-icon">🌙</span>
+                    </button>
+                </div>
             </div>
         </div>
     </header>
+
+    <!-- Token Settings Modal -->
+    <div class="modal" id="token-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🔑 GitHub Token Settings</h2>
+                <button class="modal-close" id="token-modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="token-status" id="token-status">
+                    <div class="status-indicator" id="status-indicator">
+                        <span class="status-dot"></span>
+                        <span class="status-text">Checking token status...</span>
+                    </div>
+                </div>
+
+                <div class="token-info">
+                    <h3>Current Token</h3>
+                    <div class="token-display">
+                        <label for="token-display-input" class="sr-only">GitHub Token</label>
+                        <input type="password" id="token-display-input" readonly placeholder="No token set">
+                        <button class="btn-secondary" id="toggle-token-visibility">👁️ Show</button>
+                    </div>
+                </div>
+
+                <div class="token-actions">
+                    <button class="btn btn-primary" id="update-token-btn">🔄 Update Token</button>
+                    <button class="btn btn-danger" id="clear-token-btn">🗑️ Clear Token</button>
+                </div>
+
+                <div class="token-help">
+                    <h3>How to Generate a GitHub Token</h3>
+                    <ol>
+                        <li>Go to <a href="https://github.com/settings/tokens" target="_blank">GitHub Settings → Tokens</a></li>
+                        <li>Click "Generate new token (classic)"</li>
+                        <li>Set a note: <code>Ledgerly App</code></li>
+                        <li>Set expiration (90 days recommended)</li>
+                        <li>Select scope: <strong>✓ repo</strong> (Full control of private repositories)</li>
+                        <li>Click "Generate token"</li>
+                        <li>Copy the token (starts with <code>ghp_</code> or <code>github_pat_</code>)</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Main Content -->
     <main class="main-content">

@@ -5,9 +5,67 @@ const GITHUB_CONFIG = {
     owner: 'Vedant6800',        // Replace with your GitHub username
     repo: 'ledgerly',                 // Replace with your repository name
     branch: 'main',                        // Replace with your branch name (main or master)
-    token: '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',              // Replace with your Personal Access Token
+    token: '',              // Token will be loaded from localStorage
     basePath: 'data'                       // Base path for data files in repo
 };
+
+// ==========================================
+// TOKEN MANAGER
+// ==========================================
+class TokenManager {
+    static STORAGE_KEY = 'ledgerly_github_token';
+
+    // Get token from localStorage
+    static getToken() {
+        return localStorage.getItem(this.STORAGE_KEY);
+    }
+
+    // Save token to localStorage
+    static saveToken(token) {
+        if (token && token.trim()) {
+            localStorage.setItem(this.STORAGE_KEY, token.trim());
+            return true;
+        }
+        return false;
+    }
+
+    // Remove token from localStorage
+    static clearToken() {
+        localStorage.removeItem(this.STORAGE_KEY);
+    }
+
+    // Prompt user for token
+    static promptForToken(message = 'Please enter your GitHub Personal Access Token:') {
+        const instructions = `
+${message}
+
+To generate a new token:
+1. Go to: https://github.com/settings/tokens
+2. Click "Generate new token (classic)"
+3. Name it "Ledgerly App"
+4. Select "repo" scope
+5. Click "Generate token"
+6. Copy the token (starts with 'ghp_' or 'github_pat_')
+
+Enter your token below:`;
+
+        const token = prompt(instructions);
+
+        if (token && token.trim()) {
+            return token.trim();
+        }
+
+        return null;
+    }
+
+    // Validate token format (basic check)
+    static isValidTokenFormat(token) {
+        if (!token || typeof token !== 'string') return false;
+        const trimmed = token.trim();
+        // GitHub tokens start with ghp_ (personal) or github_pat_ (fine-grained)
+        return trimmed.startsWith('ghp_') || trimmed.startsWith('github_pat_');
+    }
+}
 
 // ==========================================
 // GITHUB API CLIENT
@@ -17,6 +75,101 @@ class GitHubAPIClient {
         this.config = config;
         this.baseURL = 'https://api.github.com';
         this.cache = new Map(); // Cache file SHAs
+        this.tokenValidated = false;
+    }
+
+    // Initialize and validate token
+    async initializeToken() {
+        // Try to get token from localStorage first
+        let token = TokenManager.getToken();
+
+        if (token) {
+            console.log('✓ Token found in localStorage, validating...');
+            this.config.token = token;
+
+            // Validate the token by making a test API call
+            const isValid = await this.validateToken();
+
+            if (isValid) {
+                console.log('✓ Token is valid and working!');
+                this.tokenValidated = true;
+                return true;
+            } else {
+                console.warn('✗ Token in localStorage is expired or invalid');
+                TokenManager.clearToken();
+
+                // Ask user for new token
+                token = TokenManager.promptForToken('Your stored token has expired or is invalid.\n\nPlease provide a new GitHub Personal Access Token:');
+
+                if (!token) {
+                    throw new Error('GitHub token is required to use this app');
+                }
+
+                this.config.token = token;
+
+                // Validate the new token
+                const isNewTokenValid = await this.validateToken();
+
+                if (isNewTokenValid) {
+                    TokenManager.saveToken(token);
+                    console.log('✓ New token validated and saved!');
+                    this.tokenValidated = true;
+                    return true;
+                } else {
+                    throw new Error('The provided token is invalid. Please check and try again.');
+                }
+            }
+        } else {
+            // No token in localStorage, ask user
+            console.log('No token found in localStorage');
+            token = TokenManager.promptForToken('Welcome to Ledgerly!\n\nTo connect to GitHub, you need a Personal Access Token.');
+
+            if (!token) {
+                throw new Error('GitHub token is required to use this app');
+            }
+
+            this.config.token = token;
+
+            // Validate the token
+            const isValid = await this.validateToken();
+
+            if (isValid) {
+                TokenManager.saveToken(token);
+                console.log('✓ Token validated and saved to localStorage!');
+                this.tokenValidated = true;
+                return true;
+            } else {
+                throw new Error('The provided token is invalid. Please check and try again.');
+            }
+        }
+    }
+
+    // Validate token by making a test API call
+    async validateToken() {
+        try {
+            const response = await fetch(`${this.baseURL}/user`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${this.config.token}`,
+                    'Accept': 'application/vnd.github.v3+json'
+                }
+            });
+
+            if (response.status === 200) {
+                const userData = await response.json();
+                console.log(`Authenticated as: ${userData.login}`);
+                return true;
+            } else if (response.status === 401) {
+                console.error('Token authentication failed: 401 Unauthorized');
+                return false;
+            } else {
+                console.error(`Token validation returned status: ${response.status}`);
+                return false;
+            }
+        } catch (error) {
+            console.error('Error validating token:', error);
+            return false;
+        }
     }
 
     // Get authorization headers
@@ -36,13 +189,13 @@ class GitHubAPIClient {
     // Check if file or folder exists
     async checkExists(path) {
         const url = `${this.baseURL}/repos/${this.config.owner}/${this.config.repo}/contents/${path}?ref=${this.config.branch}`;
-
+        
         try {
             const response = await fetch(url, {
                 method: 'GET',
                 headers: this.getHeaders()
             });
-
+            
             return response.status === 200;
         } catch (error) {
             return false;
@@ -53,7 +206,7 @@ class GitHubAPIClient {
     async createFolderStructure(year, month) {
         const folderPath = `${this.config.basePath}/${year}/${month}/.gitkeep`;
         const url = `${this.baseURL}/repos/${this.config.owner}/${this.config.repo}/contents/${folderPath}`;
-
+        
         try {
             // Check if folder already exists
             const exists = await this.checkExists(`${this.config.basePath}/${year}/${month}`);
@@ -98,7 +251,7 @@ class GitHubAPIClient {
             if (response.status === 404) {
                 // File doesn't exist - try to create folder structure and return empty
                 await this.createFolderStructure(year, month);
-
+                
                 return {
                     content: [],
                     sha: null,
@@ -111,10 +264,10 @@ class GitHubAPIClient {
             }
 
             const data = await response.json();
-
+            
             // Decode base64 content
             const content = JSON.parse(atob(data.content));
-
+            
             // Cache the SHA for future updates
             const cacheKey = `${year}-${month}-${type}`;
             this.cache.set(cacheKey, data.sha);
@@ -126,12 +279,12 @@ class GitHubAPIClient {
             };
         } catch (error) {
             console.error(`Error fetching file ${path}:`, error);
-
+            
             // Try to create folder structure for new months
             if (error.message.includes('404')) {
                 await this.createFolderStructure(year, month);
             }
-
+            
             return {
                 content: [],
                 sha: null,
@@ -145,13 +298,13 @@ class GitHubAPIClient {
         try {
             // Create folder structure first
             await this.createFolderStructure(year, month);
-
+            
             // Create empty income.json
             await this.updateFile(year, month, 'income', [], `Initialize income.json for ${year}/${month}`);
-
+            
             // Create empty expenses.json
             await this.updateFile(year, month, 'expenses', [], `Initialize expenses.json for ${year}/${month}`);
-
+            
             return true;
         } catch (error) {
             console.error(`Error initializing month files for ${year}/${month}:`, error);
@@ -163,7 +316,7 @@ class GitHubAPIClient {
     async updateFile(year, month, type, content, message) {
         const path = this.getFilePath(year, month, type);
         const url = `${this.baseURL}/repos/${this.config.owner}/${this.config.repo}/contents/${path}`;
-
+        
         // Get current SHA if file exists
         const cacheKey = `${year}-${month}-${type}`;
         let sha = this.cache.get(cacheKey);
@@ -207,7 +360,7 @@ class GitHubAPIClient {
             }
 
             const data = await response.json();
-
+            
             // Update cache with new SHA
             this.cache.set(cacheKey, data.content.sha);
 
@@ -571,7 +724,7 @@ class GitHubDataManager {
         const loadingKey = `${year}-${month}`;
         this.loadingStates.delete(loadingKey);
 
-        if (this.data[year]?.[month]) {
+        if this.data[year]?.[month] {
             this.data[year][month].loaded = false;
         }
 
@@ -583,7 +736,28 @@ class GitHubDataManager {
 window.GitHubAPIClient = GitHubAPIClient;
 window.GitHubDataManager = GitHubDataManager;
 window.GITHUB_CONFIG = GITHUB_CONFIG;
+window.TokenManager = TokenManager;
 
+// Initialize GitHub API client and data manager
+const githubClient = new GitHubAPIClient(GITHUB_CONFIG);
+const dataManager = new GitHubDataManager(githubClient);
 
+// Auto-initialize token and load data for the current month
+(async () => {
+    try {
+        // Initialize and validate token
+        await githubClient.initializeToken();
 
+        // Get current year and month
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
 
+        // Load current month data
+        await dataManager.loadMonthData(year, month);
+
+        console.log('✓ Data loaded for the current month:', year, month);
+    } catch (error) {
+        console.error('Initialization error:', error);
+    }
+})();

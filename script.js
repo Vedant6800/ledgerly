@@ -21,6 +21,11 @@ class Ledgerly {
         try {
             // Initialize GitHub API client
             this.githubClient = new GitHubAPIClient(GITHUB_CONFIG);
+
+            // Initialize and validate token (will prompt user if needed)
+            this.showLoading('Verifying GitHub authentication...');
+            await this.githubClient.initializeToken();
+
             this.dataManager = new GitHubDataManager(this.githubClient);
 
             this.loadThemePreference();
@@ -31,7 +36,17 @@ class Ledgerly {
             await this.loadCurrentMonth();
         } catch (error) {
             console.error('Initialization error:', error);
-            alert('Error initializing application. Please check your GitHub configuration.');
+            this.hideLoading();
+
+            if (error.message.includes('token') || error.message.includes('GitHub')) {
+                alert(
+                    '⚠️ GitHub Authentication Failed\n\n' +
+                    error.message + '\n\n' +
+                    'Please check the console for more details.'
+                );
+            } else {
+                alert('Error initializing application:\n\n' + error.message);
+            }
         }
     }
 
@@ -130,6 +145,136 @@ class Ledgerly {
         document.getElementById('theme-toggle').addEventListener('click', () => {
             this.toggleTheme();
         });
+
+        // Token settings button
+        document.getElementById('token-settings-btn').addEventListener('click', () => {
+            this.openTokenModal();
+        });
+
+        // Token modal close button
+        document.getElementById('token-modal-close').addEventListener('click', () => {
+            this.closeTokenModal();
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('token-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'token-modal') {
+                this.closeTokenModal();
+            }
+        });
+
+        // Toggle token visibility
+        document.getElementById('toggle-token-visibility').addEventListener('click', () => {
+            this.toggleTokenVisibility();
+        });
+
+        // Update token button
+        document.getElementById('update-token-btn').addEventListener('click', async () => {
+            await this.updateToken();
+        });
+
+        // Clear token button
+        document.getElementById('clear-token-btn').addEventListener('click', () => {
+            this.clearToken();
+        });
+    }
+
+    // ==========================================
+    // TOKEN MANAGEMENT
+    // ==========================================
+    openTokenModal() {
+        const modal = document.getElementById('token-modal');
+        modal.classList.add('active');
+        this.updateTokenStatus();
+    }
+
+    closeTokenModal() {
+        const modal = document.getElementById('token-modal');
+        modal.classList.remove('active');
+    }
+
+    async updateTokenStatus() {
+        const statusDot = document.querySelector('.status-dot');
+        const statusText = document.querySelector('.status-text');
+        const tokenInput = document.getElementById('token-display-input');
+
+        const token = TokenManager.getToken();
+
+        if (!token) {
+            statusDot.className = 'status-dot invalid';
+            statusText.textContent = 'No token configured';
+            tokenInput.value = '';
+            return;
+        }
+
+        // Display masked token
+        tokenInput.value = token;
+
+        // Validate token
+        statusDot.className = 'status-dot';
+        statusText.textContent = 'Validating token...';
+
+        const isValid = await this.githubClient.validateToken();
+
+        if (isValid) {
+            statusDot.className = 'status-dot valid';
+            statusText.textContent = '✓ Token is valid and working';
+        } else {
+            statusDot.className = 'status-dot invalid';
+            statusText.textContent = '✗ Token is invalid or expired';
+        }
+    }
+
+    toggleTokenVisibility() {
+        const tokenInput = document.getElementById('token-display-input');
+        const toggleBtn = document.getElementById('toggle-token-visibility');
+
+        if (tokenInput.type === 'password') {
+            tokenInput.type = 'text';
+            toggleBtn.textContent = '🙈 Hide';
+        } else {
+            tokenInput.type = 'password';
+            toggleBtn.textContent = '👁️ Show';
+        }
+    }
+
+    async updateToken() {
+        const newToken = TokenManager.promptForToken('Enter your new GitHub Personal Access Token:');
+
+        if (!newToken) {
+            alert('Token update cancelled.');
+            return;
+        }
+
+        this.showLoading('Validating new token...');
+
+        // Temporarily set the token to validate it
+        const oldToken = this.githubClient.config.token;
+        this.githubClient.config.token = newToken;
+
+        const isValid = await this.githubClient.validateToken();
+
+        if (isValid) {
+            TokenManager.saveToken(newToken);
+            this.hideLoading();
+            alert('✓ Token updated successfully!');
+            this.updateTokenStatus();
+        } else {
+            // Restore old token if validation fails
+            this.githubClient.config.token = oldToken;
+            this.hideLoading();
+            alert('✗ Invalid token. Please check and try again.');
+        }
+    }
+
+    clearToken() {
+        if (!confirm('Are you sure you want to clear your GitHub token?\n\nYou will need to enter it again to use the app.')) {
+            return;
+        }
+
+        TokenManager.clearToken();
+        alert('Token cleared. The page will reload.');
+        setTimeout(() => location.reload(), 1000);
     }
 
     // ==========================================
@@ -345,4 +490,3 @@ let app;
 document.addEventListener('DOMContentLoaded', () => {
     app = new Ledgerly();
 });
-
