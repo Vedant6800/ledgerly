@@ -5,7 +5,6 @@
   ],
   "expenses": [
     "Clothing",
-    "Donations",
     "Education",
     "Entertainment",
     "Food",
@@ -17,6 +16,8 @@
     "Rent",
     "Transportation",
     "Travel",
-    "Utilities"
+    "Utilities",
+    "Investment",
+    "Grocery"
   ]
 }
