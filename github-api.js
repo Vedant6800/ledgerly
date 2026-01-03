@@ -731,34 +731,3 @@ class GitHubDataManager {
         return await this.loadMonthData(year, month);
     }
 }
-
-// Export for use in main application
-window.GitHubAPIClient = GitHubAPIClient;
-window.GitHubDataManager = GitHubDataManager;
-window.GITHUB_CONFIG = GITHUB_CONFIG;
-window.TokenManager = TokenManager;
-
-// Initialize GitHub API client and data manager
-const githubClient = new GitHubAPIClient(GITHUB_CONFIG);
-const dataManager = new GitHubDataManager(githubClient);
-
-// Auto-initialize token and load data for the current month
-(async () => {
-    try {
-        // Initialize and validate token
-        await githubClient.initializeToken();
-
-        // Get current year and month
-        const now = new Date();
-        const year = now.getFullYear();
-        const month = String(now.getMonth() + 1).padStart(2, '0');
-
-        // Load current month data
-        await dataManager.loadMonthData(year, month);
-
-        console.log('✓ Data loaded for the current month:', year, month);
-    } catch (error) {
-        console.error('Initialization error:', error);
-    }
-})();
-
