@@ -724,7 +724,7 @@ class GitHubDataManager {
         const loadingKey = `${year}-${month}`;
         this.loadingStates.delete(loadingKey);
 
-        if this.data[year]?.[month] {
+        if (this.data[year]?.[month]) {
             this.data[year][month].loaded = false;
         }
 
@@ -761,3 +761,4 @@ const dataManager = new GitHubDataManager(githubClient);
         console.error('Initialization error:', error);
     }
 })();
+
