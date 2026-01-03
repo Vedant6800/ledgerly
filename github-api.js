@@ -186,6 +186,120 @@ class GitHubAPIClient {
         return `${this.config.basePath}/${year}/${month}/${type}.json`;
     }
 
+    // Get category file path
+    getCategoryFilePath() {
+        return `${this.config.basePath}/category.json`;
+    }
+
+    // Get category file from GitHub
+    async getCategoryFile() {
+        const path = this.getCategoryFilePath();
+        const url = `${this.baseURL}/repos/${this.config.owner}/${this.config.repo}/contents/${path}?ref=${this.config.branch}`;
+
+        try {
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: this.getHeaders()
+            });
+
+            if (response.status === 404) {
+                // File doesn't exist - return default categories
+                return {
+                    content: {
+                        income: [],
+                        expenses: []
+                    },
+                    sha: null,
+                    exists: false
+                };
+            }
+
+            if (!response.ok) {
+                throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
+            }
+
+            const data = await response.json();
+
+            // Decode base64 content
+            const content = JSON.parse(atob(data.content));
+
+            // Cache the SHA for future updates
+            this.cache.set('category', data.sha);
+
+            return {
+                content,
+                sha: data.sha,
+                exists: true
+            };
+        } catch (error) {
+            console.error(`Error fetching category file:`, error);
+            return {
+                content: {
+                    income: [],
+                    expenses: []
+                },
+                sha: null,
+                exists: false
+            };
+        }
+    }
+
+    // Update category file on GitHub
+    async updateCategoryFile(content, message) {
+        const path = this.getCategoryFilePath();
+        const url = `${this.baseURL}/repos/${this.config.owner}/${this.config.repo}/contents/${path}`;
+
+        // Get current SHA if file exists
+        let sha = this.cache.get('category');
+
+        // If SHA not in cache, try to fetch it
+        if (!sha) {
+            try {
+                const fileData = await this.getCategoryFile();
+                sha = fileData.sha;
+            } catch (error) {
+                sha = null;
+            }
+        }
+
+        // Encode content to base64
+        const encodedContent = btoa(JSON.stringify(content, null, 2));
+
+        const body = {
+            message: message || 'Update category.json',
+            content: encodedContent,
+            branch: this.config.branch
+        };
+
+        // Add SHA only if file exists (for update)
+        if (sha) {
+            body.sha = sha;
+        }
+
+        try {
+            const response = await fetch(url, {
+                method: 'PUT',
+                headers: this.getHeaders(),
+                body: JSON.stringify(body)
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(`GitHub API error: ${response.status} - ${errorData.message}`);
+            }
+
+            const data = await response.json();
+
+            // Update cache with new SHA
+            this.cache.set('category', data.content.sha);
+
+            return data;
+        } catch (error) {
+            console.error(`Error updating category file:`, error);
+            throw error;
+        }
+    }
+
     // Check if file or folder exists
     async checkExists(path) {
         const url = `${this.baseURL}/repos/${this.config.owner}/${this.config.repo}/contents/${path}?ref=${this.config.branch}`;
@@ -533,6 +647,11 @@ class GitHubDataManager {
             updatedAt: new Date().toISOString()
         };
 
+        // Add category if provided (optional field)
+        if (transaction.category) {
+            newTransaction.category = transaction.category;
+        }
+
         // Normalize type to plural form for file operations
         const fileType = type === 'income' ? 'income' : 'expenses';
 
@@ -609,10 +728,20 @@ class GitHubDataManager {
             updatedAt: new Date().toISOString()
         };
 
+        // Update category if provided in updates
+        if (updates.category !== undefined) {
+            if (updates.category) {
+                updatedTransaction.category = updates.category;
+            } else {
+                // Remove category if empty string passed
+                delete updatedTransaction.category;
+            }
+        }
+
         this.validateTransaction(updatedTransaction, newYear, newMonth);
 
         // Check if moving to different month
-        if (newYear !== year || newMonth !== newMonth) {
+        if (newYear !== year || newMonth !== month) {
             // Remove from old month
             const oldArray = type === 'income'
                 ? this.data[year][month].income
@@ -630,12 +759,13 @@ class GitHubDataManager {
             newArray.sort((a, b) => new Date(b.date) - new Date(a.date));
 
             // Update both files on GitHub
+            const fileType = type === 'income' ? 'income' : 'expenses';
             const removeMessage = `Move ${type} transaction to ${newYear}/${newMonth}`;
             const addMessage = `Move ${type} transaction from ${year}/${month}`;
 
             await Promise.all([
-                this.github.updateFile(year, month, type, oldArray, removeMessage),
-                this.github.updateFile(newYear, newMonth, type, newArray, addMessage)
+                this.github.updateFile(year, month, fileType, oldArray, removeMessage),
+                this.github.updateFile(newYear, newMonth, fileType, newArray, addMessage)
             ]);
         } else {
             // Update in same month
@@ -647,8 +777,9 @@ class GitHubDataManager {
             targetArray.sort((a, b) => new Date(b.date) - new Date(a.date));
 
             // Update GitHub
+            const fileType = type === 'income' ? 'income' : 'expenses';
             const commitMessage = `Update ${type}: ${updatedTransaction.description}`;
-            await this.github.updateFile(year, month, type, targetArray, commitMessage);
+            await this.github.updateFile(year, month, fileType, targetArray, commitMessage);
         }
 
         return updatedTransaction;
@@ -740,7 +871,4 @@ window.GitHubAPIClient = GitHubAPIClient;
 window.GitHubDataManager = GitHubDataManager;
 window.GITHUB_CONFIG = GITHUB_CONFIG;
 window.TokenManager = TokenManager;
-
-
-
 

@@ -14,6 +14,7 @@ class Ledgerly {
         this.currentMonth = '';
         this.editingId = null;
         this.theme = 'light';
+        this.categories = { income: [], expenses: [] }; // Category cache
         this.init();
     }
 
@@ -27,6 +28,9 @@ class Ledgerly {
             await this.githubClient.initializeToken();
 
             this.dataManager = new GitHubDataManager(this.githubClient);
+
+            // Load categories from GitHub
+            await this.loadCategories();
 
             this.loadThemePreference();
             this.setupEventListeners();
@@ -47,6 +51,18 @@ class Ledgerly {
             } else {
                 alert('Error initializing application:\n\n' + error.message);
             }
+        }
+    }
+
+    // Load categories from GitHub
+    async loadCategories() {
+        try {
+            const categoryFile = await this.githubClient.getCategoryFile();
+            this.categories = categoryFile.content || { income: [], expenses: [] };
+            this.updateCategoryDropdown();
+        } catch (error) {
+            console.error('Error loading categories:', error);
+            this.categories = { income: [], expenses: [] };
         }
     }
 
@@ -177,6 +193,11 @@ class Ledgerly {
         document.getElementById('clear-token-btn').addEventListener('click', () => {
             this.clearToken();
         });
+
+        // Category change handler
+        document.getElementById('transaction-category').addEventListener('change', () => {
+            this.handleCategoryChange();
+        });
     }
 
     // ==========================================
@@ -303,6 +324,117 @@ class Ledgerly {
         }
 
         document.getElementById('transaction-type').value = type;
+        this.updateCategoryDropdown();
+    }
+
+    // ==========================================
+    // CATEGORY MANAGEMENT
+    // ==========================================
+    updateCategoryDropdown() {
+        const categorySelect = document.getElementById('transaction-category');
+        if (!categorySelect) return;
+
+        const type = document.getElementById('transaction-type').value;
+        const categories = type === 'income' ? this.categories.income : this.categories.expenses;
+
+        // Clear existing options
+        categorySelect.innerHTML = '<option value="">Select Category</option>';
+
+        // Add categories from data
+        categories.forEach(cat => {
+            const option = document.createElement('option');
+            option.value = cat;
+            option.textContent = cat;
+            categorySelect.appendChild(option);
+        });
+
+        // Add "Add New Category" option
+        const addNewOption = document.createElement('option');
+        addNewOption.value = '__add_new__';
+        addNewOption.textContent = '+ Add New Category';
+        categorySelect.appendChild(addNewOption);
+    }
+
+    handleCategoryChange() {
+        const categorySelect = document.getElementById('transaction-category');
+        if (categorySelect.value === '__add_new__') {
+            this.showAddCategoryInput();
+        }
+    }
+
+    showAddCategoryInput() {
+        const type = document.getElementById('transaction-type').value;
+        const categoryName = prompt(`Enter new ${type} category name:`);
+
+        if (!categoryName) {
+            // User cancelled - reset dropdown
+            document.getElementById('transaction-category').value = '';
+            return;
+        }
+
+        this.addNewCategory(categoryName.trim(), type);
+    }
+
+    async addNewCategory(categoryName, type) {
+        // Validate input
+        if (!categoryName || categoryName.trim() === '') {
+            alert('Category name cannot be empty');
+            document.getElementById('transaction-category').value = '';
+            return;
+        }
+
+        const trimmedName = categoryName.trim();
+
+        // Check for duplicates (case-insensitive)
+        const categoryList = type === 'income' ? this.categories.income : this.categories.expenses;
+        const exists = categoryList.some(cat => cat.toLowerCase() === trimmedName.toLowerCase());
+
+        if (exists) {
+            alert(`Category "${trimmedName}" already exists for ${type}`);
+            document.getElementById('transaction-category').value = '';
+            return;
+        }
+
+        this.showLoading('Adding new category...');
+
+        try {
+            // Add to appropriate list
+            if (type === 'income') {
+                this.categories.income.push(trimmedName);
+                this.categories.income.sort();
+            } else {
+                this.categories.expenses.push(trimmedName);
+                this.categories.expenses.sort();
+            }
+
+            // Update GitHub
+            const commitMessage = `Add new ${type} category: ${trimmedName}`;
+            await this.githubClient.updateCategoryFile(this.categories, commitMessage);
+
+            // Update dropdown
+            this.updateCategoryDropdown();
+
+            // Select the newly added category
+            document.getElementById('transaction-category').value = trimmedName;
+
+            console.log(`✓ Category "${trimmedName}" added successfully`);
+        } catch (error) {
+            console.error('Error adding category:', error);
+            alert('Error adding category: ' + error.message);
+
+            // Rollback the change
+            if (type === 'income') {
+                const index = this.categories.income.indexOf(trimmedName);
+                if (index > -1) this.categories.income.splice(index, 1);
+            } else {
+                const index = this.categories.expenses.indexOf(trimmedName);
+                if (index > -1) this.categories.expenses.splice(index, 1);
+            }
+
+            document.getElementById('transaction-category').value = '';
+        } finally {
+            this.hideLoading();
+        }
     }
 
     // ==========================================
@@ -313,6 +445,7 @@ class Ledgerly {
         const type = document.getElementById('transaction-type').value;
         const description = document.getElementById('transaction-description').value.trim();
         const amount = parseFloat(document.getElementById('transaction-amount').value);
+        const category = document.getElementById('transaction-category').value;
 
         if (!date || !description || !amount || amount <= 0) {
             alert('Please fill all fields with valid data');
@@ -322,21 +455,24 @@ class Ledgerly {
         this.showLoading(this.editingId ? 'Updating transaction...' : 'Adding transaction...');
 
         try {
+            const transactionData = {
+                date,
+                description,
+                amount
+            };
+
+            // Add category if selected (optional field)
+            if (category && category !== '__add_new__') {
+                transactionData.category = category;
+            }
+
             if (this.editingId) {
                 // Update existing transaction
-                await this.dataManager.updateTransaction(this.editingId, {
-                    date,
-                    description,
-                    amount
-                });
+                await this.dataManager.updateTransaction(this.editingId, transactionData);
                 this.editingId = null;
             } else {
                 // Add new transaction
-                await this.dataManager.addTransaction({
-                    date,
-                    description,
-                    amount
-                }, type);
+                await this.dataManager.addTransaction(transactionData, type);
             }
 
             this.resetForm();
@@ -356,6 +492,7 @@ class Ledgerly {
         document.getElementById('submit-btn').textContent = 'Add Transaction';
         document.getElementById('cancel-btn').style.display = 'none';
         this.setTransactionType('income');
+        this.updateCategoryDropdown();
         this.editingId = null;
     }
 
@@ -380,6 +517,11 @@ class Ledgerly {
         document.getElementById('transaction-description').value = transaction.description;
         document.getElementById('transaction-amount').value = transaction.amount;
         this.setTransactionType(type);
+
+        // Set category if exists
+        if (transaction.category) {
+            document.getElementById('transaction-category').value = transaction.category;
+        }
 
         // Update UI to show edit mode
         document.getElementById('transaction-form').classList.add('edit-mode');
