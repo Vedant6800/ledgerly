@@ -1,4 +1,22 @@
 {
-  "income": ["Salary","Others"],
-  "expenses": ["Food","Rent","Utilities","Entertainment","Transportation","Healthcare","Education","Clothing","Personal Care","Gifts","Donations","Travel","Miscellaneous"]
+  "income": [
+    "Salary",
+    "Others"
+  ],
+  "expenses": [
+    "Clothing",
+    "Donations",
+    "Education",
+    "Entertainment",
+    "Food",
+    "Gifts",
+    "Given at Home",
+    "Healthcare",
+    "Miscellaneous",
+    "Personal Care",
+    "Rent",
+    "Transportation",
+    "Travel",
+    "Utilities"
+  ]
 }
