@@ -155,6 +155,25 @@
             <section class="transaction-list-section">
                 <h2 class="section-title">Transactions</h2>
 
+                <!-- Sort Controls -->
+                <div class="sort-controls" id="sort-controls">
+                    <label class="sort-label">Sort by:</label>
+                    <div class="sort-buttons">
+                        <button class="sort-btn active" data-sort="date" id="sort-date-btn">
+                            <span class="sort-text">Date</span>
+                            <span class="sort-icon">↓</span>
+                        </button>
+                        <button class="sort-btn" data-sort="amount" id="sort-amount-btn">
+                            <span class="sort-text">Amount</span>
+                            <span class="sort-icon">↓</span>
+                        </button>
+                        <button class="sort-btn" data-sort="description" id="sort-description-btn">
+                            <span class="sort-text">Description</span>
+                            <span class="sort-icon">↓</span>
+                        </button>
+                    </div>
+                </div>
+
                 <div class="table-container">
                     <table class="transaction-table" id="transaction-table">
                         <thead>
@@ -198,4 +217,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-

@@ -15,6 +15,8 @@ class Ledgerly {
         this.editingId = null;
         this.theme = 'light';
         this.categories = { income: [], expenses: [] }; // Category cache
+        this.sortBy = 'date'; // Default sort field
+        this.sortOrder = 'desc'; // Default sort order (descending)
         this.init();
     }
 
@@ -197,6 +199,19 @@ class Ledgerly {
         // Category change handler
         document.getElementById('transaction-category').addEventListener('change', () => {
             this.handleCategoryChange();
+        });
+
+        // Sort button event listeners
+        document.getElementById('sort-date-btn').addEventListener('click', () => {
+            this.handleSortClick('date');
+        });
+
+        document.getElementById('sort-amount-btn').addEventListener('click', () => {
+            this.handleSortClick('amount');
+        });
+
+        document.getElementById('sort-description-btn').addEventListener('click', () => {
+            this.handleSortClick('description');
         });
     }
 
@@ -576,7 +591,7 @@ class Ledgerly {
     }
 
     renderTransactions() {
-        const transactions = this.dataManager.getAllTransactionsForMonth(this.currentYear, this.currentMonth);
+        let transactions = this.dataManager.getAllTransactionsForMonth(this.currentYear, this.currentMonth);
         const tbody = document.getElementById('transaction-tbody');
         const emptyState = document.getElementById('empty-state');
         const table = document.getElementById('transaction-table');
@@ -586,6 +601,9 @@ class Ledgerly {
             emptyState.classList.add('visible');
             return;
         }
+
+        // Apply sorting to the transactions
+        transactions = this.sortTransactions(transactions);
 
         table.style.display = 'table';
         emptyState.classList.remove('visible');
@@ -623,6 +641,73 @@ class Ledgerly {
         const div = document.createElement('div');
         div.textContent = text;
         return div.innerHTML;
+    }
+
+    // ==========================================
+    // SORTING
+    // ==========================================
+    sortTransactions(transactions) {
+        // Create a copy to avoid mutating the original array
+        const sorted = [...transactions];
+
+        sorted.sort((a, b) => {
+            let compareValue = 0;
+
+            switch (this.sortBy) {
+                case 'date':
+                    compareValue = new Date(a.date) - new Date(b.date);
+                    break;
+                case 'amount':
+                    compareValue = a.amount - b.amount;
+                    break;
+                case 'description':
+                    compareValue = a.description.localeCompare(b.description, undefined, { sensitivity: 'base' });
+                    break;
+                default:
+                    compareValue = 0;
+            }
+
+            // Apply sort order (ascending or descending)
+            return this.sortOrder === 'asc' ? compareValue : -compareValue;
+        });
+
+        return sorted;
+    }
+
+    handleSortClick(sortField) {
+        // Toggle sort order if clicking the same field
+        if (this.sortBy === sortField) {
+            this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
+        } else {
+            // New field: default to ascending
+            this.sortBy = sortField;
+            this.sortOrder = 'asc';
+        }
+
+        // Update sort buttons UI
+        this.updateSortButtonUI();
+
+        // Re-render transactions with new sort
+        this.renderTransactions();
+    }
+
+    updateSortButtonUI() {
+        const sortFields = ['date', 'amount', 'description'];
+
+        sortFields.forEach(field => {
+            const btn = document.getElementById(`sort-${field}-btn`);
+            const icon = btn.querySelector('.sort-icon');
+
+            if (field === this.sortBy) {
+                btn.classList.add('active');
+                // Update icon based on sort order
+                icon.textContent = this.sortOrder === 'asc' ? '↑' : '↓';
+            } else {
+                btn.classList.remove('active');
+                // Show default descending icon for inactive buttons
+                icon.textContent = '↓';
+            }
+        });
     }
 }
 
