@@ -67,13 +67,18 @@ class LedgerlyReports {
 
     // Generate all reports
     async generateReports() {
-        const incomeData = this.dataManager.income || [];
-        const expenseData = this.dataManager.expenses || [];
+        // Get data using the correct method
+        const summary = this.dataManager.calculateMonthlySummary(this.currentYear, this.currentMonth);
+        const allTransactions = this.dataManager.getAllTransactionsForMonth(this.currentYear, this.currentMonth);
+        
+        // Separate income and expenses
+        const incomeData = allTransactions.filter(t => t.type === 'income');
+        const expenseData = allTransactions.filter(t => t.type === 'expense');
 
         // Calculate totals
-        const totalIncome = incomeData.reduce((sum, item) => sum + Number(item.amount), 0);
-        const totalExpenses = expenseData.reduce((sum, item) => sum + Number(item.amount), 0);
-        const balance = totalIncome - totalExpenses;
+        const totalIncome = summary.totalIncome;
+        const totalExpenses = summary.totalExpenses;
+        const balance = summary.balance;
 
         // Update summary cards
         this.updateSummaryCards(totalIncome, totalExpenses, balance);
@@ -156,16 +161,16 @@ class LedgerlyReports {
 
         try {
             // Load previous month data
-            const prevData = await this.loadMonthDataForComparison(prevYear, prevMonth);
-            const currentData = {
-                income: this.dataManager.income || [],
-                expenses: this.dataManager.expenses || []
-            };
+            await this.dataManager.loadMonthData(prevYear, prevMonth);
+            
+            // Get summaries for both months
+            const prevSummary = this.dataManager.calculateMonthlySummary(prevYear, prevMonth);
+            const currentSummary = this.dataManager.calculateMonthlySummary(this.currentYear, this.currentMonth);
 
-            const prevIncome = prevData.income.reduce((sum, item) => sum + Number(item.amount), 0);
-            const prevExpenses = prevData.expenses.reduce((sum, item) => sum + Number(item.amount), 0);
-            const currentIncome = currentData.income.reduce((sum, item) => sum + Number(item.amount), 0);
-            const currentExpenses = currentData.expenses.reduce((sum, item) => sum + Number(item.amount), 0);
+            const prevIncome = prevSummary.totalIncome;
+            const prevExpenses = prevSummary.totalExpenses;
+            const currentIncome = currentSummary.totalIncome;
+            const currentExpenses = currentSummary.totalExpenses;
 
             // Calculate changes
             const incomeChange = this.calculatePercentageChange(prevIncome, currentIncome);
@@ -393,8 +398,7 @@ class LedgerlyReports {
                             }
                         }
                     }
-                }
-            });
+                });
         }
     }
 
@@ -489,8 +493,7 @@ class LedgerlyReports {
                             }
                         }
                     }
-                }
-            });
+                });
         }
     }
 
@@ -553,8 +556,7 @@ class LedgerlyReports {
                             }
                         }
                     }
-                }
-            });
+                });
         } else {
             this.charts[chartId] = new Chart(ctx, {
                 type: 'pie',
@@ -586,8 +588,7 @@ class LedgerlyReports {
                             }
                         }
                     }
-                }
-            });
+                });
         }
     }
 
@@ -647,15 +648,19 @@ class LedgerlyReports {
     toggleChartType(chartName, type) {
         this.chartTypes[chartName] = type;
 
+        // Get current data
+        const summary = this.dataManager.calculateMonthlySummary(this.currentYear, this.currentMonth);
+        const allTransactions = this.dataManager.getAllTransactionsForMonth(this.currentYear, this.currentMonth);
+        const incomeData = allTransactions.filter(t => t.type === 'income');
+        const expenseData = allTransactions.filter(t => t.type === 'expense');
+
         // Regenerate the chart
         if (chartName === 'income-expense') {
-            const income = this.dataManager.income.reduce((sum, item) => sum + Number(item.amount), 0);
-            const expenses = this.dataManager.expenses.reduce((sum, item) => sum + Number(item.amount), 0);
-            this.generateIncomeExpenseChart(income, expenses);
+            this.generateIncomeExpenseChart(summary.totalIncome, summary.totalExpenses);
         } else if (chartName === 'income-category') {
-            this.generateIncomeCategoryChart(this.dataManager.income || []);
+            this.generateIncomeCategoryChart(incomeData);
         } else if (chartName === 'expense-category') {
-            this.generateExpenseCategoryChart(this.dataManager.expenses || []);
+            this.generateExpenseCategoryChart(expenseData);
         }
     }
 
@@ -756,4 +761,3 @@ class LedgerlyReports {
 document.addEventListener('DOMContentLoaded', () => {
     window.ledgerlyReports = new LedgerlyReports();
 });
-
