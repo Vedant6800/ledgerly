@@ -17,6 +17,7 @@ class Ledgerly {
         this.categories = { income: [], expenses: [] }; // Category cache
         this.sortBy = 'date'; // Default sort field
         this.sortOrder = 'desc'; // Default sort order (descending)
+        this.filterBy = 'both'; // Default filter: both, income, or expense
         this.init();
     }
 
@@ -212,6 +213,19 @@ class Ledgerly {
 
         document.getElementById('sort-description-btn').addEventListener('click', () => {
             this.handleSortClick('description');
+        });
+
+        // Filter button event listeners
+        document.getElementById('filter-both-btn').addEventListener('click', () => {
+            this.handleFilterClick('both');
+        });
+
+        document.getElementById('filter-income-btn').addEventListener('click', () => {
+            this.handleFilterClick('income');
+        });
+
+        document.getElementById('filter-expense-btn').addEventListener('click', () => {
+            this.handleFilterClick('expense');
         });
     }
 
@@ -596,13 +610,30 @@ class Ledgerly {
         const emptyState = document.getElementById('empty-state');
         const table = document.getElementById('transaction-table');
 
+        // Apply filter first
+        if (this.filterBy === 'income') {
+            transactions = transactions.filter(t => t.type === 'income');
+        } else if (this.filterBy === 'expense') {
+            transactions = transactions.filter(t => t.type === 'expense');
+        }
+        // If filterBy is 'both', show all transactions (no filtering needed)
+
         if (transactions.length === 0) {
             table.style.display = 'none';
             emptyState.classList.add('visible');
+            // Update empty message based on filter
+            const emptyMessage = document.querySelector('.empty-message');
+            if (this.filterBy === 'income') {
+                emptyMessage.textContent = 'No income transactions for this month';
+            } else if (this.filterBy === 'expense') {
+                emptyMessage.textContent = 'No expense transactions for this month';
+            } else {
+                emptyMessage.textContent = 'No transactions for this month';
+            }
             return;
         }
 
-        // Apply sorting to the transactions
+        // Apply sorting to the filtered transactions
         transactions = this.sortTransactions(transactions);
 
         table.style.display = 'table';
@@ -706,6 +737,34 @@ class Ledgerly {
                 btn.classList.remove('active');
                 // Show default descending icon for inactive buttons
                 icon.textContent = '↓';
+            }
+        });
+    }
+
+    // ==========================================
+    // FILTERING
+    // ==========================================
+    handleFilterClick(filter) {
+        // Update active filter button
+        this.updateFilterButtonUI(filter);
+
+        // Update filter state
+        this.filterBy = filter;
+
+        // Re-render transactions with new filter
+        this.renderTransactions();
+    }
+
+    updateFilterButtonUI(activeFilter) {
+        const filters = ['both', 'income', 'expense'];
+
+        filters.forEach(filter => {
+            const btn = document.getElementById(`filter-${filter}-btn`);
+
+            if (filter === activeFilter) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
             }
         });
     }
