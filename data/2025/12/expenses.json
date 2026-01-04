@@ -1,43 +1,218 @@
 [
   {
-    "id": "exp_2512001",
+    "id": "exp_202512011",
     "date": "2025-12-01",
-    "description": "Rent Payment",
-    "amount": 25000,
-    "createdAt": "2025-12-01T10:00:00.000Z",
-    "updatedAt": "2025-12-01T10:00:00.000Z"
+    "description": "Belt",
+    "amount": 200,
+    "createdAt": "2026-01-03T18:30:00.000Z",
+    "updatedAt": "2026-01-03T18:30:00.000Z",
+    "category": "Clothing"
   },
   {
-    "id": "exp_2512002",
+    "id": "exp_202512012",
+    "date": "2025-12-01",
+    "description": "Sejal",
+    "amount": 5000,
+    "createdAt": "2026-01-03T18:30:00.000Z",
+    "updatedAt": "2026-01-03T18:30:00.000Z",
+    "category": "Return Taken Money"
+  },
+  {
+    "id": "exp_202512013",
+    "date": "2025-12-01",
+    "description": "Train (Latur to Hyd)",
+    "amount": 240,
+    "createdAt": "2026-01-03T18:30:00.000Z",
+    "updatedAt": "2026-01-03T18:30:00.000Z",
+    "category": "Travel"
+  },
+  {
+    "id": "exp_202512014",
+    "date": "2025-12-01",
+    "description": "Train (Hyd to Latur)",
+    "amount": 240,
+    "createdAt": "2026-01-03T18:30:00.000Z",
+    "updatedAt": "2026-01-03T18:30:00.000Z",
+    "category": "Travel"
+  },
+  {
+    "id": "exp_202512015",
+    "date": "2025-12-01",
+    "description": "Cab to Resort",
+    "amount": 617,
+    "createdAt": "2026-01-03T18:30:00.000Z",
+    "updatedAt": "2026-01-03T18:30:00.000Z",
+    "category": "Transportation"
+  },
+  {
+    "id": "exp_202512021",
+    "date": "2025-12-02",
+    "description": "RD",
+    "amount": 1500,
+    "createdAt": "2026-01-03T18:30:00.000Z",
+    "updatedAt": "2026-01-03T18:30:00.000Z",
+    "category": "Investment"
+  },
+  {
+    "id": "exp_202512041",
+    "date": "2025-12-04",
+    "description": "Jacket",
+    "amount": 654,
+    "createdAt": "2026-01-03T18:30:00.000Z",
+    "updatedAt": "2026-01-03T18:30:00.000Z",
+    "category": "Clothing"
+  },
+  {
+    "id": "exp_202512042",
+    "date": "2025-12-04",
+    "description": "Shoes",
+    "amount": 679,
+    "createdAt": "2026-01-03T18:30:00.000Z",
+    "updatedAt": "2026-01-03T18:30:00.000Z",
+    "category": "Clothing"
+  },
+  {
+    "id": "exp_202512051",
     "date": "2025-12-05",
-    "description": "Grocery Shopping",
-    "amount": 6800,
-    "createdAt": "2025-12-05T18:30:00.000Z",
-    "updatedAt": "2025-12-05T18:30:00.000Z"
+    "description": "Mummy Recharge",
+    "amount": 548,
+    "createdAt": "2026-01-03T18:30:00.000Z",
+    "updatedAt": "2026-01-03T18:30:00.000Z",
+    "category": "Given at Home"
   },
   {
-    "id": "exp_2512003",
-    "date": "2025-12-12",
-    "description": "Electricity Bill",
-    "amount": 3200,
-    "createdAt": "2025-12-12T11:00:00.000Z",
-    "updatedAt": "2025-12-12T11:00:00.000Z"
+    "id": "exp_202512061",
+    "date": "2025-12-06",
+    "description": "Cash to Mummy",
+    "amount": 200,
+    "createdAt": "2026-01-03T18:30:00.000Z",
+    "updatedAt": "2026-01-03T18:30:00.000Z",
+    "category": "Given at Home"
   },
   {
-    "id": "exp_2512004",
-    "date": "2025-12-20",
-    "description": "Christmas Shopping",
+    "id": "exp_202512062",
+    "date": "2025-12-06",
+    "description": "Breakfast",
+    "amount": 70,
+    "createdAt": "2026-01-03T18:30:00.000Z",
+    "updatedAt": "2026-01-03T18:30:00.000Z",
+    "category": "Food"
+  },
+  {
+    "id": "exp_202512071",
+    "date": "2025-12-07",
+    "description": "Under Eye Cream",
+    "amount": 150,
+    "createdAt": "2026-01-03T18:30:00.000Z",
+    "updatedAt": "2026-01-03T18:30:00.000Z",
+    "category": "Personal Care"
+  },
+  {
+    "id": "exp_202512072",
+    "date": "2025-12-07",
+    "description": "Face Serum",
+    "amount": 110,
+    "createdAt": "2026-01-03T18:30:00.000Z",
+    "updatedAt": "2026-01-03T18:30:00.000Z",
+    "category": "Personal Care"
+  },
+  {
+    "id": "exp_202512101",
+    "date": "2025-12-10",
+    "description": "Soap roller",
+    "amount": 97,
+    "createdAt": "2026-01-03T18:30:00.000Z",
+    "updatedAt": "2026-01-03T18:30:00.000Z",
+    "category": "Given at Home"
+  },
+  {
+    "id": "exp_202512111",
+    "date": "2025-12-11",
+    "description": "Counter",
+    "amount": 36,
+    "createdAt": "2026-01-03T18:30:00.000Z",
+    "updatedAt": "2026-01-03T18:30:00.000Z",
+    "category": "Miscellaneous"
+  },
+  {
+    "id": "exp_202512141",
+    "date": "2025-12-14",
+    "description": "To Mummy",
+    "amount": 150,
+    "createdAt": "2026-01-03T18:30:00.000Z",
+    "updatedAt": "2026-01-03T18:30:00.000Z",
+    "category": "Given at Home"
+  },
+  {
+    "id": "exp_202512161",
+    "date": "2025-12-16",
+    "description": "Shampoo",
+    "amount": 250,
+    "createdAt": "2026-01-03T18:30:00.000Z",
+    "updatedAt": "2026-01-03T18:30:00.000Z",
+    "category": "Personal Care"
+  },
+  {
+    "id": "exp_202512221",
+    "date": "2025-12-22",
+    "description": "FD",
     "amount": 15000,
-    "createdAt": "2025-12-20T15:00:00.000Z",
-    "updatedAt": "2025-12-20T15:00:00.000Z"
+    "createdAt": "2026-01-03T18:30:00.000Z",
+    "updatedAt": "2026-01-03T18:30:00.000Z",
+    "category": "Investment"
   },
   {
-    "id": "exp_2512005",
-    "date": "2025-12-28",
-    "description": "New Year Party",
-    "amount": 4500,
-    "createdAt": "2025-12-28T21:00:00.000Z",
-    "updatedAt": "2025-12-28T21:00:00.000Z"
+    "id": "exp_202512222",
+    "date": "2025-12-22",
+    "description": "Cake",
+    "amount": 600,
+    "createdAt": "2026-01-03T18:30:00.000Z",
+    "updatedAt": "2026-01-03T18:30:00.000Z",
+    "category": "Food"
+  },
+  {
+    "id": "exp_202512223",
+    "date": "2025-12-22",
+    "description": "Ghee",
+    "amount": 105,
+    "createdAt": "2026-01-03T18:30:00.000Z",
+    "updatedAt": "2026-01-03T18:30:00.000Z",
+    "category": "Grocery"
+  },
+  {
+    "id": "exp_202512231",
+    "date": "2025-12-23",
+    "description": "Body Lotion",
+    "amount": 145,
+    "createdAt": "2026-01-03T18:30:00.000Z",
+    "updatedAt": "2026-01-03T18:30:00.000Z",
+    "category": "Personal Care"
+  },
+  {
+    "id": "exp_202512241",
+    "date": "2025-12-24",
+    "description": "Speaker",
+    "amount": 403,
+    "createdAt": "2026-01-03T18:30:00.000Z",
+    "updatedAt": "2026-01-03T18:30:00.000Z",
+    "category": "Entertainment"
+  },
+  {
+    "id": "exp_202512261",
+    "date": "2025-12-26",
+    "description": "Pani puri and all",
+    "amount": 100,
+    "createdAt": "2026-01-03T18:30:00.000Z",
+    "updatedAt": "2026-01-03T18:30:00.000Z",
+    "category": "Food"
+  },
+  {
+    "id": "exp_202512262",
+    "date": "2025-12-26",
+    "description": "Recharge",
+    "amount": 1048,
+    "createdAt": "2026-01-03T18:30:00.000Z",
+    "updatedAt": "2026-01-03T18:30:00.000Z",
+    "category": "Utilities"
   }
 ]
-
