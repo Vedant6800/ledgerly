@@ -398,7 +398,8 @@ class LedgerlyReports {
                             }
                         }
                     }
-                });
+                }
+            });
         }
     }
 
@@ -760,3 +761,4 @@ class LedgerlyReports {
 document.addEventListener('DOMContentLoaded', () => {
     window.ledgerlyReports = new LedgerlyReports();
 });
+
