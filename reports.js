@@ -494,7 +494,8 @@ class LedgerlyReports {
                             }
                         }
                     }
-                });
+                }
+            });
         }
     }
 
@@ -557,7 +558,7 @@ class LedgerlyReports {
                             }
                         }
                     }
-                });
+        }});
         } else {
             this.charts[chartId] = new Chart(ctx, {
                 type: 'pie',
@@ -589,7 +590,7 @@ class LedgerlyReports {
                             }
                         }
                     }
-                });
+        }});
         }
     }
 
