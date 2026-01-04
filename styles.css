@@ -543,6 +543,7 @@ body {
     gap: var(--spacing-md);
     margin-bottom: var(--spacing-lg);
     flex-wrap: wrap;
+}
 
 /* Filter Controls */
 .filter-controls {
@@ -1439,3 +1440,4 @@ html {
         width: 100%;
     }
 }
+
