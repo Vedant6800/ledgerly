@@ -1,6 +1,7 @@
 {
   "income": [
     "Salary",
+    "FD/RD",
     "Others"
   ],
   "expenses": [
