@@ -616,7 +616,7 @@ body {
 
 .filter-btn.active[data-filter="expense"] {
     background: linear-gradient(135deg, var(--accent-expense), var(--accent-expense-light));
-    color: white;
+    color: black;
     border-color: var(--accent-expense-dark);
     font-weight: var(--font-weight-bold);
     box-shadow: var(--shadow-md);
@@ -1438,3 +1438,4 @@ html {
         width: 100%;
     }
 }
+
