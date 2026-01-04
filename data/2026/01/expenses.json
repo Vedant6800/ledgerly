@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260117675216642408385",
+    "date": "2026-01-04",
+    "description": "DMart",
+    "amount": 3177,
+    "createdAt": "2026-01-04T10:14:24.240Z",
+    "updatedAt": "2026-01-04T10:14:24.240Z",
+    "category": "Grocery"
+  },
+  {
     "id": "exp_20260117674535560418521",
     "date": "2026-01-03",
     "description": "Moisturiser",
