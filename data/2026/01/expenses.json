@@ -9,6 +9,15 @@
     "category": "Grocery"
   },
   {
+    "id": "exp_20260117675218501818215",
+    "date": "2026-01-04",
+    "description": "Popcorn at Dmart",
+    "amount": 60,
+    "createdAt": "2026-01-04T10:17:30.181Z",
+    "updatedAt": "2026-01-04T10:17:30.181Z",
+    "category": "Food"
+  },
+  {
     "id": "exp_20260117674535560418521",
     "date": "2026-01-03",
     "description": "Moisturiser",
