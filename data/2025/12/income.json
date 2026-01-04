@@ -1,27 +1,22 @@
 [
   {
-    "id": "inc_2512001",
+    "id": "inc_202512011",
     "date": "2025-12-01",
-    "description": "Monthly Salary",
-    "amount": 75000,
-    "createdAt": "2025-12-01T09:00:00.000Z",
-    "updatedAt": "2025-12-01T09:00:00.000Z"
+    "description": "Salary",
+    "amount": 14845,
+    "createdAt": "2026-01-03T18:55:00.000Z",
+    "updatedAt": "2026-01-03T18:55:00.000Z",
+    "category": "Salary"
   },
   {
-    "id": "inc_2512002",
-    "date": "2025-12-10",
-    "description": "Year-end Bonus",
-    "amount": 50000,
-    "createdAt": "2025-12-10T10:00:00.000Z",
-    "updatedAt": "2025-12-10T10:00:00.000Z"
-  },
-  {
-    "id": "inc_2512003",
-    "date": "2025-12-18",
-    "description": "Freelance Project",
-    "amount": 22000,
-    "createdAt": "2025-12-18T14:20:00.000Z",
-    "updatedAt": "2025-12-18T14:20:00.000Z"
+    "id": "inc_202512221",
+    "date": "2025-12-22",
+    "description": "FD",
+    "amount": 12400,
+    "createdAt": "2026-01-03T18:55:00.000Z",
+    "updatedAt": "2026-01-03T18:55:00.000Z",
+    "category": "FD/RD"
   }
 ]
+
 
