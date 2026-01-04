@@ -538,9 +538,10 @@ body {
 /* Filter and Sort Controls Container */
 .filter-sort-controls {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: var(--spacing-md);
     margin-bottom: var(--spacing-lg);
+    flex-wrap: wrap;
 }
 
 /* Filter Controls */
@@ -1438,4 +1439,5 @@ html {
         width: 100%;
     }
 }
+
 
