@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - Ledgerly</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="reports.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="header-text">
+                    <h1 class="app-name">Ledgerly Reports</h1>
+                    <p class="app-subtitle">Financial Analytics Dashboard</p>
+                </div>
+                <div class="header-actions">
+                    <a href="index.html" class="btn-icon" title="Back to Home">
+                        <span>🏠</span>
+                    </a>
+                    <button class="theme-toggle" id="theme-toggle" title="Toggle theme">
+                        <span class="theme-icon">🌙</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+
+            <!-- Loading Indicator -->
+            <div class="loading-overlay" id="loading-overlay">
+                <div class="loading-spinner"></div>
+                <p class="loading-text">Loading reports from GitHub...</p>
+            </div>
+
+            <!-- Month Selector -->
+            <section class="month-selector-section">
+                <label for="month-selector" class="month-label">Select Month for Reports</label>
+                <input type="month" id="month-selector" class="month-input">
+            </section>
+
+            <!-- Monthly Summary Overview -->
+            <section class="report-section">
+                <h2 class="report-section-title">📊 Monthly Summary</h2>
+                <div class="summary-cards">
+                    <div class="summary-card income-card">
+                        <p class="card-label">Total Income</p>
+                        <p class="card-value" id="total-income">₹0.00</p>
+                    </div>
+                    <div class="summary-card expense-card">
+                        <p class="card-label">Total Expenses</p>
+                        <p class="card-value" id="total-expenses">₹0.00</p>
+                    </div>
+                    <div class="summary-card balance-card">
+                        <p class="card-label">Net Balance</p>
+                        <p class="card-value" id="balance">₹0.00</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Expense Ratio Indicator -->
+            <section class="report-section">
+                <h2 class="report-section-title">💳 Expense Ratio</h2>
+                <div class="expense-ratio-container">
+                    <div class="expense-ratio-info">
+                        <p class="expense-ratio-label">Expenses as % of Income</p>
+                        <p class="expense-ratio-value" id="expense-ratio-value">0%</p>
+                        <p class="expense-ratio-status" id="expense-ratio-status">No data available</p>
+                    </div>
+                    <div class="expense-ratio-bar-container">
+                        <div class="expense-ratio-bar" id="expense-ratio-bar"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Month-to-Month Comparison -->
+            <section class="report-section">
+                <h2 class="report-section-title">📈 Month-to-Month Comparison</h2>
+                <div class="comparison-grid" id="comparison-grid">
+                    <div class="comparison-card">
+                        <p class="comparison-label">Income Change</p>
+                        <p class="comparison-value" id="income-change">--</p>
+                        <p class="comparison-subtext" id="income-change-subtext">vs previous month</p>
+                    </div>
+                    <div class="comparison-card">
+                        <p class="comparison-label">Expense Change</p>
+                        <p class="comparison-value" id="expense-change">--</p>
+                        <p class="comparison-subtext" id="expense-change-subtext">vs previous month</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Rolling 3-Month Average -->
+            <section class="report-section">
+                <h2 class="report-section-title">📊 Rolling 3-Month Average</h2>
+                <div class="rolling-average-container">
+                    <div class="rolling-average-summary">
+                        <div class="rolling-stat">
+                            <p class="rolling-label">Avg. Monthly Income</p>
+                            <p class="rolling-value income-color" id="avg-income">₹0.00</p>
+                        </div>
+                        <div class="rolling-stat">
+                            <p class="rolling-label">Avg. Monthly Expenses</p>
+                            <p class="rolling-value expense-color" id="avg-expenses">₹0.00</p>
+                        </div>
+                        <div class="rolling-stat">
+                            <p class="rolling-label">Avg. Burn Rate</p>
+                            <p class="rolling-value" id="avg-burn-rate">₹0.00/day</p>
+                        </div>
+                    </div>
+                    <p class="rolling-info" id="rolling-info">Calculated from available months</p>
+                </div>
+            </section>
+
+            <!-- Income vs Expenses Chart -->
+            <section class="report-section">
+                <h2 class="report-section-title">💰 Income vs Expenses</h2>
+                <div class="chart-controls">
+                    <button class="chart-toggle-btn active" data-chart="income-expense" data-type="bar">
+                        📊 Bar Chart
+                    </button>
+                    <button class="chart-toggle-btn" data-chart="income-expense" data-type="pie">
+                        🥧 Pie Chart
+                    </button>
+                </div>
+                <div class="chart-container">
+                    <canvas id="income-expense-chart"></canvas>
+                </div>
+            </section>
+
+            <!-- Category-wise Income Distribution -->
+            <section class="report-section">
+                <h2 class="report-section-title">📥 Income by Category</h2>
+                <div class="chart-controls">
+                    <button class="chart-toggle-btn active" data-chart="income-category" data-type="bar">
+                        📊 Bar Chart
+                    </button>
+                    <button class="chart-toggle-btn" data-chart="income-category" data-type="pie">
+                        🥧 Pie Chart
+                    </button>
+                </div>
+                <div class="chart-container">
+                    <canvas id="income-category-chart"></canvas>
+                </div>
+                <div class="no-data-message" id="income-category-no-data" style="display: none;">
+                    <p>📭 No income data available for this month</p>
+                </div>
+            </section>
+
+            <!-- Category-wise Expense Distribution -->
+            <section class="report-section">
+                <h2 class="report-section-title">📤 Expenses by Category</h2>
+                <div class="chart-controls">
+                    <button class="chart-toggle-btn active" data-chart="expense-category" data-type="bar">
+                        📊 Bar Chart
+                    </button>
+                    <button class="chart-toggle-btn" data-chart="expense-category" data-type="pie">
+                        🥧 Pie Chart
+                    </button>
+                </div>
+                <div class="chart-container">
+                    <canvas id="expense-category-chart"></canvas>
+                </div>
+                <div class="no-data-message" id="expense-category-no-data" style="display: none;">
+                    <p>📭 No expense data available for this month</p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Ledgerly. Analytics Dashboard.</p>
+        </div>
+    </footer>
+
+    <!-- Load Chart.js from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <!-- Load GitHub API -->
+    <script src="github-api.js"></script>
+    <!-- Load Reports Script -->
+    <script src="reports.js"></script>
+</body>
+</html>
+

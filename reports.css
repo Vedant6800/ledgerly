@@ -1,0 +1,348 @@
+/* ==========================================
+   REPORTS PAGE - ADDITIONAL STYLES
+   ========================================== */
+
+/* Report Sections */
+.report-section {
+    background: var(--bg-card);
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+    box-shadow: var(--shadow-md);
+}
+
+.report-section-title {
+    font-size: 24px;
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 3px solid var(--color-primary);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+/* Expense Ratio Indicator */
+.expense-ratio-container {
+    display: grid;
+    gap: var(--spacing-lg);
+}
+
+.expense-ratio-info {
+    text-align: center;
+}
+
+.expense-ratio-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.expense-ratio-value {
+    font-size: 48px;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.expense-ratio-status {
+    font-size: 16px;
+    font-weight: var(--font-weight-medium);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: 20px;
+    display: inline-block;
+    margin-top: var(--spacing-sm);
+}
+
+.expense-ratio-status.healthy {
+    background-color: var(--accent-income-bg);
+    color: var(--accent-income);
+}
+
+.expense-ratio-status.moderate {
+    background-color: #fff8e1;
+    color: #f57c00;
+}
+
+[data-theme="dark"] .expense-ratio-status.moderate {
+    background-color: #3d3419;
+    color: #ffb74d;
+}
+
+.expense-ratio-status.risky {
+    background-color: var(--accent-expense-bg);
+    color: var(--accent-expense);
+}
+
+.expense-ratio-bar-container {
+    width: 100%;
+    height: 40px;
+    background-color: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+.expense-ratio-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-income) 0%, #f57c00 50%, var(--accent-expense) 100%);
+    border-radius: 18px;
+    transition: width 0.6s ease;
+    position: relative;
+}
+
+.expense-ratio-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Month-to-Month Comparison */
+.comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.comparison-card {
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-form) 100%);
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-lg);
+    text-align: center;
+    transition: all var(--transition-normal);
+}
+
+.comparison-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.comparison-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.comparison-value {
+    font-size: 36px;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-sm);
+}
+
+.comparison-value.positive {
+    color: var(--accent-income);
+}
+
+.comparison-value.negative {
+    color: var(--accent-expense);
+}
+
+.comparison-value.neutral {
+    color: var(--text-muted);
+}
+
+.comparison-subtext {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+/* Rolling 3-Month Average */
+.rolling-average-container {
+    text-align: center;
+}
+
+.rolling-average-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+.rolling-stat {
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-lg);
+    transition: all var(--transition-normal);
+}
+
+.rolling-stat:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+}
+
+.rolling-label {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.rolling-value {
+    font-size: 28px;
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+}
+
+.rolling-value.income-color {
+    color: var(--accent-income);
+}
+
+.rolling-value.expense-color {
+    color: var(--accent-expense);
+}
+
+.rolling-info {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* Chart Controls */
+.chart-controls {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.chart-toggle-btn {
+    background-color: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-size: 14px;
+    font-weight: var(--font-weight-medium);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.chart-toggle-btn:hover {
+    border-color: var(--color-primary);
+    background-color: var(--bg-form);
+    transform: translateY(-2px);
+}
+
+.chart-toggle-btn.active {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    border-color: var(--color-primary-dark);
+    color: #ffffff;
+    box-shadow: var(--shadow-md);
+}
+
+/* Chart Container */
+.chart-container {
+    position: relative;
+    height: 400px;
+    padding: var(--spacing-md);
+    background: var(--bg-secondary);
+    border-radius: var(--border-radius);
+    border: 2px solid var(--border-color);
+}
+
+.chart-container canvas {
+    max-height: 100%;
+}
+
+/* No Data Message */
+.no-data-message {
+    text-align: center;
+    padding: var(--spacing-xxl);
+    background: var(--bg-secondary);
+    border: 2px dashed var(--border-color);
+    border-radius: var(--border-radius);
+    color: var(--text-muted);
+}
+
+.no-data-message p {
+    font-size: 18px;
+    margin: 0;
+}
+
+/* Footer */
+.footer {
+    background: var(--bg-card);
+    border-top: 2px solid var(--border-color);
+    padding: var(--spacing-lg) 0;
+    margin-top: var(--spacing-xxl);
+    text-align: center;
+}
+
+.footer p {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .report-section-title {
+        font-size: 20px;
+    }
+
+    .expense-ratio-value {
+        font-size: 36px;
+    }
+
+    .comparison-value {
+        font-size: 28px;
+    }
+
+    .rolling-value {
+        font-size: 24px;
+    }
+
+    .chart-container {
+        height: 300px;
+    }
+
+    .chart-controls {
+        flex-direction: column;
+    }
+
+    .chart-toggle-btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .report-section {
+        padding: var(--spacing-lg);
+    }
+
+    .report-section-title {
+        font-size: 18px;
+    }
+
+    .expense-ratio-value {
+        font-size: 32px;
+    }
+
+    .comparison-value {
+        font-size: 24px;
+    }
+
+    .rolling-value {
+        font-size: 20px;
+    }
+}
+

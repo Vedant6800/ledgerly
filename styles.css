@@ -183,6 +183,7 @@ body {
     transition: all var(--transition-normal);
     backdrop-filter: blur(10px);
     font-size: 24px;
+    text-decoration: none;
 }
 
 .btn-icon:hover {
@@ -542,7 +543,6 @@ body {
     gap: var(--spacing-md);
     margin-bottom: var(--spacing-lg);
     flex-wrap: wrap;
-}
 
 /* Filter Controls */
 .filter-controls {
@@ -1439,5 +1439,3 @@ html {
         width: 100%;
     }
 }
-
-
