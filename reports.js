@@ -70,7 +70,7 @@ class LedgerlyReports {
         // Get data using the correct method
         const summary = this.dataManager.calculateMonthlySummary(this.currentYear, this.currentMonth);
         const allTransactions = this.dataManager.getAllTransactionsForMonth(this.currentYear, this.currentMonth);
-        
+
         // Separate income and expenses
         const incomeData = allTransactions.filter(t => t.type === 'income');
         const expenseData = allTransactions.filter(t => t.type === 'expense');
@@ -162,7 +162,7 @@ class LedgerlyReports {
         try {
             // Load previous month data
             await this.dataManager.loadMonthData(prevYear, prevMonth);
-            
+
             // Get summaries for both months
             const prevSummary = this.dataManager.calculateMonthlySummary(prevYear, prevMonth);
             const currentSummary = this.dataManager.calculateMonthlySummary(this.currentYear, this.currentMonth);
@@ -228,8 +228,8 @@ class LedgerlyReports {
 
     // Load month data for comparison (without updating current state)
     async loadMonthDataForComparison(year, month) {
-        const incomeFile = await this.githubClient.getMonthFile(year, month, 'income');
-        const expenseFile = await this.githubClient.getMonthFile(year, month, 'expenses');
+        const incomeFile = await this.githubClient.getFile(year, month, 'income');
+        const expenseFile = await this.githubClient.getFile(year, month, 'expenses');
 
         return {
             income: incomeFile.content || [],
@@ -398,8 +398,7 @@ class LedgerlyReports {
                             }
                         }
                     }
-                }
-            });
+                });
         }
     }
 
@@ -461,8 +460,7 @@ class LedgerlyReports {
                             }
                         }
                     }
-                }
-            });
+                });
         } else {
             this.charts[chartId] = new Chart(ctx, {
                 type: 'pie',
@@ -762,4 +760,3 @@ class LedgerlyReports {
 document.addEventListener('DOMContentLoaded', () => {
     window.ledgerlyReports = new LedgerlyReports();
 });
-
