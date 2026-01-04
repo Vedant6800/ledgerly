@@ -5,6 +5,7 @@
     "description": "Salary",
     "amount": 16767,
     "createdAt": "2026-01-03T08:58:53.432Z",
-    "updatedAt": "2026-01-03T08:58:53.437Z"
+    "updatedAt": "2026-01-03T08:58:53.437Z",
+    "category": "Salary"
   }
 ]
