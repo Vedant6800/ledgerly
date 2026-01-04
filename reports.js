@@ -461,7 +461,8 @@ class LedgerlyReports {
                             }
                         }
                     }
-                });
+                }
+            });
         } else {
             this.charts[chartId] = new Chart(ctx, {
                 type: 'pie',
@@ -761,4 +762,5 @@ class LedgerlyReports {
 document.addEventListener('DOMContentLoaded', () => {
     window.ledgerlyReports = new LedgerlyReports();
 });
+
 
