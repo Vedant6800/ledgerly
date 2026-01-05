@@ -18,6 +18,15 @@
     "category": "Food"
   },
   {
+    "id": "exp_2026011767591431670402",
+    "date": "2026-01-04",
+    "description": "Return to Sejal",
+    "amount": 5000,
+    "createdAt": "2026-01-05T05:37:11.672Z",
+    "updatedAt": "2026-01-05T05:37:11.673Z",
+    "category": "Return Taken Money"
+  },
+  {
     "id": "exp_20260117674535560418521",
     "date": "2026-01-03",
     "description": "Moisturiser",
