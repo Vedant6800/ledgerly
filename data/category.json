@@ -1,8 +1,9 @@
 {
   "income": [
-    "Salary",
     "FD/RD",
-    "Others"
+    "Others",
+    "Recived from someone",
+    "Salary"
   ],
   "expenses": [
     "Clothing",
