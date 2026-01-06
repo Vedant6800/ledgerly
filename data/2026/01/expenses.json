@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260117677152650512903",
+    "date": "2026-01-06",
+    "description": "Milk",
+    "amount": 1100,
+    "createdAt": "2026-01-06T16:01:05.052Z",
+    "updatedAt": "2026-01-06T16:01:05.052Z",
+    "category": "Utilities"
+  },
+  {
     "id": "exp_20260117675216642408385",
     "date": "2026-01-04",
     "description": "DMart",
