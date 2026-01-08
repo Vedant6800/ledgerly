@@ -27,6 +27,15 @@
     "category": "Utilities"
   },
   {
+    "id": "exp_20260117678541247733284",
+    "date": "2026-01-06",
+    "description": "Given cash to mummy for RD",
+    "amount": 250,
+    "createdAt": "2026-01-08T06:35:24.773Z",
+    "updatedAt": "2026-01-08T06:35:24.773Z",
+    "category": "Given at Home"
+  },
+  {
     "id": "exp_20260117675216642408385",
     "date": "2026-01-04",
     "description": "DMart",
