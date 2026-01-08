@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260117678539895085083",
+    "date": "2026-01-08",
+    "description": "Given to Mummy",
+    "amount": 1000,
+    "createdAt": "2026-01-08T06:33:09.508Z",
+    "updatedAt": "2026-01-08T06:33:09.508Z",
+    "category": "Given at Home"
+  },
+  {
     "id": "exp_20260117677152650512903",
     "date": "2026-01-06",
     "description": "Milk",
