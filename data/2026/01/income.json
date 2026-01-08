@@ -9,6 +9,15 @@
     "category": "Recived from someone"
   },
   {
+    "id": "inc_20260117678711715386728",
+    "date": "2026-01-06",
+    "description": "Cash by papa",
+    "amount": 2500,
+    "createdAt": "2026-01-08T11:19:31.538Z",
+    "updatedAt": "2026-01-08T11:19:31.538Z",
+    "category": "Recived from someone"
+  },
+  {
     "id": "inc_20260117674307334323226",
     "date": "2026-01-01",
     "description": "Salary",
