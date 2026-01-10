@@ -9,6 +9,15 @@
     "category": "Entertainment"
   },
   {
+    "id": "exp_2026011768049973529980",
+    "date": "2026-01-10",
+    "description": "Vadapao",
+    "amount": 75,
+    "createdAt": "2026-01-10T12:59:33.529Z",
+    "updatedAt": "2026-01-10T12:59:33.529Z",
+    "category": "Food"
+  },
+  {
     "id": "exp_20260117678539895085083",
     "date": "2026-01-08",
     "description": "Given to Mummy",
