@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260117682377244681386",
+    "date": "2026-01-12",
+    "description": "Bhel",
+    "amount": 60,
+    "createdAt": "2026-01-12T17:08:44.469Z",
+    "updatedAt": "2026-01-12T17:08:44.469Z",
+    "category": "Food"
+  },
+  {
     "id": "exp_20260117680497536772088",
     "date": "2026-01-10",
     "description": "Movie",
