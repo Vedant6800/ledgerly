@@ -9,6 +9,15 @@
     "category": "Food"
   },
   {
+    "id": "exp_20260117682955806896814",
+    "date": "2026-01-12",
+    "description": "To jay",
+    "amount": 40,
+    "createdAt": "2026-01-13T09:13:00.689Z",
+    "updatedAt": "2026-01-13T09:13:00.689Z",
+    "category": "Given at Home"
+  },
+  {
     "id": "exp_20260117680497536772088",
     "date": "2026-01-10",
     "description": "Movie",
