@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260117687299891616443",
+    "date": "2026-01-18",
+    "description": "Given to Mummy",
+    "amount": 200,
+    "createdAt": "2026-01-18T09:53:09.161Z",
+    "updatedAt": "2026-01-18T09:53:09.161Z",
+    "category": "Given at Home"
+  },
+  {
     "id": "exp_20260117684886287606939",
     "date": "2026-01-15",
     "description": "Haircut",
