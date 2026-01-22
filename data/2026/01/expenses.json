@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260117690796936329436",
+    "date": "2026-01-19",
+    "description": "Synopsis submission to college",
+    "amount": 460,
+    "createdAt": "2026-01-22T11:01:33.638Z",
+    "updatedAt": "2026-01-22T11:01:33.638Z",
+    "category": "Education"
+  },
+  {
     "id": "exp_20260117687299891616443",
     "date": "2026-01-18",
     "description": "Given to Mummy",
