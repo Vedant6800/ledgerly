@@ -45,6 +45,15 @@
     "category": "Personal Care"
   },
   {
+    "id": "exp_20260117691457016003568",
+    "date": "2026-01-15",
+    "description": "Spectacles Frame",
+    "amount": 600,
+    "createdAt": "2026-01-23T05:21:41.600Z",
+    "updatedAt": "2026-01-23T05:21:41.600Z",
+    "category": "Clothing"
+  },
+  {
     "id": "exp_20260117682377244681386",
     "date": "2026-01-12",
     "description": "Bhel",
