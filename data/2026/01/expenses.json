@@ -27,6 +27,15 @@
     "category": "Given at Home"
   },
   {
+    "id": "exp_20260117691455801314859",
+    "date": "2026-01-17",
+    "description": "Credit card bill payment for mobile recharge",
+    "amount": 1048,
+    "createdAt": "2026-01-23T05:19:40.131Z",
+    "updatedAt": "2026-01-23T05:19:40.131Z",
+    "category": "Utilities"
+  },
+  {
     "id": "exp_20260117684886287606939",
     "date": "2026-01-15",
     "description": "Haircut",
