@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260117691454246615773",
+    "date": "2026-01-23",
+    "description": "Mouse for laptop",
+    "amount": 304,
+    "createdAt": "2026-01-23T05:17:04.662Z",
+    "updatedAt": "2026-01-23T05:17:04.662Z",
+    "category": "Miscellaneous"
+  },
+  {
     "id": "exp_20260117690796936329436",
     "date": "2026-01-19",
     "description": "Synopsis submission to college",
