@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260117692595312946580",
+    "date": "2026-01-24",
+    "description": "Petrol",
+    "amount": 160,
+    "createdAt": "2026-01-24T12:58:51.296Z",
+    "updatedAt": "2026-01-24T12:58:51.300Z",
+    "category": "Travel"
+  },
+  {
     "id": "exp_20260117691454246615773",
     "date": "2026-01-23",
     "description": "Mouse for laptop",
