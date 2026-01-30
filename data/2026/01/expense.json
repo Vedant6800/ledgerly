@@ -1,0 +1,218 @@
+[
+  {
+    "id": "exp_20260117697366655719302",
+    "date": "2026-01-28",
+    "description": "Given to Mummy for mirchi",
+    "amount": 700,
+    "createdAt": "2026-01-30T01:31:05.571Z",
+    "updatedAt": "2026-01-30T01:31:05.574Z",
+    "category": "Given at Home"
+  },
+  {
+    "id": "exp_20260117692595312946580",
+    "date": "2026-01-24",
+    "description": "Petrol",
+    "amount": 160,
+    "createdAt": "2026-01-24T12:58:51.296Z",
+    "updatedAt": "2026-01-24T12:58:51.300Z",
+    "category": "Travel"
+  },
+  {
+    "id": "exp_20260117691454246615773",
+    "date": "2026-01-23",
+    "description": "Mouse for laptop",
+    "amount": 304,
+    "createdAt": "2026-01-23T05:17:04.662Z",
+    "updatedAt": "2026-01-23T05:17:04.662Z",
+    "category": "Miscellaneous"
+  },
+  {
+    "id": "exp_20260117690796936329436",
+    "date": "2026-01-19",
+    "description": "Synopsis submission to college",
+    "amount": 460,
+    "createdAt": "2026-01-22T11:01:33.638Z",
+    "updatedAt": "2026-01-22T11:01:33.638Z",
+    "category": "Education"
+  },
+  {
+    "id": "exp_20260117687299891616443",
+    "date": "2026-01-18",
+    "description": "Given to Mummy",
+    "amount": 200,
+    "createdAt": "2026-01-18T09:53:09.161Z",
+    "updatedAt": "2026-01-18T09:53:09.161Z",
+    "category": "Given at Home"
+  },
+  {
+    "id": "exp_20260117691455801314859",
+    "date": "2026-01-17",
+    "description": "Credit card bill payment for mobile recharge",
+    "amount": 1048,
+    "createdAt": "2026-01-23T05:19:40.131Z",
+    "updatedAt": "2026-01-23T05:19:40.131Z",
+    "category": "Utilities"
+  },
+  {
+    "id": "exp_20260117684886287606939",
+    "date": "2026-01-15",
+    "description": "Haircut",
+    "amount": 100,
+    "createdAt": "2026-01-15T14:50:28.760Z",
+    "updatedAt": "2026-01-15T14:50:28.760Z",
+    "category": "Personal Care"
+  },
+  {
+    "id": "exp_20260117682377244681386",
+    "date": "2026-01-12",
+    "description": "Bhel",
+    "amount": 60,
+    "createdAt": "2026-01-12T17:08:44.469Z",
+    "updatedAt": "2026-01-12T17:08:44.469Z",
+    "category": "Food"
+  },
+  {
+    "id": "exp_20260117682955806896814",
+    "date": "2026-01-12",
+    "description": "To jay",
+    "amount": 40,
+    "createdAt": "2026-01-13T09:13:00.689Z",
+    "updatedAt": "2026-01-13T09:13:00.689Z",
+    "category": "Given at Home"
+  },
+  {
+    "id": "exp_20260117680497536772088",
+    "date": "2026-01-10",
+    "description": "Movie",
+    "amount": 220,
+    "createdAt": "2026-01-10T12:55:53.677Z",
+    "updatedAt": "2026-01-10T12:55:53.677Z",
+    "category": "Entertainment"
+  },
+  {
+    "id": "exp_2026011768049973529980",
+    "date": "2026-01-10",
+    "description": "Vadapao",
+    "amount": 75,
+    "createdAt": "2026-01-10T12:59:33.529Z",
+    "updatedAt": "2026-01-10T12:59:33.529Z",
+    "category": "Food"
+  },
+  {
+    "id": "exp_20260117678539895085083",
+    "date": "2026-01-08",
+    "description": "Given to Mummy",
+    "amount": 1000,
+    "createdAt": "2026-01-08T06:33:09.508Z",
+    "updatedAt": "2026-01-08T06:33:09.508Z",
+    "category": "Given at Home"
+  },
+  {
+    "id": "exp_20260117678540513744865",
+    "date": "2026-01-07",
+    "description": "Given to Jay for khari",
+    "amount": 100,
+    "createdAt": "2026-01-08T06:34:11.374Z",
+    "updatedAt": "2026-01-08T06:34:11.374Z",
+    "category": "Given at Home"
+  },
+  {
+    "id": "exp_20260117677152650512903",
+    "date": "2026-01-06",
+    "description": "Milk",
+    "amount": 1100,
+    "createdAt": "2026-01-06T16:01:05.052Z",
+    "updatedAt": "2026-01-06T16:01:05.052Z",
+    "category": "Utilities"
+  },
+  {
+    "id": "exp_20260117678541247733284",
+    "date": "2026-01-06",
+    "description": "Given cash to mummy for RD",
+    "amount": 250,
+    "createdAt": "2026-01-08T06:35:24.773Z",
+    "updatedAt": "2026-01-08T06:35:24.773Z",
+    "category": "Given at Home"
+  },
+  {
+    "id": "exp_20260117675216642408385",
+    "date": "2026-01-04",
+    "description": "DMart",
+    "amount": 3177,
+    "createdAt": "2026-01-04T10:14:24.240Z",
+    "updatedAt": "2026-01-04T10:14:24.240Z",
+    "category": "Grocery"
+  },
+  {
+    "id": "exp_20260117675218501818215",
+    "date": "2026-01-04",
+    "description": "Popcorn at Dmart",
+    "amount": 60,
+    "createdAt": "2026-01-04T10:17:30.181Z",
+    "updatedAt": "2026-01-04T10:17:30.181Z",
+    "category": "Food"
+  },
+  {
+    "id": "exp_2026011767591431670402",
+    "date": "2026-01-04",
+    "description": "Return to Sejal",
+    "amount": 5000,
+    "createdAt": "2026-01-05T05:37:11.672Z",
+    "updatedAt": "2026-01-05T05:37:11.673Z",
+    "category": "Return Taken Money"
+  },
+  {
+    "id": "exp_20260117674535560418521",
+    "date": "2026-01-03",
+    "description": "Moisturiser",
+    "amount": 20,
+    "createdAt": "2026-01-03T15:19:16.042Z",
+    "updatedAt": "2026-01-03T15:19:16.042Z",
+    "category": "Personal Care"
+  },
+  {
+    "id": "exp_20260117674335775132556",
+    "date": "2026-01-02",
+    "description": "RD",
+    "amount": 1500,
+    "createdAt": "2026-01-03T09:46:17.513Z",
+    "updatedAt": "2026-01-03T09:46:17.513Z",
+    "category": "Investment"
+  },
+  {
+    "id": "exp_20260117674338961549483",
+    "date": "2026-01-02",
+    "description": "Groundnut",
+    "amount": 115,
+    "createdAt": "2026-01-03T09:51:36.154Z",
+    "updatedAt": "2026-01-03T09:51:36.154Z",
+    "category": "Grocery"
+  },
+  {
+    "id": "exp_20260117674329222267492",
+    "date": "2026-01-01",
+    "description": "Jagerry",
+    "amount": 400,
+    "createdAt": "2026-01-03T09:35:22.226Z",
+    "updatedAt": "2026-01-03T09:35:22.226Z",
+    "category": "Grocery"
+  },
+  {
+    "id": "exp_20260117674337672058004",
+    "date": "2026-01-01",
+    "description": "Mummy Bdy Breakfast",
+    "amount": 160,
+    "createdAt": "2026-01-03T09:49:27.205Z",
+    "updatedAt": "2026-01-03T09:49:27.205Z",
+    "category": "Food"
+  },
+  {
+    "id": "exp_20260117674340038238245",
+    "date": "2026-01-01",
+    "description": "Panipuri with seji and her sister",
+    "amount": 80,
+    "createdAt": "2026-01-03T09:53:23.823Z",
+    "updatedAt": "2026-01-03T09:53:23.823Z",
+    "category": "Food"
+  }
+]
