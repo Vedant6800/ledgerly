@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260117697366655719302",
+    "date": "2026-01-28",
+    "description": "Given to Mummy for mirchi",
+    "amount": 700,
+    "createdAt": "2026-01-30T01:31:05.571Z",
+    "updatedAt": "2026-01-30T01:31:05.574Z",
+    "category": "Given at Home"
+  },
+  {
     "id": "exp_20260117692595312946580",
     "date": "2026-01-24",
     "description": "Petrol",
