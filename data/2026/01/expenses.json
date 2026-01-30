@@ -9,6 +9,15 @@
     "category": "Given at Home"
   },
   {
+    "id": "exp_20260117697697688852043",
+    "date": "2026-01-28",
+    "description": "Bag for jay",
+    "amount": 500,
+    "createdAt": "2026-01-30T10:42:48.888Z",
+    "updatedAt": "2026-01-30T10:42:48.889Z",
+    "category": "Given at Home"
+  },
+  {
     "id": "exp_20260117692595312946580",
     "date": "2026-01-24",
     "description": "Petrol",
