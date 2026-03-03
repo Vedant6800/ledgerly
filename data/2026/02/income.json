@@ -1,0 +1,29 @@
+[
+  {
+    "id": "inc_202602240001",
+    "date": "2026-02-24",
+    "description": "By Papa (for papa recharge and papa ticket)",
+    "amount": 600,
+    "createdAt": "2026-02-24T09:00:00.000Z",
+    "updatedAt": "2026-02-24T09:00:00.000Z",
+    "category": "Recived from someone"
+  },
+  {
+    "id": "inc_202602200002",
+    "date": "2026-02-20",
+    "description": "By Papa (for ghar kharcha)",
+    "amount": 6000,
+    "createdAt": "2026-02-20T10:00:00.000Z",
+    "updatedAt": "2026-02-20T10:00:00.000Z",
+    "category": "Recived from someone"
+  },
+  {
+    "id": "inc_202602010003",
+    "date": "2026-02-01",
+    "description": "Salary",
+    "amount": 16767,
+    "createdAt": "2026-02-01T08:00:00.000Z",
+    "updatedAt": "2026-02-01T08:00:00.000Z",
+    "category": "Salary"
+  }
+]

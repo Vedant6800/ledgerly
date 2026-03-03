@@ -1,0 +1,200 @@
+[
+  {
+    "id": "exp_202602270001",
+    "date": "2026-02-27",
+    "description": "Dominos for Sam",
+    "amount": 217,
+    "createdAt": "2026-02-27T10:00:00.000Z",
+    "updatedAt": "2026-02-27T10:00:00.000Z",
+    "category": "Dining Out"
+  },
+  {
+    "id": "exp_202602250002",
+    "date": "2026-02-25",
+    "description": "Order for Sejal",
+    "amount": 150,
+    "createdAt": "2026-02-25T09:00:00.000Z",
+    "updatedAt": "2026-02-25T09:00:00.000Z",
+    "category": "Online Shopping"
+  },
+  {
+    "id": "exp_202602250003",
+    "date": "2026-02-25",
+    "description": "Pramod Super Market, Snacks",
+    "amount": 184,
+    "createdAt": "2026-02-25T09:10:00.000Z",
+    "updatedAt": "2026-02-25T09:10:00.000Z",
+    "category": "Grocery"
+  },
+  {
+    "id": "exp_202602230004",
+    "date": "2026-02-23",
+    "description": "Papa Recharge",
+    "amount": 289,
+    "createdAt": "2026-02-23T08:00:00.000Z",
+    "updatedAt": "2026-02-23T08:00:00.000Z",
+    "category": "Utilities"
+  },
+  {
+    "id": "exp_202602230005",
+    "date": "2026-02-23",
+    "description": "Kante Tel",
+    "amount": 733,
+    "createdAt": "2026-02-23T08:10:00.000Z",
+    "updatedAt": "2026-02-23T08:10:00.000Z",
+    "category": "Grocery"
+  },
+  {
+    "id": "exp_202602210006",
+    "date": "2026-02-21",
+    "description": "Petrol",
+    "amount": 150,
+    "createdAt": "2026-02-21T07:00:00.000Z",
+    "updatedAt": "2026-02-21T07:00:00.000Z",
+    "category": "Travel"
+  },
+  {
+    "id": "exp_202602210007",
+    "date": "2026-02-21",
+    "description": "Movie",
+    "amount": 410,
+    "createdAt": "2026-02-21T07:30:00.000Z",
+    "updatedAt": "2026-02-21T07:30:00.000Z",
+    "category": "Entertainment"
+  },
+  {
+    "id": "exp_202602210008",
+    "date": "2026-02-21",
+    "description": "Dinner with Jay and Papa (One and Only Food Mall)",
+    "amount": 800,
+    "createdAt": "2026-02-21T08:00:00.000Z",
+    "updatedAt": "2026-02-21T08:00:00.000Z",
+    "category": "Dining Out"
+  },
+  {
+    "id": "exp_202602180009",
+    "date": "2026-02-18",
+    "description": "Mummy Mortale Hospital",
+    "amount": 6500,
+    "createdAt": "2026-02-18T09:00:00.000Z",
+    "updatedAt": "2026-02-18T09:00:00.000Z",
+    "category": "Healthcare"
+  },
+  {
+    "id": "exp_202602180010",
+    "date": "2026-02-18",
+    "description": "Pramod Super Market, Ghr ka kirana",
+    "amount": 1500,
+    "createdAt": "2026-02-18T09:10:00.000Z",
+    "updatedAt": "2026-02-18T09:10:00.000Z",
+    "category": "Grocery"
+  },
+  {
+    "id": "exp_202602170011",
+    "date": "2026-02-17",
+    "description": "To Jay",
+    "amount": 150,
+    "createdAt": "2026-02-17T10:00:00.000Z",
+    "updatedAt": "2026-02-17T10:00:00.000Z",
+    "category": "Family Support"
+  },
+  {
+    "id": "exp_202602140012",
+    "date": "2026-02-14",
+    "description": "Pramod Super Market, Snacks for Mahashivratri",
+    "amount": 251,
+    "createdAt": "2026-02-14T11:00:00.000Z",
+    "updatedAt": "2026-02-14T11:00:00.000Z",
+    "category": "Grocery"
+  },
+  {
+    "id": "exp_202602120013",
+    "date": "2026-02-12",
+    "description": "To Mummy",
+    "amount": 200,
+    "createdAt": "2026-02-12T09:00:00.000Z",
+    "updatedAt": "2026-02-12T09:00:00.000Z",
+    "category": "Family Support"
+  },
+  {
+    "id": "exp_202602110014",
+    "date": "2026-02-11",
+    "description": "Chocolate to Sam from Amazon",
+    "amount": 100,
+    "createdAt": "2026-02-11T08:00:00.000Z",
+    "updatedAt": "2026-02-11T08:00:00.000Z",
+    "category": "Online Shopping"
+  },
+  {
+    "id": "exp_202602110015",
+    "date": "2026-02-11",
+    "description": "Doodh Bill (For Home)",
+    "amount": 1050,
+    "createdAt": "2026-02-11T08:10:00.000Z",
+    "updatedAt": "2026-02-11T08:10:00.000Z",
+    "category": "Utilities"
+  },
+  {
+    "id": "exp_202602070016",
+    "date": "2026-02-07",
+    "description": "With Friends",
+    "amount": 100,
+    "createdAt": "2026-02-07T18:00:00.000Z",
+    "updatedAt": "2026-02-07T18:00:00.000Z",
+    "category": "Entertainment"
+  },
+  {
+    "id": "exp_202602030017",
+    "date": "2026-02-03",
+    "description": "Noodles from Amazon",
+    "amount": 63,
+    "createdAt": "2026-02-03T10:00:00.000Z",
+    "updatedAt": "2026-02-03T10:00:00.000Z",
+    "category": "Online Shopping"
+  },
+  {
+    "id": "exp_202602030018",
+    "date": "2026-02-03",
+    "description": "HairColor for mummy from Amazon",
+    "amount": 202,
+    "createdAt": "2026-02-03T10:10:00.000Z",
+    "updatedAt": "2026-02-03T10:10:00.000Z",
+    "category": "Personal Care"
+  },
+  {
+    "id": "exp_202602020019",
+    "date": "2026-02-02",
+    "description": "Pramod Super Market, Snacks",
+    "amount": 130,
+    "createdAt": "2026-02-02T09:00:00.000Z",
+    "updatedAt": "2026-02-02T09:00:00.000Z",
+    "category": "Grocery"
+  },
+  {
+    "id": "exp_202602010020",
+    "date": "2026-02-01",
+    "description": "Petrol for Sejal (She went with Jay)",
+    "amount": 260,
+    "createdAt": "2026-02-01T07:00:00.000Z",
+    "updatedAt": "2026-02-01T07:00:00.000Z",
+    "category": "Travel"
+  },
+  {
+    "id": "exp_202602010021",
+    "date": "2026-02-01",
+    "description": "Snacks for Sejal (She went with Jay)",
+    "amount": 100,
+    "createdAt": "2026-02-01T07:10:00.000Z",
+    "updatedAt": "2026-02-01T07:10:00.000Z",
+    "category": "Dining Out"
+  },
+  {
+    "id": "exp_202602010022",
+    "date": "2026-02-01",
+    "description": "RD",
+    "amount": 1500,
+    "createdAt": "2026-02-01T07:20:00.000Z",
+    "updatedAt": "2026-02-01T07:20:00.000Z",
+    "category": "Investment"
+  }
+]
