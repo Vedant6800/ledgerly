@@ -803,7 +803,8 @@ class GitHubDataManager {
 
         // Update GitHub
         const commitMessage = `Delete ${type}: ${transaction.description} (₹${transaction.amount})`;
-        await this.github.updateFile(year, month, type, targetArray, commitMessage);
+        const fileType = type === 'income' ? 'income' : 'expenses';
+        await this.github.updateFile(year, month, fileType, targetArray, commitMessage);
 
         return true;
     }
