@@ -1,5 +1,32 @@
 [
   {
+    "id": "exp_202602280023",
+    "date": "2026-02-28",
+    "description": "Vijay Ticket to Pune",
+    "amount": 125,
+    "createdAt": "2026-02-28T09:00:00.000Z",
+    "updatedAt": "2026-02-28T09:00:00.000Z",
+    "category": "Given at Home"
+  },
+  {
+    "id": "exp_202602280024",
+    "date": "2026-02-28",
+    "description": "Chappal Repair",
+    "amount": 50,
+    "createdAt": "2026-02-28T09:10:00.000Z",
+    "updatedAt": "2026-02-28T09:10:00.000Z",
+    "category": "Miscellaneous"
+  },
+  {
+    "id": "exp_202602280025",
+    "date": "2026-02-28",
+    "description": "Temple Visit",
+    "amount": 100,
+    "createdAt": "2026-02-28T09:20:00.000Z",
+    "updatedAt": "2026-02-28T09:20:00.000Z",
+    "category": "Travel"
+  },
+  {
     "id": "exp_202602270001",
     "date": "2026-02-27",
     "description": "Dominos for Sam",
