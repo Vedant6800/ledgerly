@@ -16,5 +16,14 @@
     "createdAt": "2026-03-07T07:56:38.419Z",
     "updatedAt": "2026-03-07T07:56:38.419Z",
     "category": "Transportation"
+  },
+  {
+    "id": "exp_20260317728702934892793",
+    "date": "2026-03-07",
+    "description": "Muskmelon",
+    "amount": 100,
+    "createdAt": "2026-03-07T07:58:13.489Z",
+    "updatedAt": "2026-03-07T07:58:13.489Z",
+    "category": "Food"
   }
 ]
