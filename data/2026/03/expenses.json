@@ -25,5 +25,14 @@
     "createdAt": "2026-03-07T07:58:13.489Z",
     "updatedAt": "2026-03-07T07:58:13.489Z",
     "category": "Food"
+  },
+  {
+    "id": "exp_20260317728727298973649",
+    "date": "2026-03-07",
+    "description": "Breakfast",
+    "amount": 75,
+    "createdAt": "2026-03-07T08:38:49.897Z",
+    "updatedAt": "2026-03-07T08:38:49.897Z",
+    "category": "Food"
   }
 ]
