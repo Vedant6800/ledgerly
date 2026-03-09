@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260317730654597396027",
+    "date": "2026-03-08",
+    "description": "Rangpanchami",
+    "amount": 500,
+    "createdAt": "2026-03-09T14:10:59.740Z",
+    "updatedAt": "2026-03-09T14:10:59.745Z",
+    "category": "Entertainment"
+  },
+  {
     "id": "exp_20260317728701429005212",
     "date": "2026-03-07",
     "description": "Dominos",
