@@ -54,6 +54,15 @@
     "category": "Grocery"
   },
   {
+    "id": "exp_2026031773065552551672",
+    "date": "2026-03-02",
+    "description": "RD",
+    "amount": 1500,
+    "createdAt": "2026-03-09T14:12:32.551Z",
+    "updatedAt": "2026-03-09T14:12:32.551Z",
+    "category": "Investment"
+  },
+  {
     "id": "exp_20260317728729315508626",
     "date": "2026-03-01",
     "description": "Yatra",
