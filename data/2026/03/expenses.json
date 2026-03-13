@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260317734090455563232",
+    "date": "2026-03-13",
+    "description": "Kulfi",
+    "amount": 80,
+    "createdAt": "2026-03-13T13:37:25.556Z",
+    "updatedAt": "2026-03-13T13:37:25.557Z",
+    "category": "Food"
+  },
+  {
     "id": "exp_20260317730654597396027",
     "date": "2026-03-08",
     "description": "Rangpanchami",
