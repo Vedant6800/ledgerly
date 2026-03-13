@@ -9,6 +9,14 @@
     "category": "Food"
   },
   {
+    "id": "exp_20260317734090640496775",
+    "date": "2026-03-13",
+    "description": "To Sagar",
+    "amount": 100,
+    "createdAt": "2026-03-13T13:37:44.049Z",
+    "updatedAt": "2026-03-13T13:37:44.049Z"
+  },
+  {
     "id": "exp_20260317730654597396027",
     "date": "2026-03-08",
     "description": "Rangpanchami",
