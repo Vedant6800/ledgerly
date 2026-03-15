@@ -36,6 +36,15 @@
     "category": "Entertainment"
   },
   {
+    "id": "exp_20260317735900708558486",
+    "date": "2026-03-08",
+    "description": "JioHotstar",
+    "amount": 234,
+    "createdAt": "2026-03-15T15:54:30.855Z",
+    "updatedAt": "2026-03-15T15:54:30.855Z",
+    "category": "Entertainment"
+  },
+  {
     "id": "exp_20260317728701429005212",
     "date": "2026-03-07",
     "description": "Dominos",
