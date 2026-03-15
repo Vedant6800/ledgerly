@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260317735901621044549",
+    "date": "2026-03-14",
+    "description": "Ice Cream (Family Pack + Cones) from Blinkit",
+    "amount": 287,
+    "createdAt": "2026-03-15T15:56:02.104Z",
+    "updatedAt": "2026-03-15T15:56:02.104Z",
+    "category": "Food"
+  },
+  {
     "id": "exp_20260317734090455563232",
     "date": "2026-03-13",
     "description": "Kulfi",
