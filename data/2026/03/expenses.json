@@ -9,6 +9,15 @@
     "category": "Food"
   },
   {
+    "id": "exp_20260317735904728738095",
+    "date": "2026-03-14",
+    "description": "Mobile EMI",
+    "amount": 2500,
+    "createdAt": "2026-03-15T16:01:12.874Z",
+    "updatedAt": "2026-03-15T16:01:12.874Z",
+    "category": "EMI"
+  },
+  {
     "id": "exp_20260317734090455563232",
     "date": "2026-03-13",
     "description": "Kulfi",
