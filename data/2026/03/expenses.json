@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260317740312843748034",
+    "date": "2026-03-19",
+    "description": "Pramod Super Market: farsan, Biscuits and chips",
+    "amount": 200,
+    "createdAt": "2026-03-20T18:28:04.374Z",
+    "updatedAt": "2026-03-20T18:28:04.378Z",
+    "category": "Grocery"
+  },
+  {
     "id": "exp_20260317735901621044549",
     "date": "2026-03-14",
     "description": "Ice Cream (Family Pack + Cones) from Blinkit",
