@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260317743671700241037",
+    "date": "2026-03-24",
+    "description": "Hospital: Mummy Plaster Removal",
+    "amount": 700,
+    "createdAt": "2026-03-24T15:46:10.024Z",
+    "updatedAt": "2026-03-24T15:46:10.024Z",
+    "category": "Healthcare"
+  },
+  {
     "id": "exp_20260317743670061707561",
     "date": "2026-03-23",
     "description": "MCA 2nd Sem Exam form",
