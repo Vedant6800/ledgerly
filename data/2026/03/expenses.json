@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_2026041775385296554742",
+    "date": "2026-03-28",
+    "description": "Hyderabad Train(500)+auto to go to Train (50)+Jeep to comeback(110)",
+    "amount": 660,
+    "createdAt": "2026-04-05T10:34:56.554Z",
+    "updatedAt": "2026-04-05T10:36:37.436Z",
+    "category": "Travel"
+  },
+  {
     "id": "exp_20260317743671700241037",
     "date": "2026-03-24",
     "description": "Hospital: Mummy Plaster Removal",
