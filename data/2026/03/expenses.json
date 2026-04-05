@@ -36,6 +36,15 @@
     "category": "Transportation"
   },
   {
+    "id": "exp_20260317753855608876821",
+    "date": "2026-03-22",
+    "description": "Petrol",
+    "amount": 300,
+    "createdAt": "2026-04-05T10:39:20.887Z",
+    "updatedAt": "2026-04-05T10:39:20.887Z",
+    "category": "Transportation"
+  },
+  {
     "id": "exp_20260317740312843748034",
     "date": "2026-03-19",
     "description": "Pramod Super Market: farsan, Biscuits and chips",
