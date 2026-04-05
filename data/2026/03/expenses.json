@@ -18,6 +18,15 @@
     "category": "Travel"
   },
   {
+    "id": "exp_2026031775386124785177",
+    "date": "2026-03-28",
+    "description": "Wonderla Tickit(1000)+Locker(200)+Petrol(240)+chai(60)+Breakfast(52)+Dinner(253)",
+    "amount": 1805,
+    "createdAt": "2026-04-05T10:48:44.785Z",
+    "updatedAt": "2026-04-05T10:48:44.786Z",
+    "category": "Entertainment"
+  },
+  {
     "id": "exp_20260317743671700241037",
     "date": "2026-03-24",
     "description": "Hospital: Mummy Plaster Removal",
