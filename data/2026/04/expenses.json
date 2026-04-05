@@ -16,5 +16,14 @@
     "createdAt": "2026-04-05T10:27:45.417Z",
     "updatedAt": "2026-04-05T10:27:45.417Z",
     "category": "Transportation"
+  },
+  {
+    "id": "exp_20260417753849770424759",
+    "date": "2026-04-01",
+    "description": "Given to Mummy",
+    "amount": 200,
+    "createdAt": "2026-04-05T10:29:37.043Z",
+    "updatedAt": "2026-04-05T10:29:37.043Z",
+    "category": "Given at Home"
   }
 ]
