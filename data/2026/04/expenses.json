@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_2026041775385296554742",
+    "date": "2026-04-28",
+    "description": "Hyderabad Train(500)+auto to go to Train (50)+Jeep to comeback(110)",
+    "amount": 660,
+    "createdAt": "2026-04-05T10:34:56.554Z",
+    "updatedAt": "2026-04-05T10:34:56.554Z",
+    "category": "Travel"
+  },
+  {
     "id": "exp_20260417753847726865802",
     "date": "2026-04-04",
     "description": "Ice Cream",
