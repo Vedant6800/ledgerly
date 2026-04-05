@@ -9,6 +9,15 @@
     "category": "Food"
   },
   {
+    "id": "exp_2026041775389219714128",
+    "date": "2026-04-04",
+    "description": "Oil Strainer",
+    "amount": 150,
+    "createdAt": "2026-04-05T11:40:19.714Z",
+    "updatedAt": "2026-04-05T11:40:19.715Z",
+    "category": "Online Shopping"
+  },
+  {
     "id": "exp_20260417753848654167744",
     "date": "2026-04-01",
     "description": "Petrol",
