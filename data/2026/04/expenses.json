@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260417753904016553445",
+    "date": "2026-04-14",
+    "description": "Papa Mobile Emi",
+    "amount": 2500,
+    "createdAt": "2026-04-05T12:00:01.655Z",
+    "updatedAt": "2026-04-05T12:00:01.655Z",
+    "category": "EMI"
+  },
+  {
     "id": "exp_20260417753847726865802",
     "date": "2026-04-04",
     "description": "Ice Cream",
