@@ -9,6 +9,15 @@
     "category": "Gifts"
   },
   {
+    "id": "exp_20260317753864012759554",
+    "date": "2026-03-29",
+    "description": "Hyderabad Day 2: Breakfast(60) + Juice(30) + Movie(200) + Samosa in Movie(60) + Petrol (40)",
+    "amount": 390,
+    "createdAt": "2026-04-05T10:53:21.275Z",
+    "updatedAt": "2026-04-05T10:53:21.275Z",
+    "category": "Entertainment"
+  },
+  {
     "id": "exp_2026041775385296554742",
     "date": "2026-03-28",
     "description": "Hyderabad Train(500)+auto to go to Train (50)+Jeep to comeback(110)",
