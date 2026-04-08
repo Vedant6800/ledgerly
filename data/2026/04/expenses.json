@@ -9,6 +9,15 @@
     "category": "EMI"
   },
   {
+    "id": "exp_20260417756560401447048",
+    "date": "2026-04-08",
+    "description": "Joshi Hospital",
+    "amount": 300,
+    "createdAt": "2026-04-08T13:47:20.144Z",
+    "updatedAt": "2026-04-08T13:47:20.147Z",
+    "category": "Healthcare"
+  },
+  {
     "id": "exp_20260417753847726865802",
     "date": "2026-04-04",
     "description": "Ice Cream",
