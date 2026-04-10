@@ -9,6 +9,15 @@
     "category": "EMI"
   },
   {
+    "id": "exp_20260417758407787009505",
+    "date": "2026-04-10",
+    "description": "Drumstick and Banana",
+    "amount": 80,
+    "createdAt": "2026-04-10T17:06:18.703Z",
+    "updatedAt": "2026-04-10T17:06:18.709Z",
+    "category": "Grocery"
+  },
+  {
     "id": "exp_20260417756560401447048",
     "date": "2026-04-08",
     "description": "Joshi Hospital",
