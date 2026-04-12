@@ -9,6 +9,15 @@
     "category": "EMI"
   },
   {
+    "id": "exp_20260417760103539119038",
+    "date": "2026-04-12",
+    "description": "Mucinac 600 + ORS",
+    "amount": 140,
+    "createdAt": "2026-04-12T16:12:33.911Z",
+    "updatedAt": "2026-04-12T16:12:33.914Z",
+    "category": "Healthcare"
+  },
+  {
     "id": "exp_20260417758407787009505",
     "date": "2026-04-10",
     "description": "Drumstick and Banana",
