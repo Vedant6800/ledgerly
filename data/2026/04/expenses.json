@@ -9,6 +9,15 @@
     "category": "Given at Home"
   },
   {
+    "id": "exp_20260417765950544786309",
+    "date": "2026-04-15",
+    "description": "Doodh Bill",
+    "amount": 1050,
+    "createdAt": "2026-04-19T10:37:34.478Z",
+    "updatedAt": "2026-04-19T10:37:34.478Z",
+    "category": "Given at Home"
+  },
+  {
     "id": "exp_20260417753904016553445",
     "date": "2026-04-14",
     "description": "Papa Mobile Emi",
