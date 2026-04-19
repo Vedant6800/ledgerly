@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260417766161477256778",
+    "date": "2026-04-19",
+    "description": "Given to Vijay",
+    "amount": 3000,
+    "createdAt": "2026-04-19T16:29:07.725Z",
+    "updatedAt": "2026-04-19T16:29:07.726Z",
+    "category": "Given at Home"
+  },
+  {
     "id": "exp_2026041776594980309482",
     "date": "2026-04-15",
     "description": "Sent to Mummy",
