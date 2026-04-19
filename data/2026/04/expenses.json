@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_2026041776594980309482",
+    "date": "2026-04-15",
+    "description": "Sent to Mummy",
+    "amount": 5000,
+    "createdAt": "2026-04-19T10:36:20.309Z",
+    "updatedAt": "2026-04-19T10:36:20.311Z",
+    "category": "Given at Home"
+  },
+  {
     "id": "exp_20260417753904016553445",
     "date": "2026-04-14",
     "description": "Papa Mobile Emi",
