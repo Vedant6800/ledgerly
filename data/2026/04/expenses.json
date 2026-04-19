@@ -54,6 +54,15 @@
     "category": "Healthcare"
   },
   {
+    "id": "exp_20260417765951295553196",
+    "date": "2026-04-06",
+    "description": "Petrol",
+    "amount": 480,
+    "createdAt": "2026-04-19T10:38:49.555Z",
+    "updatedAt": "2026-04-19T10:38:49.555Z",
+    "category": "Transportation"
+  },
+  {
     "id": "exp_20260417753847726865802",
     "date": "2026-04-04",
     "description": "Ice Cream",
