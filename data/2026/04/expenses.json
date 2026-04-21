@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260417767484926889541",
+    "date": "2026-04-21",
+    "description": "Mango",
+    "amount": 150,
+    "createdAt": "2026-04-21T05:14:52.712Z",
+    "updatedAt": "2026-04-21T05:14:52.713Z",
+    "category": "Fruits"
+  },
+  {
     "id": "exp_20260417766161477256778",
     "date": "2026-04-19",
     "description": "Given to Vijay",
