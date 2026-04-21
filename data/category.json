@@ -7,24 +7,25 @@
   ],
   "expenses": [
     "Clothing",
+    "Dining Out",
+    "EMI",
     "Education",
     "Entertainment",
+    "Family Support",
     "Food",
+    "Fruits",
     "Gifts",
     "Given at Home",
+    "Grocery",
     "Healthcare",
+    "Investment",
     "Miscellaneous",
+    "Online Shopping",
     "Personal Care",
     "Rent",
+    "Return Taken Money",
     "Transportation",
     "Travel",
-    "Utilities",
-    "Investment",
-    "Grocery",
-    "Return Taken Money",
-    "Online Shopping",
-    "Dining Out",
-    "Family Support",
-    "EMI"
+    "Utilities"
   ]
 }
