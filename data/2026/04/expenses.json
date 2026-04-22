@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_202604177683875185436",
+    "date": "2026-04-22",
+    "description": "MF SIP",
+    "amount": 500,
+    "createdAt": "2026-04-22T06:19:11.854Z",
+    "updatedAt": "2026-04-22T06:19:11.854Z",
+    "category": "Investment"
+  },
+  {
     "id": "exp_20260417767484926889541",
     "date": "2026-04-21",
     "description": "Mango",
