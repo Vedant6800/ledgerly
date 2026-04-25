@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260417771092248806009",
+    "date": "2026-04-25",
+    "description": "Mango",
+    "amount": 350,
+    "createdAt": "2026-04-25T09:27:04.880Z",
+    "updatedAt": "2026-04-25T09:27:04.880Z",
+    "category": "Fruits"
+  },
+  {
     "id": "exp_202604177683875185436",
     "date": "2026-04-22",
     "description": "MF SIP",
