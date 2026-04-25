@@ -27,6 +27,15 @@
     "category": "Grocery"
   },
   {
+    "id": "exp_20260417771094653539629",
+    "date": "2026-04-23",
+    "description": "Shoes",
+    "amount": 970,
+    "createdAt": "2026-04-25T09:31:05.353Z",
+    "updatedAt": "2026-04-25T09:31:05.353Z",
+    "category": "Clothing"
+  },
+  {
     "id": "exp_202604177683875185436",
     "date": "2026-04-22",
     "description": "MF SIP",
