@@ -9,6 +9,15 @@
     "category": "Fruits"
   },
   {
+    "id": "exp_20260417771093027588172",
+    "date": "2026-04-25",
+    "description": "College Record Books",
+    "amount": 400,
+    "createdAt": "2026-04-25T09:28:22.758Z",
+    "updatedAt": "2026-04-25T09:28:22.758Z",
+    "category": "Education"
+  },
+  {
     "id": "exp_202604177683875185436",
     "date": "2026-04-22",
     "description": "MF SIP",
