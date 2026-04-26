@@ -11,7 +11,6 @@ class LedgerlyReports {
         this.theme = 'light';
         this.charts = {}; // Store chart instances
         this.chartTypes = {
-            'income-expense': 'bar',
             'income-category': 'bar',
             'expense-category': 'bar'
         };
@@ -93,13 +92,17 @@ class LedgerlyReports {
         // Update expense ratio
         this.updateExpenseRatio(totalIncome, totalExpenses);
 
-        // Update month-to-month comparison
-        await this.updateMonthComparison();
-
         // Generate charts
-        this.generateIncomeExpenseChart(totalIncome, totalExpenses);
         this.generateIncomeCategoryChart(incomeData);
         this.generateExpenseCategoryChart(expenseData);
+
+        // New analytical sections (all use already-loaded in-memory data)
+        this.calculateSpendingInsights(expenseData, totalExpenses);
+        this.calculateBurnRate(totalExpenses);
+
+        // Smart observations needs prev-month data — run async fire-and-forget
+        this.generateSmartObservations(totalIncome, totalExpenses, balance, expenseData)
+            .catch(err => console.warn('Smart Observations failed silently:', err));
 
         // Update Financial Position (YTD + All-Time)
         // Fire-and-forget: errors are handled internally
@@ -154,97 +157,252 @@ class LedgerlyReports {
         ratioStatusEl.className = 'expense-ratio-status ' + statusClass;
     }
 
-    // Update month-to-month comparison
-    async updateMonthComparison() {
-        const incomeChangeEl = document.getElementById('income-change');
-        const incomeChangeSubtextEl = document.getElementById('income-change-subtext');
-        const expenseChangeEl = document.getElementById('expense-change');
-        const expenseChangeSubtextEl = document.getElementById('expense-change-subtext');
+    // ============================================================
+    // SPENDING INSIGHTS — Top categories, share bars
+    // ============================================================
+    calculateSpendingInsights(expenseData, totalExpenses) {
+        const siEmpty   = document.getElementById('si-empty');
+        const siContent = document.getElementById('si-content');
+        const siList    = document.getElementById('si-category-list');
+        const siFooter  = document.getElementById('si-footer');
+        const siOther   = document.getElementById('si-other-text');
 
-        // Calculate previous month
-        const currentDate = new Date(this.currentYear, parseInt(this.currentMonth) - 1, 1);
-        const prevDate = new Date(currentDate);
-        prevDate.setMonth(prevDate.getMonth() - 1);
+        if (expenseData.length === 0 || totalExpenses === 0) {
+            siEmpty.style.display   = '';
+            siContent.style.display = 'none';
+            return;
+        }
+        siEmpty.style.display   = 'none';
+        siContent.style.display = '';
 
-        const prevYear = prevDate.getFullYear().toString();
-        const prevMonth = String(prevDate.getMonth() + 1).padStart(2, '0');
+        // Aggregate by category
+        const catMap = {};
+        for (const t of expenseData) {
+            const cat = t.category || 'Uncategorized';
+            catMap[cat] = (catMap[cat] || 0) + Number(t.amount);
+        }
+        const sorted = Object.entries(catMap).sort((a, b) => b[1] - a[1]);
+        const top3   = sorted.slice(0, 3);
+        const rest   = sorted.slice(3);
 
-        try {
-            // Load previous month data
-            await this.dataManager.loadMonthData(prevYear, prevMonth);
+        // Largest single value for relative bar widths
+        const maxAmount = top3[0][1];
 
-            // Get summaries for both months
-            const prevSummary = this.dataManager.calculateMonthlySummary(prevYear, prevMonth);
-            const currentSummary = this.dataManager.calculateMonthlySummary(this.currentYear, this.currentMonth);
+        siList.innerHTML = top3.map(([cat, total], i) => {
+            const pct      = ((total / totalExpenses) * 100).toFixed(1);
+            const barWidth = ((total / maxAmount) * 100).toFixed(1);
+            const rank     = i + 1;
+            return `
+            <div class="si-row">
+                <div class="si-row-header">
+                    <span class="si-rank">#${rank}</span>
+                    <span class="si-cat-name" title="${cat}">${cat}</span>
+                    <div class="si-cat-right">
+                        <span class="si-cat-amount">${this.formatCurrency(total)}</span>
+                        <span class="si-cat-pct">${pct}%</span>
+                    </div>
+                </div>
+                <div class="si-bar-track">
+                    <div class="si-bar-fill si-bar-fill--${rank}" style="width:${barWidth}%"></div>
+                </div>
+            </div>`;
+        }).join('');
 
-            const prevIncome = prevSummary.totalIncome;
-            const prevExpenses = prevSummary.totalExpenses;
-            const currentIncome = currentSummary.totalIncome;
-            const currentExpenses = currentSummary.totalExpenses;
-
-            // Calculate changes
-            const incomeChange = this.calculatePercentageChange(prevIncome, currentIncome);
-            const expenseChange = this.calculatePercentageChange(prevExpenses, currentExpenses);
-
-            // Update income change
-            this.updateComparisonCard(incomeChangeEl, incomeChangeSubtextEl, incomeChange, 'income');
-
-            // Update expense change
-            this.updateComparisonCard(expenseChangeEl, expenseChangeSubtextEl, expenseChange, 'expense');
-
-        } catch (error) {
-            console.log('Previous month data not available:', error);
-            incomeChangeEl.textContent = '--';
-            incomeChangeEl.className = 'comparison-value neutral';
-            incomeChangeSubtextEl.textContent = 'No previous month data';
-
-            expenseChangeEl.textContent = '--';
-            expenseChangeEl.className = 'comparison-value neutral';
-            expenseChangeSubtextEl.textContent = 'No previous month data';
+        if (rest.length > 0) {
+            const otherTotal = rest.reduce((s, [, v]) => s + v, 0);
+            const otherPct   = ((otherTotal / totalExpenses) * 100).toFixed(1);
+            siOther.textContent =
+                `+${rest.length} more categor${rest.length === 1 ? 'y' : 'ies'} · ` +
+                `${this.formatCurrency(otherTotal)} (${otherPct}%)`;
+            siFooter.style.display = '';
+        } else {
+            siFooter.style.display = 'none';
         }
     }
 
-    // Update comparison card
-    updateComparisonCard(valueEl, subtextEl, change, type) {
-        if (change === null) {
-            valueEl.textContent = '--';
-            valueEl.className = 'comparison-value neutral';
-            subtextEl.textContent = 'No previous data';
+    // ============================================================
+    // DAILY BURN RATE
+    // ============================================================
+    calculateBurnRate(totalExpenses) {
+        const brEmpty   = document.getElementById('br-empty');
+        const brContent = document.getElementById('br-content');
+
+        if (totalExpenses === 0) {
+            brEmpty.style.display   = '';
+            brContent.style.display = 'none';
+            return;
+        }
+        brEmpty.style.display   = 'none';
+        brContent.style.display = '';
+
+        const year        = parseInt(this.currentYear, 10);
+        const month       = parseInt(this.currentMonth, 10);
+        const daysInMonth = new Date(year, month, 0).getDate();
+
+        const now            = new Date();
+        const isCurrentMonth = now.getFullYear() === year && (now.getMonth() + 1) === month;
+        const dayOfMonth     = isCurrentMonth ? now.getDate() : daysInMonth;
+        const daysElapsed    = Math.max(dayOfMonth, 1);
+        const daysLeft       = Math.max(daysInMonth - daysElapsed, 0);
+
+        const dailyRate = totalExpenses / daysElapsed;
+        const projected = dailyRate * daysInMonth;
+        const progressPct = Math.min((totalExpenses / projected) * 100, 100).toFixed(1);
+
+        document.getElementById('br-daily-value').textContent    = this.formatCurrency(dailyRate);
+        document.getElementById('br-days-elapsed').textContent   = `${daysElapsed} of ${daysInMonth}`;
+        document.getElementById('br-days-remaining').textContent = daysLeft === 0 ? 'Month done' : `${daysLeft} left`;
+        document.getElementById('br-projected').textContent      = this.formatCurrency(projected);
+        document.getElementById('br-progress-bar').style.width   = progressPct + '%';
+        document.getElementById('br-progress-cap').textContent   = this.formatCurrency(projected);
+        document.getElementById('br-basis-text').textContent     =
+            `Based on ${this.formatCurrency(totalExpenses)} spent over ` +
+            `${daysElapsed} day${daysElapsed !== 1 ? 's' : ''}`;
+    }
+
+    // ============================================================
+    // SMART OBSERVATIONS — rule-based insight cards
+    // ============================================================
+    async generateSmartObservations(totalIncome, totalExpenses, balance, expenseData) {
+        const soLoading = document.getElementById('so-loading');
+        const soEmpty   = document.getElementById('so-empty');
+        const soList    = document.getElementById('so-list');
+
+        soLoading.style.display = '';
+        soEmpty.style.display   = 'none';
+        soList.style.display    = 'none';
+
+        const observations = [];
+
+        // ── 1. Balance health ──────────────────────────────────────────
+        if (totalIncome > 0 || totalExpenses > 0) {
+            if (balance < 0) {
+                observations.push({
+                    sentiment: 'negative', icon: '🚨',
+                    headline: 'Negative Balance',
+                    detail: `You spent ${this.formatCurrency(Math.abs(balance))} more than you earned this month. Review your expenses to avoid a deficit.`
+                });
+            } else if (totalIncome > 0) {
+                const savingsRate = ((balance / totalIncome) * 100).toFixed(1);
+                if (parseFloat(savingsRate) >= 30) {
+                    observations.push({
+                        sentiment: 'positive', icon: '🏆',
+                        headline: 'Excellent Savings Rate',
+                        detail: `You saved ${savingsRate}% of your income — well above the recommended 20%. Keep it up!`
+                    });
+                } else if (parseFloat(savingsRate) >= 15) {
+                    observations.push({
+                        sentiment: 'positive', icon: '✅',
+                        headline: 'Healthy Savings',
+                        detail: `You're saving ${savingsRate}% of income. Solid — aim for 20%+ to build your financial buffer faster.`
+                    });
+                } else if (parseFloat(savingsRate) > 0) {
+                    observations.push({
+                        sentiment: 'warning', icon: '⚠️',
+                        headline: 'Low Savings Rate',
+                        detail: `Only ${savingsRate}% of income saved this month. Trim discretionary expenses to boost your safety net.`
+                    });
+                }
+            }
+        }
+
+        // ── 2. Top spending category concentration ─────────────────────
+        if (expenseData.length > 0 && totalExpenses > 0) {
+            const catMap = {};
+            for (const t of expenseData) {
+                const cat = t.category || 'Uncategorized';
+                catMap[cat] = (catMap[cat] || 0) + Number(t.amount);
+            }
+            const [[topCat, topAmt]] = Object.entries(catMap).sort((a, b) => b[1] - a[1]);
+            const pct = ((topAmt / totalExpenses) * 100).toFixed(1);
+
+            if (parseFloat(pct) >= 40) {
+                observations.push({
+                    sentiment: 'warning', icon: '📦',
+                    headline: `High Concentration in "${topCat}"`,
+                    detail: `${pct}% of total expenses (${this.formatCurrency(topAmt)}) went to "${topCat}". Consider whether that aligns with your priorities.`
+                });
+            } else {
+                observations.push({
+                    sentiment: 'neutral', icon: '📊',
+                    headline: `Top Spending: ${topCat}`,
+                    detail: `"${topCat}" was your biggest expense at ${this.formatCurrency(topAmt)} (${pct}% of total spend).`
+                });
+            }
+        }
+
+        // ── 3. Month-over-month comparison (async prev-month fetch) ────
+        try {
+            const prevDate  = new Date(parseInt(this.currentYear, 10), parseInt(this.currentMonth, 10) - 2, 1);
+            const prevYear  = prevDate.getFullYear().toString();
+            const prevMonth = String(prevDate.getMonth() + 1).padStart(2, '0');
+
+            await this.dataManager.loadMonthData(prevYear, prevMonth);
+            const prevSummary  = this.dataManager.calculateMonthlySummary(prevYear, prevMonth);
+            const prevExpenses = prevSummary.totalExpenses;
+            const prevIncome   = prevSummary.totalIncome;
+
+            if (prevExpenses > 0 && totalExpenses > 0) {
+                const changePct = ((totalExpenses - prevExpenses) / prevExpenses * 100).toFixed(1);
+                const changeAmt = this.formatCurrency(Math.abs(totalExpenses - prevExpenses));
+                if (parseFloat(changePct) > 15) {
+                    observations.push({
+                        sentiment: 'negative', icon: '📈',
+                        headline: `Expenses Up ${changePct}% vs Last Month`,
+                        detail: `You spent ${changeAmt} more than last month. Check which categories drove the jump.`
+                    });
+                } else if (parseFloat(changePct) < -10) {
+                    observations.push({
+                        sentiment: 'positive', icon: '📉',
+                        headline: `Expenses Down ${Math.abs(changePct)}% vs Last Month`,
+                        detail: `You saved ${changeAmt} compared to last month's spending. Great discipline!`
+                    });
+                } else {
+                    observations.push({
+                        sentiment: 'neutral', icon: '↔️',
+                        headline: 'Spending Relatively Stable',
+                        detail: `Expenses changed by just ${changePct}% vs last month (${changeAmt} difference) — consistent pattern.`
+                    });
+                }
+            }
+
+            // Income change observation
+            if (prevIncome > 0 && totalIncome > 0) {
+                const incChangePct = ((totalIncome - prevIncome) / prevIncome * 100).toFixed(1);
+                if (parseFloat(incChangePct) > 20) {
+                    observations.push({
+                        sentiment: 'positive', icon: '💰',
+                        headline: `Income Up ${incChangePct}% vs Last Month`,
+                        detail: `Income grew by ${this.formatCurrency(totalIncome - prevIncome)}. Invest the surplus strategically.`
+                    });
+                } else if (parseFloat(incChangePct) < -20) {
+                    observations.push({
+                        sentiment: 'warning', icon: '💸',
+                        headline: `Income Down ${Math.abs(incChangePct)}% vs Last Month`,
+                        detail: `Income dropped by ${this.formatCurrency(prevIncome - totalIncome)}. Review expense commitments for this period.`
+                    });
+                }
+            }
+        } catch (_) { /* No prev-month data — silently skip MoM observations */ }
+
+        // ── 4. Render or empty state ───────────────────────────────────
+        if (observations.length === 0) {
+            soLoading.style.display = 'none';
+            soEmpty.style.display   = '';
             return;
         }
 
-        const icon = change > 0 ? '📈' : change < 0 ? '📉' : '➡️';
-        const sign = change > 0 ? '+' : '';
-        valueEl.textContent = `${icon} ${sign}${change.toFixed(1)}%`;
+        soList.innerHTML = observations.map(obs => `
+            <div class="so-card so-card--${obs.sentiment}">
+                <span class="so-icon" aria-hidden="true">${obs.icon}</span>
+                <div class="so-text">
+                    <p class="so-headline">${obs.headline}</p>
+                    <p class="so-detail">${obs.detail}</p>
+                </div>
+            </div>`).join('');
 
-        // For income: positive is good, for expenses: negative is good
-        let className = 'comparison-value ';
-        if (type === 'income') {
-            className += change > 0 ? 'positive' : change < 0 ? 'negative' : 'neutral';
-        } else {
-            className += change < 0 ? 'positive' : change > 0 ? 'negative' : 'neutral';
-        }
-
-        valueEl.className = className;
-        subtextEl.textContent = 'vs previous month';
-    }
-
-    // Calculate percentage change
-    calculatePercentageChange(oldValue, newValue) {
-        if (oldValue === 0 && newValue === 0) return 0;
-        if (oldValue === 0) return null; // Can't calculate percentage
-        return ((newValue - oldValue) / oldValue) * 100;
-    }
-
-    // Load month data for comparison (without updating current state)
-    async loadMonthDataForComparison(year, month) {
-        const incomeFile = await this.githubClient.getFile(year, month, 'income');
-        const expenseFile = await this.githubClient.getFile(year, month, 'expenses');
-
-        return {
-            income: incomeFile.content || [],
-            expenses: expenseFile.content || []
-        };
+        soLoading.style.display = 'none';
+        soList.style.display    = '';
     }
 
     // Update rolling 3-month average
@@ -321,98 +479,6 @@ class LedgerlyReports {
         return months;
     }
 
-    // Generate Income vs Expense Chart
-    generateIncomeExpenseChart(income, expenses) {
-        const chartId = 'income-expense-chart';
-        const chartType = this.chartTypes['income-expense'];
-
-        // Destroy existing chart
-        if (this.charts[chartId]) {
-            this.charts[chartId].destroy();
-        }
-
-        const ctx = document.getElementById(chartId).getContext('2d');
-
-        if (chartType === 'bar') {
-            this.charts[chartId] = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Income', 'Expenses'],
-                    datasets: [{
-                        label: 'Amount (₹)',
-                        data: [income, expenses],
-                        backgroundColor: [
-                            'rgba(45, 122, 79, 0.7)',
-                            'rgba(207, 75, 0, 0.7)'
-                        ],
-                        borderColor: [
-                            'rgba(45, 122, 79, 1)',
-                            'rgba(207, 75, 0, 1)'
-                        ],
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        title: {
-                            display: false
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: {
-                                callback: (value) => '₹' + value.toLocaleString('en-IN')
-                            }
-                        }
-                    }
-                }
-            });
-        } else {
-            this.charts[chartId] = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: ['Income', 'Expenses'],
-                    datasets: [{
-                        data: [income, expenses],
-                        backgroundColor: [
-                            'rgba(45, 122, 79, 0.7)',
-                            'rgba(207, 75, 0, 0.7)'
-                        ],
-                        borderColor: [
-                            'rgba(45, 122, 79, 1)',
-                            'rgba(207, 75, 0, 1)'
-                        ],
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom'
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: (context) => {
-                                    const label = context.label || '';
-                                    const value = context.parsed || 0;
-                                    return `${label}: ₹${value.toLocaleString('en-IN')}`;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        }
-    }
-
     // Generate Income Category Chart
     generateIncomeCategoryChart(incomeData) {
         const chartId = 'income-category-chart';
@@ -428,11 +494,41 @@ class LedgerlyReports {
         chartContainer.style.display = 'block';
         noDataEl.style.display = 'none';
 
-        // Group by category
-        const categoryTotals = this.groupByCategory(incomeData);
-        const labels = Object.keys(categoryTotals);
-        const data = Object.values(categoryTotals);
+        // Build both a totals map (for chart data) AND a detail map (for tooltips)
+        const categoryDetails = this.groupByCategoryWithDetails(incomeData);
+        const labels = Object.keys(categoryDetails);
+        const data   = labels.map(cat => categoryDetails[cat].total);
         const colors = this.generateColors(labels.length, 'income');
+
+        // Shared tooltip callbacks — used by both bar and pie variants
+        const buildTooltipLines = (categoryLabel, parsedTotal, datasetData) => {
+            const fmt = (n) => '₹' + Number(n).toLocaleString('en-IN', {
+                minimumFractionDigits: 2, maximumFractionDigits: 2
+            });
+
+            const lines = [];
+
+            // Pie chart needs a percentage; bar chart doesn't have a meaningful one
+            if (datasetData) {
+                const grandTotal = datasetData.reduce((s, v) => s + v, 0);
+                const pct = grandTotal > 0 ? ((parsedTotal / grandTotal) * 100).toFixed(1) : '0.0';
+                lines.push(`${categoryLabel}: ${fmt(parsedTotal)} (${pct}%)`);
+            } else {
+                lines.push(`${categoryLabel}: ${fmt(parsedTotal)}`);
+            }
+
+            // Description breakdown
+            const detail = categoryDetails[categoryLabel];
+            if (detail && detail.items.length > 0) {
+                lines.push(''); // blank separator line
+                detail.items.forEach((item, idx) => {
+                    const bullet = idx === 0 ? '┌' : idx === detail.items.length - 1 ? '└' : '├';
+                    lines.push(`${bullet} ${item.description}: ${fmt(item.amount)}`);
+                });
+            }
+
+            return lines;
+        };
 
         // Destroy existing chart
         if (this.charts[chartId]) {
@@ -458,13 +554,22 @@ class LedgerlyReports {
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    indexAxis: 'y', // Horizontal bar — matches expense chart, better label visibility
                     plugins: {
-                        legend: {
-                            display: false
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                // Return an array → Chart.js renders each entry as its own line
+                                label: (context) => buildTooltipLines(
+                                    context.label,
+                                    context.parsed.x, // horizontal bar: value is on x-axis
+                                    null              // no grand-total % for bar chart
+                                )
+                            }
                         }
                     },
                     scales: {
-                        y: {
+                        x: {
                             beginAtZero: true,
                             ticks: {
                                 callback: (value) => '₹' + value.toLocaleString('en-IN')
@@ -489,18 +594,14 @@ class LedgerlyReports {
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: {
-                            position: 'right'
-                        },
+                        legend: { position: 'right' },
                         tooltip: {
                             callbacks: {
-                                label: (context) => {
-                                    const label = context.label || '';
-                                    const value = context.parsed || 0;
-                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                                    const percentage = ((value / total) * 100).toFixed(1);
-                                    return `${label}: ₹${value.toLocaleString('en-IN')} (${percentage}%)`;
-                                }
+                                label: (context) => buildTooltipLines(
+                                    context.label,
+                                    context.parsed,         // pie: the raw value
+                                    context.dataset.data    // pass full dataset for % calc
+                                )
                             }
                         }
                     }
@@ -728,15 +829,12 @@ class LedgerlyReports {
         this.chartTypes[chartName] = type;
 
         // Get current data
-        const summary = this.dataManager.calculateMonthlySummary(this.currentYear, this.currentMonth);
         const allTransactions = this.dataManager.getAllTransactionsForMonth(this.currentYear, this.currentMonth);
         const incomeData = allTransactions.filter(t => t.type === 'income');
         const expenseData = allTransactions.filter(t => t.type === 'expense');
 
         // Regenerate the chart
-        if (chartName === 'income-expense') {
-            this.generateIncomeExpenseChart(summary.totalIncome, summary.totalExpenses);
-        } else if (chartName === 'income-category') {
+        if (chartName === 'income-category') {
             this.generateIncomeCategoryChart(incomeData);
         } else if (chartName === 'expense-category') {
             this.generateExpenseCategoryChart(expenseData);

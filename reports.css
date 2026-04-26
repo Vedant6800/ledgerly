@@ -112,57 +112,6 @@
     100% { transform: translateX(100%); }
 }
 
-/* Month-to-Month Comparison */
-.comparison-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--spacing-lg);
-}
-
-.comparison-card {
-    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-form) 100%);
-    border: 2px solid var(--border-color);
-    border-radius: var(--border-radius);
-    padding: var(--spacing-lg);
-    text-align: center;
-    transition: all var(--transition-normal);
-}
-
-.comparison-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
-}
-
-.comparison-label {
-    font-size: 14px;
-    color: var(--text-secondary);
-    margin-bottom: var(--spacing-sm);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.comparison-value {
-    font-size: 36px;
-    font-weight: var(--font-weight-bold);
-    margin-bottom: var(--spacing-sm);
-}
-
-.comparison-value.positive {
-    color: var(--accent-income);
-}
-
-.comparison-value.negative {
-    color: var(--accent-expense);
-}
-
-.comparison-value.neutral {
-    color: var(--text-muted);
-}
-
-.comparison-subtext {
-    font-size: 13px;
-    color: var(--text-muted);
-}
 
 /* Rolling 3-Month Average */
 .rolling-average-container {
@@ -303,10 +252,6 @@
         font-size: 36px;
     }
 
-    .comparison-value {
-        font-size: 28px;
-    }
-
     .rolling-value {
         font-size: 24px;
     }
@@ -335,10 +280,6 @@
 
     .expense-ratio-value {
         font-size: 32px;
-    }
-
-    .comparison-value {
-        font-size: 24px;
     }
 
     .rolling-value {
@@ -403,7 +344,7 @@
 .fp-content {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-xl);
+    gap: var(--spacing-lg);
 }
 
 /* ---- Group (YTD / All-Time) ---- */
@@ -415,6 +356,9 @@
     transition: box-shadow var(--transition-normal);
     position: relative;
     overflow: hidden;
+    /* Column flex keeps header at fixed height, cards fill the rest */
+    display: flex;
+    flex-direction: column;
 }
 
 .fp-group::before {
@@ -442,11 +386,17 @@
     align-items: center;
     gap: var(--spacing-md);
     margin-bottom: var(--spacing-lg);
+    /* Fixed min-height so both groups' headers are always the same height */
+    min-height: 52px;
 }
 
 .fp-group-icon {
-    font-size: 32px;
-    line-height: 1;
+    /* Fixed box prevents emoji rendering differences from shifting layout */
+    width: 40px;
+    height: 40px;
+    font-size: 28px;
+    line-height: 40px;
+    text-align: center;
     flex-shrink: 0;
 }
 
@@ -472,8 +422,11 @@
 /* Cards row */
 .fp-cards {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-md);
+    /* Equal thirds — 0 min-width prevents long numbers from busting the grid */
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--spacing-sm);
+    align-items: stretch;
+    flex: 1;           /* Fill remaining group height */
 }
 
 /* Individual card */
@@ -481,10 +434,14 @@
     background: var(--bg-card);
     border: 2px solid var(--border-color);
     border-radius: var(--border-radius);
-    padding: var(--spacing-md) var(--spacing-lg);
+    /* Tighter horizontal padding so long ₹ values don't overflow */
+    padding: var(--spacing-md) var(--spacing-md);
     transition: transform var(--transition-normal), box-shadow var(--transition-normal);
     position: relative;
     overflow: hidden;
+    /* Internal column flex: label pins to top, value fills below */
+    display: flex;
+    flex-direction: column;
 }
 
 .fp-card::after {
@@ -514,19 +471,24 @@
 }
 
 .fp-card-label {
-    font-size: 12px;
-    font-weight: var(--font-weight-medium);
+    font-size: 11px;
+    font-weight: var(--font-weight-bold);
     color: var(--text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.8px;
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
+    white-space: nowrap;
 }
 
 .fp-card-value {
-    font-size: 22px;
+    /* Fluid font: shrinks on overflow, never below 16px */
+    font-size: clamp(16px, 2.2vw, 20px);
     font-weight: var(--font-weight-bold);
     color: var(--text-primary);
-    line-height: 1.2;
+    line-height: 1.3;
+    /* Allow wrapping so very long numbers don't clip */
+    word-break: break-all;
+    margin-top: auto;
 }
 
 .fp-card--income .fp-card-value {
@@ -682,5 +644,388 @@
 
     .fp-group {
         flex: 1;
+    }
+}
+
+/* ==========================================
+   ANALYTICS ROW LAYOUT
+   ========================================== */
+.analytics-row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+}
+
+.analytics-section {
+    flex: 1;
+    /* Remove bottom margin so the row gap controls spacing */
+    margin-bottom: 0 !important;
+}
+
+@media (min-width: 900px) {
+    .analytics-row {
+        flex-direction: row;
+        align-items: stretch;
+    }
+}
+
+/* ==========================================
+   SHARED EMPTY STATE
+   ========================================== */
+.ai-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-xl) var(--spacing-lg);
+    text-align: center;
+    border: 2px dashed var(--border-color);
+    border-radius: var(--border-radius);
+    color: var(--text-muted);
+}
+
+.ai-empty-icon {
+    font-size: 40px;
+    line-height: 1;
+}
+
+.ai-empty p {
+    font-size: 15px;
+    margin: 0;
+}
+
+.ai-section-label {
+    font-size: 12px;
+    font-weight: var(--font-weight-medium);
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    margin-bottom: var(--spacing-md);
+}
+
+/* ==========================================
+   SPENDING INSIGHTS
+   ========================================== */
+.si-category-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* One category row */
+.si-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.si-row-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.si-rank {
+    font-size: 11px;
+    font-weight: var(--font-weight-bold);
+    color: var(--text-muted);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 1px 6px;
+    margin-right: var(--spacing-sm);
+}
+
+.si-cat-name {
+    font-size: 14px;
+    font-weight: var(--font-weight-medium);
+    color: var(--text-primary);
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.si-cat-right {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.si-cat-amount {
+    font-size: 14px;
+    font-weight: var(--font-weight-bold);
+    color: var(--accent-expense);
+}
+
+.si-cat-pct {
+    font-size: 12px;
+    color: var(--text-muted);
+    min-width: 40px;
+    text-align: right;
+}
+
+/* Category progress bar */
+.si-bar-track {
+    height: 6px;
+    background: var(--bg-secondary);
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.si-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.5s ease;
+}
+
+/* Fill colours per rank */
+.si-bar-fill--1 { background: linear-gradient(90deg, var(--accent-expense), #ff6b1f); }
+.si-bar-fill--2 { background: linear-gradient(90deg, #f57c00, #ffa726); }
+.si-bar-fill--3 { background: linear-gradient(90deg, #d4a017, var(--color-gold)); }
+
+.si-footer {
+    margin-top: var(--spacing-md);
+    font-size: 13px;
+    color: var(--text-muted);
+    font-style: italic;
+    text-align: right;
+}
+
+/* ==========================================
+   DAILY BURN RATE
+   ========================================== */
+.br-primary {
+    display: flex;
+    align-items: baseline;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+.br-value {
+    font-size: 42px;
+    font-weight: var(--font-weight-bold);
+    color: var(--accent-expense);
+    line-height: 1;
+}
+
+.br-unit {
+    font-size: 18px;
+    color: var(--text-secondary);
+    font-weight: var(--font-weight-medium);
+}
+
+.br-subtext {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Three mini stat cards */
+.br-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.br-stat-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    text-align: center;
+    transition: transform var(--transition-normal);
+}
+
+.br-stat-card:hover {
+    transform: translateY(-2px);
+}
+
+.br-stat-label {
+    font-size: 11px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.br-stat-value {
+    font-size: 18px;
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+}
+
+.br-projected {
+    color: var(--accent-expense);
+}
+
+/* Month-progress bar */
+.br-progress-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.br-progress-track {
+    height: 10px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.br-progress-bar {
+    height: 100%;
+    border-radius: 5px;
+    background: linear-gradient(90deg, var(--accent-income), #f57c00, var(--accent-expense));
+    transition: width 0.6s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.br-progress-bar::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+    animation: shimmer 2s infinite;
+}
+
+.br-progress-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+/* ==========================================
+   SMART OBSERVATIONS
+   ========================================== */
+
+/* Loading skeleton rows */
+.so-loading {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.so-skeleton {
+    height: 56px;
+    border-radius: var(--border-radius);
+    background: linear-gradient(
+        90deg,
+        var(--bg-secondary) 0%,
+        var(--border-color) 40%,
+        var(--bg-secondary) 100%
+    );
+    background-size: 200% 100%;
+    animation: fp-shimmer 1.6s infinite;
+}
+
+/* Observation list */
+.so-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+/* Single observation card */
+.so-card {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--border-radius);
+    border-left: 4px solid transparent;
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+    background: var(--bg-secondary);
+}
+
+.so-card:hover {
+    transform: translateX(4px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Sentiment variants */
+.so-card--positive {
+    border-left-color: var(--accent-income);
+    background: var(--accent-income-bg);
+}
+
+.so-card--warning {
+    border-left-color: #f57c00;
+    background: #fff8e1;
+}
+
+[data-theme="dark"] .so-card--warning {
+    background: #3d3419;
+}
+
+.so-card--negative {
+    border-left-color: var(--accent-expense);
+    background: var(--accent-expense-bg);
+}
+
+.so-card--neutral {
+    border-left-color: var(--color-primary);
+    background: linear-gradient(135deg, var(--bg-secondary), var(--bg-form));
+}
+
+.so-icon {
+    font-size: 24px;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.so-text {
+    flex: 1;
+}
+
+.so-headline {
+    font-size: 14px;
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin-bottom: 2px;
+}
+
+.so-detail {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* ==========================================
+   RESPONSIVE — Analytics Sections
+   ========================================== */
+@media (max-width: 768px) {
+    .br-value {
+        font-size: 32px;
+    }
+
+    .br-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .br-stat-value {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .br-value {
+        font-size: 28px;
+    }
+
+    .br-unit {
+        font-size: 15px;
+    }
+
+    .so-card {
+        padding: var(--spacing-md);
     }
 }

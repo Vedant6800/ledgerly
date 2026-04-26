@@ -158,37 +158,103 @@
                 </div>
             </section>
 
-            <!-- Month-to-Month Comparison -->
-            <section class="report-section">
-                <h2 class="report-section-title">📈 Month-to-Month Comparison</h2>
-                <div class="comparison-grid" id="comparison-grid">
-                    <div class="comparison-card">
-                        <p class="comparison-label">Income Change</p>
-                        <p class="comparison-value" id="income-change">--</p>
-                        <p class="comparison-subtext" id="income-change-subtext">vs previous month</p>
-                    </div>
-                    <div class="comparison-card">
-                        <p class="comparison-label">Expense Change</p>
-                        <p class="comparison-value" id="expense-change">--</p>
-                        <p class="comparison-subtext" id="expense-change-subtext">vs previous month</p>
-                    </div>
-                </div>
-            </section>
+            <!-- =============================================
+                 ANALYTICS ROW: Spending Insights + Daily Burn Rate
+                 ============================================= -->
+            <div class="analytics-row">
 
+                <!-- Spending Insights (Behavior Analysis) -->
+                <section class="report-section analytics-section" id="spending-insights-section">
+                    <h2 class="report-section-title">🔍 Spending Insights</h2>
 
-            <!-- Income vs Expenses Chart -->
-            <section class="report-section">
-                <h2 class="report-section-title">💰 Income vs Expenses</h2>
-                <div class="chart-controls">
-                    <button class="chart-toggle-btn active" data-chart="income-expense" data-type="bar">
-                        📊 Bar Chart
-                    </button>
-                    <button class="chart-toggle-btn" data-chart="income-expense" data-type="pie">
-                        🥧 Pie Chart
-                    </button>
+                    <!-- No-data state -->
+                    <div class="ai-empty" id="si-empty" style="display:none;">
+                        <span class="ai-empty-icon">💸</span>
+                        <p>No expense data yet. Add some transactions to see your spending breakdown.</p>
+                    </div>
+
+                    <!-- Content -->
+                    <div id="si-content">
+                        <p class="ai-section-label">Top Expense Categories This Month</p>
+                        <div class="si-category-list" id="si-category-list">
+                            <!-- Rows injected by JS -->
+                        </div>
+                        <div class="si-footer" id="si-footer" style="display:none;">
+                            <span id="si-other-text"></span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Daily Burn Rate -->
+                <section class="report-section analytics-section" id="burn-rate-section">
+                    <h2 class="report-section-title">🔥 Daily Burn Rate</h2>
+
+                    <!-- No-data state -->
+                    <div class="ai-empty" id="br-empty" style="display:none;">
+                        <span class="ai-empty-icon">📉</span>
+                        <p>No expenses recorded yet this month.</p>
+                    </div>
+
+                    <!-- Content -->
+                    <div id="br-content">
+                        <div class="br-primary">
+                            <span class="br-value" id="br-daily-value">₹0.00</span>
+                            <span class="br-unit">/ day</span>
+                        </div>
+                        <p class="br-subtext" id="br-basis-text"></p>
+
+                        <div class="br-stats">
+                            <div class="br-stat-card">
+                                <p class="br-stat-label">Days Elapsed</p>
+                                <p class="br-stat-value" id="br-days-elapsed">—</p>
+                            </div>
+                            <div class="br-stat-card">
+                                <p class="br-stat-label">Projected Month Total</p>
+                                <p class="br-stat-value br-projected" id="br-projected">₹0.00</p>
+                            </div>
+                            <div class="br-stat-card">
+                                <p class="br-stat-label">Days Remaining</p>
+                                <p class="br-stat-value" id="br-days-remaining">—</p>
+                            </div>
+                        </div>
+
+                        <!-- Projection progress bar -->
+                        <div class="br-progress-wrap">
+                            <div class="br-progress-track">
+                                <div class="br-progress-bar" id="br-progress-bar" style="width:0%"></div>
+                            </div>
+                            <div class="br-progress-labels">
+                                <span>₹0</span>
+                                <span id="br-progress-cap"></span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div><!-- /.analytics-row -->
+
+            <!-- =============================================
+                 SMART OBSERVATIONS (Auto Insights)
+                 ============================================= -->
+            <section class="report-section" id="smart-obs-section">
+                <h2 class="report-section-title">💡 Smart Observations</h2>
+
+                <!-- Loading state -->
+                <div class="so-loading" id="so-loading">
+                    <div class="so-skeleton"></div>
+                    <div class="so-skeleton"></div>
+                    <div class="so-skeleton"></div>
                 </div>
-                <div class="chart-container">
-                    <canvas id="income-expense-chart"></canvas>
+
+                <!-- No-data state -->
+                <div class="ai-empty" id="so-empty" style="display:none;">
+                    <span class="ai-empty-icon">🔮</span>
+                    <p>Not enough data to generate insights yet. Keep tracking your finances!</p>
+                </div>
+
+                <!-- Observation cards -->
+                <div class="so-list" id="so-list" style="display:none;">
+                    <!-- Injected by JS -->
                 </div>
             </section>
 
