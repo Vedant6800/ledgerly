@@ -63,6 +63,86 @@
                 </div>
             </section>
 
+            <!-- =============================================
+                 FINANCIAL POSITION (YTD + ALL-TIME)
+                 ============================================= -->
+            <section class="report-section fp-section" id="financial-position-section">
+                <h2 class="report-section-title">🏦 Financial Position</h2>
+
+                <!-- Loading skeleton -->
+                <div class="fp-loading" id="fp-loading">
+                    <div class="fp-skeleton"></div>
+                    <div class="fp-skeleton"></div>
+                </div>
+
+                <!-- Empty state (shown when no data at all) -->
+                <div class="fp-empty" id="fp-empty" style="display:none;">
+                    <span class="fp-empty-icon">📂</span>
+                    <p>No financial data found. Add some transactions to see your position.</p>
+                </div>
+
+                <!-- Main content (hidden until loaded) -->
+                <div class="fp-content" id="fp-content" style="display:none;">
+
+                    <!-- YTD Group -->
+                    <div class="fp-group fp-group--ytd">
+                        <div class="fp-group-header">
+                            <span class="fp-group-icon">📅</span>
+                            <div>
+                                <span class="fp-group-label">Year-to-Date</span>
+                                <span class="fp-group-period" id="fp-ytd-period">Jan – --</span>
+                            </div>
+                        </div>
+                        <div class="fp-cards">
+                            <div class="fp-card fp-card--income">
+                                <p class="fp-card-label">Income</p>
+                                <p class="fp-card-value" id="fp-ytd-income">₹0.00</p>
+                            </div>
+                            <div class="fp-card fp-card--expense">
+                                <p class="fp-card-label">Expenses</p>
+                                <p class="fp-card-value" id="fp-ytd-expenses">₹0.00</p>
+                            </div>
+                            <div class="fp-card fp-card--balance fp-card--hoverable"
+                                 id="fp-ytd-balance-card"
+                                 data-tooltip-target="ytd">
+                                <p class="fp-card-label">Balance</p>
+                                <p class="fp-card-value" id="fp-ytd-balance">₹0.00</p>
+                                <span class="fp-tooltip-hint">Hover for monthly breakdown</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- All-Time Group -->
+                    <div class="fp-group fp-group--alltime">
+                        <div class="fp-group-header">
+                            <span class="fp-group-icon">🌍</span>
+                            <div>
+                                <span class="fp-group-label">All-Time</span>
+                                <span class="fp-group-period" id="fp-alltime-period">All records</span>
+                            </div>
+                        </div>
+                        <div class="fp-cards">
+                            <div class="fp-card fp-card--income">
+                                <p class="fp-card-label">Income</p>
+                                <p class="fp-card-value" id="fp-alltime-income">₹0.00</p>
+                            </div>
+                            <div class="fp-card fp-card--expense">
+                                <p class="fp-card-label">Expenses</p>
+                                <p class="fp-card-value" id="fp-alltime-expenses">₹0.00</p>
+                            </div>
+                            <div class="fp-card fp-card--balance fp-card--hoverable"
+                                 id="fp-alltime-balance-card"
+                                 data-tooltip-target="alltime">
+                                <p class="fp-card-label">Balance</p>
+                                <p class="fp-card-value" id="fp-alltime-balance">₹0.00</p>
+                                <span class="fp-tooltip-hint">Hover for yearly breakdown</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div><!-- /.fp-content -->
+            </section>
+
             <!-- Expense Ratio Indicator -->
             <section class="report-section">
                 <h2 class="report-section-title">💳 Expense Ratio</h2>
@@ -159,6 +239,12 @@
             <p>&copy; 2026 Ledgerly. Analytics Dashboard.</p>
         </div>
     </footer>
+
+    <!-- Financial Position custom tooltip -->
+    <div id="fp-tooltip" class="fp-tooltip" role="tooltip" aria-hidden="true">
+        <div class="fp-tooltip-arrow"></div>
+        <div class="fp-tooltip-inner" id="fp-tooltip-inner"></div>
+    </div>
 
     <!-- Load Chart.js from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
