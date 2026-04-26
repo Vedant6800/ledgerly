@@ -151,6 +151,17 @@
                         <button type="submit" class="btn btn-primary" id="submit-btn">Add Transaction</button>
                         <button type="button" class="btn btn-secondary" id="cancel-btn" style="display: none;">Cancel</button>
                     </div>
+
+                    <!-- Queue Status Badge — populated dynamically by the queue system -->
+                    <div class="queue-status-wrapper">
+                        <div class="queue-status"
+                             id="queue-status"
+                             style="display: none;"
+                             role="status"
+                             aria-live="polite"
+                             aria-atomic="true">
+                        </div>
+                    </div>
                 </form>
             </section>
 
@@ -193,6 +204,76 @@
                                 <span class="sort-icon">↓</span>
                             </button>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Context-Aware Search Bar -->
+                <div class="search-controls" id="search-controls">
+                    <label class="search-label" for="search-field">Search:</label>
+                    <div class="search-field-group">
+                        <!-- Field selector dropdown -->
+                        <select class="search-field-select" id="search-field" aria-label="Search field">
+                            <option value="all">All Fields</option>
+                            <option value="description">Description</option>
+                            <option value="category">Category</option>
+                            <option value="amount">Amount (₹)</option>
+                            <option value="date">Date</option>
+                            <option value="duration">Duration</option>
+                        </select>
+
+                        <!-- Dynamic input — type/placeholder adapt to selected field -->
+                        <div class="search-input-wrapper" id="search-single-wrapper">
+                            <input
+                                type="text"
+                                class="search-input"
+                                id="search-input"
+                                placeholder="Search all fields…"
+                                autocomplete="off"
+                                aria-label="Search transactions"
+                            />
+                            <button
+                                class="search-clear-btn"
+                                id="search-clear-btn"
+                                type="button"
+                                title="Clear search"
+                                aria-label="Clear search"
+                                style="display:none"
+                            >×</button>
+                        </div>
+
+                        <!-- Duration range pickers — shown only when Duration is selected -->
+                        <div class="search-duration-wrapper" id="search-duration-wrapper" style="display:none" role="group" aria-label="Date range filter">
+                            <div class="duration-group">
+                                <label class="duration-label" for="search-from-date">From</label>
+                                <input
+                                    type="date"
+                                    class="search-input duration-input"
+                                    id="search-from-date"
+                                    aria-label="Start date"
+                                />
+                            </div>
+                            <span class="duration-separator" aria-hidden="true">→</span>
+                            <div class="duration-group">
+                                <label class="duration-label" for="search-to-date">To</label>
+                                <input
+                                    type="date"
+                                    class="search-input duration-input"
+                                    id="search-to-date"
+                                    aria-label="End date"
+                                />
+                            </div>
+                            <button
+                                class="search-clear-btn"
+                                id="search-clear-duration-btn"
+                                type="button"
+                                title="Clear date range"
+                                aria-label="Clear date range"
+                                style="display:none"
+                            >×</button>
+                        </div>
+
+                        <!-- Live match count badge -->
+                        <span class="search-count" id="search-count" style="display:none"></span>
                     </div>
                 </div>
 

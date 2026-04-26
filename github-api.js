@@ -285,7 +285,7 @@ class GitHubAPIClient {
 
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(`GitHub API error: ${response.status} - ${errorData.message}`);
+                throw new Error(this.buildApiError(response.status, errorData.message));
             }
 
             const data = await response.json();
@@ -303,13 +303,13 @@ class GitHubAPIClient {
     // Check if file or folder exists
     async checkExists(path) {
         const url = `${this.baseURL}/repos/${this.config.owner}/${this.config.repo}/contents/${path}?ref=${this.config.branch}`;
-        
+
         try {
             const response = await fetch(url, {
                 method: 'GET',
                 headers: this.getHeaders()
             });
-            
+
             return response.status === 200;
         } catch (error) {
             return false;
@@ -320,7 +320,7 @@ class GitHubAPIClient {
     async createFolderStructure(year, month) {
         const folderPath = `${this.config.basePath}/${year}/${month}/.gitkeep`;
         const url = `${this.baseURL}/repos/${this.config.owner}/${this.config.repo}/contents/${folderPath}`;
-        
+
         try {
             // Check if folder already exists
             const exists = await this.checkExists(`${this.config.basePath}/${year}/${month}`);
@@ -365,7 +365,7 @@ class GitHubAPIClient {
             if (response.status === 404) {
                 // File doesn't exist - try to create folder structure and return empty
                 await this.createFolderStructure(year, month);
-                
+
                 return {
                     content: [],
                     sha: null,
@@ -378,10 +378,10 @@ class GitHubAPIClient {
             }
 
             const data = await response.json();
-            
+
             // Decode base64 content
             const content = JSON.parse(atob(data.content));
-            
+
             // Cache the SHA for future updates
             const cacheKey = `${year}-${month}-${type}`;
             this.cache.set(cacheKey, data.sha);
@@ -393,12 +393,12 @@ class GitHubAPIClient {
             };
         } catch (error) {
             console.error(`Error fetching file ${path}:`, error);
-            
+
             // Try to create folder structure for new months
             if (error.message.includes('404')) {
                 await this.createFolderStructure(year, month);
             }
-            
+
             return {
                 content: [],
                 sha: null,
@@ -412,13 +412,13 @@ class GitHubAPIClient {
         try {
             // Create folder structure first
             await this.createFolderStructure(year, month);
-            
+
             // Create empty income.json
             await this.updateFile(year, month, 'income', [], `Initialize income.json for ${year}/${month}`);
-            
+
             // Create empty expenses.json
             await this.updateFile(year, month, 'expenses', [], `Initialize expenses.json for ${year}/${month}`);
-            
+
             return true;
         } catch (error) {
             console.error(`Error initializing month files for ${year}/${month}:`, error);
@@ -430,7 +430,7 @@ class GitHubAPIClient {
     async updateFile(year, month, type, content, message) {
         const path = this.getFilePath(year, month, type);
         const url = `${this.baseURL}/repos/${this.config.owner}/${this.config.repo}/contents/${path}`;
-        
+
         // Get current SHA if file exists
         const cacheKey = `${year}-${month}-${type}`;
         let sha = this.cache.get(cacheKey);
@@ -470,11 +470,11 @@ class GitHubAPIClient {
 
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(`GitHub API error: ${response.status} - ${errorData.message}`);
+                throw new Error(this.buildApiError(response.status, errorData.message));
             }
 
             const data = await response.json();
-            
+
             // Update cache with new SHA
             this.cache.set(cacheKey, data.content.sha);
 
@@ -516,6 +516,55 @@ class GitHubAPIClient {
 
         this.cache.delete(cacheKey);
         return await response.json();
+    }
+    /**
+     * Translates a raw GitHub API HTTP status into a plain-English error message.
+     * Keeps technical details out of the user-facing UI while still logging the
+     * original reason for developer reference.
+     *
+     * @param {number} status       HTTP status code returned by GitHub.
+     * @param {string} rawMessage   Raw message from the GitHub API response body.
+     * @returns {string}            Human-readable error string.
+     */
+    buildApiError(status, rawMessage) {
+        console.error(`[GitHub API] ${status} — ${rawMessage}`);
+
+        switch (status) {
+            case 409:
+                // Conflict: the cached file SHA is stale, usually because a
+                // previous write hasn't propagated yet. Tell the user to wait.
+                return 'A previous transaction is still being saved. ' +
+                    'Please wait a moment before adding the next one.';
+
+            case 401:
+                return 'Your GitHub token is invalid or has expired. ' +
+                    'Click the 🔑 icon to update it.';
+
+            case 403:
+                return 'Access denied. Make sure your GitHub token has the ' +
+                    '"repo" scope and has not expired.';
+
+            case 404:
+                return 'File or repository not found. ' +
+                    'Check the owner and repo name in GITHUB_CONFIG.';
+
+            case 422:
+                return 'GitHub could not process the request. ' +
+                    'The file may already exist or the data is invalid.';
+
+            case 500:
+            case 502:
+            case 503:
+                return 'GitHub is temporarily unavailable. ' +
+                    'Please try again in a few seconds.';
+
+            default:
+                // Fall back to a cleaned-up version of the raw message so it
+                // is still readable but not a raw API dump.
+                return rawMessage
+                    ? `Sync failed (${status}): ${rawMessage}`
+                    : `An unexpected error occurred (HTTP ${status}).`;
+        }
     }
 }
 
@@ -612,7 +661,7 @@ class GitHubDataManager {
     // Get month transactions (from cache or GitHub)
     async getMonthTransactions(year, month) {
         // Check if already in memory
-        if (this.data[year]?.[ month]?.loaded) {
+        if (this.data[year]?.[month]?.loaded) {
             return {
                 income: this.data[year][month].income,
                 expenses: this.data[year][month].expenses

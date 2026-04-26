@@ -89,9 +89,6 @@ class LedgerlyReports {
         // Update month-to-month comparison
         await this.updateMonthComparison();
 
-        // Update rolling 3-month average
-        await this.updateRollingAverage();
-
         // Generate charts
         this.generateIncomeExpenseChart(totalIncome, totalExpenses);
         this.generateIncomeCategoryChart(incomeData);
@@ -514,11 +511,41 @@ class LedgerlyReports {
         chartContainer.style.display = 'block';
         noDataEl.style.display = 'none';
 
-        // Group by category
-        const categoryTotals = this.groupByCategory(expenseData);
-        const labels = Object.keys(categoryTotals);
-        const data = Object.values(categoryTotals);
+        // Build both a totals map (for chart data) AND a detail map (for tooltips)
+        const categoryDetails = this.groupByCategoryWithDetails(expenseData);
+        const labels = Object.keys(categoryDetails);
+        const data   = labels.map(cat => categoryDetails[cat].total);
         const colors = this.generateColors(labels.length, 'expense');
+
+        // Shared tooltip callbacks — used by both bar and pie variants
+        const buildTooltipLines = (categoryLabel, parsedTotal, datasetData) => {
+            const fmt = (n) => '₹' + Number(n).toLocaleString('en-IN', {
+                minimumFractionDigits: 2, maximumFractionDigits: 2
+            });
+
+            const lines = [];
+
+            // Pie chart needs a percentage; bar chart doesn't have a meaningful one
+            if (datasetData) {
+                const grandTotal = datasetData.reduce((s, v) => s + v, 0);
+                const pct = grandTotal > 0 ? ((parsedTotal / grandTotal) * 100).toFixed(1) : '0.0';
+                lines.push(`${categoryLabel}: ${fmt(parsedTotal)} (${pct}%)`);
+            } else {
+                lines.push(`${categoryLabel}: ${fmt(parsedTotal)}`);
+            }
+
+            // Description breakdown
+            const detail = categoryDetails[categoryLabel];
+            if (detail && detail.items.length > 0) {
+                lines.push(''); // blank separator line
+                detail.items.forEach((item, idx) => {
+                    const bullet = idx === 0 ? '┌' : idx === detail.items.length - 1 ? '└' : '├';
+                    lines.push(`${bullet} ${item.description}: ${fmt(item.amount)}`);
+                });
+            }
+
+            return lines;
+        };
 
         // Destroy existing chart
         if (this.charts[chartId]) {
@@ -544,10 +571,18 @@ class LedgerlyReports {
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    indexAxis: 'y', // Horizontal bar chart for better category label visibility
+                    indexAxis: 'y', // Horizontal bar for better category label visibility
                     plugins: {
-                        legend: {
-                            display: false
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                // Return an array → Chart.js renders each entry as its own line
+                                label: (context) => buildTooltipLines(
+                                    context.label,
+                                    context.parsed.x, // horizontal bar: value is on x-axis
+                                    null              // no grand-total % for bar chart
+                                )
+                            }
                         }
                     },
                     scales: {
@@ -558,7 +593,8 @@ class LedgerlyReports {
                             }
                         }
                     }
-        }});
+                }
+            });
         } else {
             this.charts[chartId] = new Chart(ctx, {
                 type: 'pie',
@@ -575,26 +611,23 @@ class LedgerlyReports {
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: {
-                            position: 'right'
-                        },
+                        legend: { position: 'right' },
                         tooltip: {
                             callbacks: {
-                                label: (context) => {
-                                    const label = context.label || '';
-                                    const value = context.parsed || 0;
-                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                                    const percentage = ((value / total) * 100).toFixed(1);
-                                    return `${label}: ₹${value.toLocaleString('en-IN')} (${percentage}%)`;
-                                }
+                                label: (context) => buildTooltipLines(
+                                    context.label,
+                                    context.parsed,         // pie: the raw value
+                                    context.dataset.data    // pass full dataset for % calc
+                                )
                             }
                         }
                     }
-        }});
+                }
+            });
         }
     }
 
-    // Group transactions by category
+    // Group transactions by category — returns { [category]: total }
     groupByCategory(transactions) {
         const categoryTotals = {};
 
@@ -609,6 +642,37 @@ class LedgerlyReports {
         // Sort by amount (descending)
         const sortedEntries = Object.entries(categoryTotals).sort((a, b) => b[1] - a[1]);
         return Object.fromEntries(sortedEntries);
+    }
+
+    /**
+     * Groups transactions by category and keeps a per-category breakdown of
+     * every individual transaction (description + amount), sorted by amount.
+     * Returns: { [category]: { total: number, items: [{description, amount}] } }
+     */
+    groupByCategoryWithDetails(transactions) {
+        const result = {};
+
+        for (const t of transactions) {
+            const category = t.category || 'Uncategorized';
+            if (!result[category]) {
+                result[category] = { total: 0, items: [] };
+            }
+            result[category].total += Number(t.amount);
+            result[category].items.push({
+                description: t.description || '—',
+                amount: Number(t.amount)
+            });
+        }
+
+        // Sort categories by total descending, items within each category by amount descending
+        const sorted = Object.entries(result)
+            .sort((a, b) => b[1].total - a[1].total)
+            .map(([cat, val]) => [
+                cat,
+                { ...val, items: val.items.sort((a, b) => b.amount - a.amount) }
+            ]);
+
+        return Object.fromEntries(sorted);
     }
 
     // Generate color palette for charts

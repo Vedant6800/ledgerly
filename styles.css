@@ -1441,3 +1441,348 @@ html {
     }
 }
 
+/* ==========================================
+   TRANSACTION QUEUE STATUS BADGE
+   ========================================== */
+
+/* Wrapper keeps the badge under the form-actions row, full width. */
+.queue-status-wrapper {
+    margin-top: var(--spacing-md);
+}
+
+/* The badge itself — hidden by default, shown by JS when queue is active. */
+.queue-status {
+    display: inline-flex;          /* shown via JS as 'flex' */
+    align-items: center;
+    gap: 10px;
+    padding: 9px 16px;
+    background: rgba(156, 198, 219, 0.12);
+    border: 1.5px solid rgba(156, 198, 219, 0.45);
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: var(--font-weight-medium);
+    color: var(--text-secondary);
+    box-shadow: 0 2px 8px rgba(156, 198, 219, 0.15);
+    animation: queueBadgeSlideIn 0.25s ease-out;
+    max-width: 100%;
+    line-height: 1.4;
+}
+
+@keyframes queueBadgeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Dark theme: slightly stronger border so it's visible on the dark card. */
+[data-theme="dark"] .queue-status {
+    background: rgba(156, 198, 219, 0.08);
+    border-color: rgba(156, 198, 219, 0.3);
+    color: var(--text-secondary);
+}
+
+/* Error state — badge turns amber/red to signal a failed transaction. */
+.queue-status.queue-status--error {
+    background: rgba(207, 75, 0, 0.08);
+    border-color: rgba(207, 75, 0, 0.4);
+    color: var(--accent-expense);
+    animation: queueBadgeShake 0.35s ease-out;
+}
+
+[data-theme="dark"] .queue-status.queue-status--error {
+    background: rgba(207, 75, 0, 0.12);
+    border-color: rgba(207, 75, 0, 0.5);
+}
+
+@keyframes queueBadgeShake {
+    0%, 100% { transform: translateX(0); }
+    20%       { transform: translateX(-5px); }
+    40%       { transform: translateX(5px); }
+    60%       { transform: translateX(-4px); }
+    80%       { transform: translateX(4px); }
+}
+
+/* Inline micro-spinner — reuses the global `spin` keyframe. */
+.queue-spinner {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    border: 2px solid rgba(156, 198, 219, 0.35);
+    border-top-color: var(--color-primary);
+    border-radius: 50%;
+    animation: spin 0.75s linear infinite;
+    flex-shrink: 0;
+}
+
+[data-theme="dark"] .queue-spinner {
+    border-color: rgba(156, 198, 219, 0.2);
+    border-top-color: var(--color-primary);
+}
+
+/* Highlight the queued count in bold inside the badge label. */
+.queue-status strong {
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary-dark);
+}
+
+[data-theme="dark"] .queue-status strong {
+    color: var(--color-primary);
+}
+
+/* On mobile: badge takes full row width for readability. */
+@media (max-width: 768px) {
+    .queue-status {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+/* ==========================================
+   CONTEXT-AWARE SEARCH BAR
+   ========================================== */
+
+.search-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-lg);
+    background-color: var(--bg-card);
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: var(--spacing-lg);
+    flex-wrap: wrap;
+}
+
+.search-label {
+    font-size: 13px;
+    font-weight: var(--font-weight-medium);
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* Inner row — select + input + count badge */
+.search-field-group {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    flex: 1;
+    flex-wrap: wrap;
+}
+
+/* Field-type dropdown */
+.search-field-select {
+    padding: 9px 30px 9px 14px;
+    font-size: 14px;
+    font-family: var(--font-primary);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-primary);
+    background-color: var(--bg-form);
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239CC6DB' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.search-field-select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(156, 198, 219, 0.2);
+}
+
+/* Wrapper stacks the adaptive input and the × button */
+.search-input-wrapper {
+    position: relative;
+    flex: 1;
+    min-width: 180px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 9px 36px 9px 14px;
+    font-size: 14px;
+    font-family: var(--font-primary);
+    font-weight: var(--font-weight-normal);
+    color: var(--text-primary);
+    background-color: var(--bg-form);
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    box-sizing: border-box;
+}
+
+.search-input::placeholder {
+    color: var(--text-muted);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    background-color: var(--bg-secondary);
+    box-shadow: 0 0 0 3px rgba(156, 198, 219, 0.2);
+}
+
+/* Gold border when a search term is active */
+.search-input.is-active {
+    border-color: var(--color-gold);
+    box-shadow: 0 0 0 3px rgba(221, 186, 125, 0.18);
+}
+
+/* Clear × button inside the input */
+.search-clear-btn {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border: none;
+    background: var(--text-muted);
+    color: var(--bg-card);
+    border-radius: 50%;
+    font-size: 13px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--transition-fast), transform var(--transition-fast);
+    padding: 0;
+}
+
+.search-clear-btn:hover {
+    background: var(--accent-expense);
+    transform: translateY(-50%) scale(1.15);
+}
+
+/* Live match count badge */
+.search-count {
+    font-size: 12px;
+    font-weight: var(--font-weight-medium);
+    color: var(--text-secondary);
+    background: var(--bg-secondary);
+    border: 1.5px solid var(--border-color);
+    border-radius: 20px;
+    padding: 4px 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    animation: queueBadgeSlideIn 0.2s ease-out;
+}
+
+.search-count.no-results {
+    color: var(--accent-expense);
+    border-color: rgba(207, 75, 0, 0.35);
+    background: rgba(207, 75, 0, 0.06);
+}
+
+/* Subtle row highlight on a matched transaction */
+.search-match td {
+    background: linear-gradient(90deg, transparent, rgba(221, 186, 125, 0.07), transparent);
+}
+
+[data-theme="dark"] .search-match td {
+    background: linear-gradient(90deg, transparent, rgba(221, 186, 125, 0.04), transparent);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .search-controls {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .search-field-group {
+        width: 100%;
+    }
+
+    .search-field-select {
+        width: 100%;
+    }
+
+    .search-input-wrapper {
+        min-width: unset;
+        width: 100%;
+    }
+}
+
+/* ==========================================
+   DURATION RANGE PICKER (search field = duration)
+   ========================================== */
+
+/* The wrapper replaces the single input when Duration is selected */
+.search-duration-wrapper {
+    display: flex;          /* toggled to flex by JS */
+    align-items: center;
+    gap: var(--spacing-sm);
+    flex: 1;
+    flex-wrap: wrap;
+}
+
+/* Each label + date-input pair */
+.duration-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 1;
+    min-width: 160px;
+}
+
+/* "From" / "To" labels */
+.duration-label {
+    font-size: 12px;
+    font-weight: var(--font-weight-medium);
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* The date inputs share the same base .search-input styles;
+   this class adds a slightly smaller min-width so both fit */
+.duration-input {
+    flex: 1;
+    min-width: 140px;
+    padding-right: 14px; /* no internal clear button here */
+}
+
+/* Arrow separator between the two date pickers */
+.duration-separator {
+    font-size: 18px;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    user-select: none;
+    padding: 0 4px;
+}
+
+/* Mobile: stack vertically */
+@media (max-width: 768px) {
+    .search-duration-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .duration-group {
+        width: 100%;
+    }
+
+    .duration-separator {
+        transform: rotate(90deg);
+        align-self: center;
+    }
+}
