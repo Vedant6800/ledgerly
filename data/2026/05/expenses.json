@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260517783479384784409",
+    "date": "2026-05-09",
+    "description": "Bidve College for Hall Tickit COllection",
+    "amount": 100,
+    "createdAt": "2026-05-09T17:32:18.478Z",
+    "updatedAt": "2026-05-09T17:32:18.478Z",
+    "category": "Travel"
+  },
+  {
     "id": "exp_20260517783476443692718",
     "date": "2026-05-05",
     "description": "PG Rent(350*6)",
