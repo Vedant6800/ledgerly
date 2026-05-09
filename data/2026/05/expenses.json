@@ -16,5 +16,14 @@
     "createdAt": "2026-05-09T17:27:24.369Z",
     "updatedAt": "2026-05-09T17:27:24.369Z",
     "category": "Rent"
+  },
+  {
+    "id": "exp_20260517783497341323442",
+    "date": "2026-05-01",
+    "description": "RD",
+    "amount": 1500,
+    "createdAt": "2026-05-09T18:02:14.132Z",
+    "updatedAt": "2026-05-09T18:02:14.132Z",
+    "category": "Investment"
   }
 ]
