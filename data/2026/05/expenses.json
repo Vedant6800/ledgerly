@@ -1,14 +1,5 @@
 [
   {
-    "id": "exp_20260517783483900516504",
-    "date": "2026-05-28",
-    "description": "Cab to PG",
-    "amount": 320,
-    "createdAt": "2026-05-09T17:39:50.051Z",
-    "updatedAt": "2026-05-09T17:39:50.051Z",
-    "category": "Transportation"
-  },
-  {
     "id": "exp_20260517783479384784409",
     "date": "2026-05-09",
     "description": "Bidve College for Hall Tickit COllection",
