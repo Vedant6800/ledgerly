@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260417783481128595518",
+    "date": "2026-04-29",
+    "description": "Travels to Pune",
+    "amount": 600,
+    "createdAt": "2026-05-09T17:35:12.859Z",
+    "updatedAt": "2026-05-09T17:35:12.859Z",
+    "category": "Travel"
+  },
+  {
     "id": "exp_20260417771092248806009",
     "date": "2026-04-25",
     "description": "Mango",
