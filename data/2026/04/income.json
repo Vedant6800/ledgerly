@@ -1,5 +1,14 @@
 [
   {
+    "id": "inc_20260417783477850778352",
+    "date": "2026-04-25",
+    "description": "Papa Given for money I have for Family expences",
+    "amount": 9000,
+    "createdAt": "2026-05-09T17:29:45.077Z",
+    "updatedAt": "2026-05-09T17:29:45.077Z",
+    "category": "Recived from someone"
+  },
+  {
     "id": "inc_20260417753845827871803",
     "date": "2026-04-03",
     "description": "Salary: Teaching",
