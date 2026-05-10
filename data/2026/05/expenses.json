@@ -72,6 +72,15 @@
     "category": "Travel"
   },
   {
+    "id": "exp_20260517784384101434849",
+    "date": "2026-05-03",
+    "description": "T Shirt for me",
+    "amount": 300,
+    "createdAt": "2026-05-10T18:40:10.143Z",
+    "updatedAt": "2026-05-10T18:40:10.143Z",
+    "category": "Clothing"
+  },
+  {
     "id": "exp_20260517783497341323442",
     "date": "2026-05-01",
     "description": "RD",
