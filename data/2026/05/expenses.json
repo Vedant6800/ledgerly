@@ -79,5 +79,14 @@
     "createdAt": "2026-05-09T18:02:14.132Z",
     "updatedAt": "2026-05-09T18:02:14.132Z",
     "category": "Investment"
+  },
+  {
+    "id": "exp_20260517784378111384331",
+    "date": "2026-05-01",
+    "description": "Day Out with Sejal (Food+Travel)",
+    "amount": 650,
+    "createdAt": "2026-05-10T18:30:11.138Z",
+    "updatedAt": "2026-05-10T18:30:11.138Z",
+    "category": "Leisure"
   }
 ]
