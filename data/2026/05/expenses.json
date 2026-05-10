@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260517784370042206556",
+    "date": "2026-05-10",
+    "description": "Vegetables(Mango:100, Drumstick and LadyFinger: 50)",
+    "amount": 150,
+    "createdAt": "2026-05-10T18:16:44.220Z",
+    "updatedAt": "2026-05-10T18:16:44.220Z",
+    "category": "Grocery"
+  },
+  {
     "id": "exp_20260517783479384784409",
     "date": "2026-05-09",
     "description": "Bidve College for Hall Tickit COllection",
