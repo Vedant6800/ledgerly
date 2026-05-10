@@ -54,6 +54,15 @@
     "category": "Rent"
   },
   {
+    "id": "exp_20260517784373605262331",
+    "date": "2026-05-05",
+    "description": "Lunch and Snacks at Office(3 days)",
+    "amount": 515,
+    "createdAt": "2026-05-10T18:22:40.526Z",
+    "updatedAt": "2026-05-10T18:22:40.526Z",
+    "category": "Food"
+  },
+  {
     "id": "exp_20260517783497341323442",
     "date": "2026-05-01",
     "description": "RD",
