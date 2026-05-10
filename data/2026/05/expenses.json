@@ -18,6 +18,15 @@
     "category": "Food"
   },
   {
+    "id": "exp_20260517784371814021939",
+    "date": "2026-05-10",
+    "description": "InnerWear",
+    "amount": 200,
+    "createdAt": "2026-05-10T18:19:41.402Z",
+    "updatedAt": "2026-05-10T18:19:41.402Z",
+    "category": "Clothing"
+  },
+  {
     "id": "exp_20260517783479384784409",
     "date": "2026-05-09",
     "description": "Bidve College for Hall Tickit COllection",
