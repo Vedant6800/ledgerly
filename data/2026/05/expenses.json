@@ -63,6 +63,15 @@
     "category": "Food"
   },
   {
+    "id": "exp_20260517784374933612366",
+    "date": "2026-05-05",
+    "description": "Travels to Latur",
+    "amount": 620,
+    "createdAt": "2026-05-10T18:24:53.361Z",
+    "updatedAt": "2026-05-10T18:24:53.361Z",
+    "category": "Travel"
+  },
+  {
     "id": "exp_20260517783497341323442",
     "date": "2026-05-01",
     "description": "RD",
