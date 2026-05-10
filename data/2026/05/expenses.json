@@ -99,6 +99,15 @@
     "category": "Gifts"
   },
   {
+    "id": "exp_20260517784386776023537",
+    "date": "2026-05-03",
+    "description": "Clutures for Mummy",
+    "amount": 50,
+    "createdAt": "2026-05-10T18:44:37.602Z",
+    "updatedAt": "2026-05-10T18:44:37.602Z",
+    "category": "Gifts"
+  },
+  {
     "id": "exp_20260517783497341323442",
     "date": "2026-05-01",
     "description": "RD",
