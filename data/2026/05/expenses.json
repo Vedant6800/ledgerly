@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260517784372702222895",
+    "date": "2026-05-15",
+    "description": "Papa Mobile EMI",
+    "amount": 2500,
+    "createdAt": "2026-05-10T18:21:10.222Z",
+    "updatedAt": "2026-05-10T18:21:10.222Z",
+    "category": "EMI"
+  },
+  {
     "id": "exp_20260517784370042206556",
     "date": "2026-05-10",
     "description": "Vegetables(Mango:100, Drumstick and LadyFinger: 50)",
