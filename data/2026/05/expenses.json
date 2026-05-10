@@ -81,6 +81,15 @@
     "category": "Clothing"
   },
   {
+    "id": "exp_20260517784384946107297",
+    "date": "2026-05-03",
+    "description": "Day Out with Sam",
+    "amount": 750,
+    "createdAt": "2026-05-10T18:41:34.611Z",
+    "updatedAt": "2026-05-10T18:41:34.611Z",
+    "category": "Leisure"
+  },
+  {
     "id": "exp_20260517783497341323442",
     "date": "2026-05-01",
     "description": "RD",
