@@ -90,6 +90,15 @@
     "category": "Leisure"
   },
   {
+    "id": "exp_20260517784385627004486",
+    "date": "2026-05-03",
+    "description": "Mobile cover and Goggles for Sam",
+    "amount": 200,
+    "createdAt": "2026-05-10T18:42:42.700Z",
+    "updatedAt": "2026-05-10T18:42:42.700Z",
+    "category": "Gifts"
+  },
+  {
     "id": "exp_20260517783497341323442",
     "date": "2026-05-01",
     "description": "RD",
