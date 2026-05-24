@@ -162,6 +162,15 @@
     "category": "Online Shopping"
   },
   {
+    "id": "exp_20260517796451490545190",
+    "date": "2026-03-11",
+    "description": "Mobile Recharge",
+    "amount": 1098,
+    "createdAt": "2026-05-24T17:52:29.054Z",
+    "updatedAt": "2026-05-24T17:55:21.418Z",
+    "category": "Utilities"
+  },
+  {
     "id": "exp_20260317730654597396027",
     "date": "2026-03-08",
     "description": "Rangpanchami",
