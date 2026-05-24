@@ -9,6 +9,15 @@
     "category": "Transportation"
   },
   {
+    "id": "exp_20260517796458947947806",
+    "date": "2026-05-22",
+    "description": "Given to mummy(500+200 for movie)",
+    "amount": 700,
+    "createdAt": "2026-05-24T18:04:54.794Z",
+    "updatedAt": "2026-05-24T18:04:54.794Z",
+    "category": "Given at Home"
+  },
+  {
     "id": "exp_20260517796444994342635",
     "date": "2026-05-21",
     "description": "Ice Cream Tub(Blinkit)",
