@@ -63,6 +63,15 @@
     "category": "Fruits"
   },
   {
+    "id": "exp_20260517796451490545190",
+    "date": "2026-05-11",
+    "description": "Mobile Recharge",
+    "amount": 1098,
+    "createdAt": "2026-05-24T17:52:29.054Z",
+    "updatedAt": "2026-05-24T17:52:29.054Z",
+    "category": "Utilities"
+  },
+  {
     "id": "exp_20260517784370042206556",
     "date": "2026-05-10",
     "description": "Vegetables(Mango:100, Drumstick and LadyFinger: 50)",
