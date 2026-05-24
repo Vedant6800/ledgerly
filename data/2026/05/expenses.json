@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260517796446680295088",
+    "date": "2026-05-22",
+    "description": "Auto for MCA Exams",
+    "amount": 100,
+    "createdAt": "2026-05-24T17:44:28.029Z",
+    "updatedAt": "2026-05-24T17:44:28.029Z",
+    "category": "Transportation"
+  },
+  {
     "id": "exp_20260517796444994342635",
     "date": "2026-05-21",
     "description": "Ice Cream Tub(Blinkit)",
