@@ -36,6 +36,15 @@
     "category": "EMI"
   },
   {
+    "id": "exp_20260517796449188393763",
+    "date": "2026-05-15",
+    "description": "MCA Notes",
+    "amount": 250,
+    "createdAt": "2026-05-24T17:48:38.839Z",
+    "updatedAt": "2026-05-24T17:48:38.839Z",
+    "category": "Education"
+  },
+  {
     "id": "exp_20260517796447357872056",
     "date": "2026-05-14",
     "description": "Ice Cream",
