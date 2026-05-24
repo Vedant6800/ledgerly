@@ -36,6 +36,15 @@
     "category": "EMI"
   },
   {
+    "id": "exp_20260517796447357872056",
+    "date": "2026-05-14",
+    "description": "Ice Cream",
+    "amount": 120,
+    "createdAt": "2026-05-24T17:45:35.787Z",
+    "updatedAt": "2026-05-24T17:45:35.787Z",
+    "category": "Food"
+  },
+  {
     "id": "exp_20260517784370042206556",
     "date": "2026-05-10",
     "description": "Vegetables(Mango:100, Drumstick and LadyFinger: 50)",
