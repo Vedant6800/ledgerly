@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260517796444994342635",
+    "date": "2026-05-21",
+    "description": "Ice Cream Tub(Blinkit)",
+    "amount": 150,
+    "createdAt": "2026-05-24T17:41:39.434Z",
+    "updatedAt": "2026-05-24T17:41:39.434Z",
+    "category": "Food"
+  },
+  {
     "id": "exp_20260517784372702222895",
     "date": "2026-05-15",
     "description": "Papa Mobile EMI",
