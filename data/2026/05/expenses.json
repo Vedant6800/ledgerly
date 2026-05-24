@@ -45,6 +45,15 @@
     "category": "Food"
   },
   {
+    "id": "exp_20260517796448158522074",
+    "date": "2026-05-13",
+    "description": "Mango",
+    "amount": 100,
+    "createdAt": "2026-05-24T17:46:55.852Z",
+    "updatedAt": "2026-05-24T17:46:55.852Z",
+    "category": "Fruits"
+  },
+  {
     "id": "exp_20260517784370042206556",
     "date": "2026-05-10",
     "description": "Vegetables(Mango:100, Drumstick and LadyFinger: 50)",
