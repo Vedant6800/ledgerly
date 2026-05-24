@@ -478,6 +478,12 @@ class GitHubAPIClient {
             // Update cache with new SHA
             this.cache.set(cacheKey, data.content.sha);
 
+            // Invalidate Financial Position cache for this month in localStorage
+            const lsKey = `ledgerly_fp_agg_${year}-${month}`;
+            try {
+                localStorage.removeItem(lsKey);
+            } catch (_) {}
+
             return data;
         } catch (error) {
             console.error(`Error updating file ${path}:`, error);
@@ -515,6 +521,13 @@ class GitHubAPIClient {
         }
 
         this.cache.delete(cacheKey);
+
+        // Invalidate Financial Position cache for this month in localStorage
+        const lsKey = `ledgerly_fp_agg_${year}-${month}`;
+        try {
+            localStorage.removeItem(lsKey);
+        } catch (_) {}
+
         return await response.json();
     }
     /**

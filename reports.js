@@ -856,6 +856,14 @@ class LedgerlyReports {
             this.toggleTheme();
         });
 
+        // Refresh reports
+        const refreshBtn = document.getElementById('refresh-reports-btn');
+        if (refreshBtn) {
+            refreshBtn.addEventListener('click', () => {
+                this.forceRefresh();
+            });
+        }
+
         // Chart type toggle buttons
         document.querySelectorAll('.chart-toggle-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -1300,6 +1308,37 @@ class LedgerlyReports {
         }
 
         return html;
+    }
+
+    // Force refresh all analytics data and clear cache
+    async forceRefresh() {
+        this.showLoading('Refreshing reports from GitHub...');
+        try {
+            // 1. Clear all Financial Position cache keys from localStorage
+            for (let i = localStorage.length - 1; i >= 0; i--) {
+                const key = localStorage.key(i);
+                if (key && key.startsWith('ledgerly_fp_agg_')) {
+                    localStorage.removeItem(key);
+                }
+            }
+
+            // 2. Clear in-memory FP cache
+            this.fpAggregateCache = {};
+
+            // 3. Clear dataManager cache to force reload from GitHub
+            if (this.dataManager) {
+                this.dataManager.data = {};
+                this.dataManager.loadingStates.clear();
+            }
+
+            // 4. Reload current month and regenerate reports
+            await this.loadCurrentMonth();
+        } catch (error) {
+            console.error('Error refreshing reports:', error);
+            alert('Error refreshing data from GitHub. Please check your connection.');
+        } finally {
+            this.hideLoading();
+        }
     }
 }
 
