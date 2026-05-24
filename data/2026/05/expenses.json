@@ -18,6 +18,15 @@
     "category": "Given at Home"
   },
   {
+    "id": "exp_2026051779646188744436",
+    "date": "2026-05-22",
+    "description": "After exam with Sam and Akhilesh",
+    "amount": 250,
+    "createdAt": "2026-05-24T18:09:48.744Z",
+    "updatedAt": "2026-05-24T18:09:48.744Z",
+    "category": "Food"
+  },
+  {
     "id": "exp_20260517796444994342635",
     "date": "2026-05-21",
     "description": "Ice Cream Tub(Blinkit)",
