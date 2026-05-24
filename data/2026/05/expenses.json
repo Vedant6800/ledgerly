@@ -72,6 +72,15 @@
     "category": "Travel"
   },
   {
+    "id": "exp_20260517796364541578096",
+    "date": "2026-05-05",
+    "description": "Dinner at Pune",
+    "amount": 450,
+    "createdAt": "2026-05-24T15:27:34.157Z",
+    "updatedAt": "2026-05-24T15:27:34.158Z",
+    "category": "Food"
+  },
+  {
     "id": "exp_20260517784384101434849",
     "date": "2026-05-03",
     "description": "T Shirt for me",
