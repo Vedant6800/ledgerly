@@ -9,6 +9,15 @@
     "category": "Transportation"
   },
   {
+    "id": "exp_20260517806816109282701",
+    "date": "2026-05-29",
+    "description": "With vijay when shahil came latur(swimming, food, etc.)",
+    "amount": 500,
+    "createdAt": "2026-06-05T17:46:50.928Z",
+    "updatedAt": "2026-06-05T17:46:50.928Z",
+    "category": "Leisure"
+  },
+  {
     "id": "exp_20260517796446680295088",
     "date": "2026-05-22",
     "description": "Auto for MCA Exams",
