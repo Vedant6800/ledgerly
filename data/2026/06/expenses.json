@@ -9,6 +9,15 @@
     "category": "Entertainment"
   },
   {
+    "id": "exp_20260617806819050543495",
+    "date": "2026-06-03",
+    "description": "Pramod Super Market: farsan, Biscuits and chips",
+    "amount": 300,
+    "createdAt": "2026-06-05T17:51:45.054Z",
+    "updatedAt": "2026-06-05T17:51:45.054Z",
+    "category": "Grocery"
+  },
+  {
     "id": "exp_20260617806817470294862",
     "date": "2026-06-01",
     "description": "RD",
