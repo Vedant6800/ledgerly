@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260517806814969731899",
+    "date": "2026-05-31",
+    "description": "Petrol",
+    "amount": 230,
+    "createdAt": "2026-06-05T17:44:56.973Z",
+    "updatedAt": "2026-06-05T17:44:56.973Z",
+    "category": "Transportation"
+  },
+  {
     "id": "exp_20260517796446680295088",
     "date": "2026-05-22",
     "description": "Auto for MCA Exams",
