@@ -7,5 +7,14 @@
     "createdAt": "2026-06-05T17:44:11.156Z",
     "updatedAt": "2026-06-05T17:44:11.156Z",
     "category": "Entertainment"
+  },
+  {
+    "id": "exp_20260617806817470294862",
+    "date": "2026-06-01",
+    "description": "RD",
+    "amount": 1500,
+    "createdAt": "2026-06-05T17:49:07.029Z",
+    "updatedAt": "2026-06-05T17:49:07.029Z",
+    "category": "Investment"
   }
 ]
