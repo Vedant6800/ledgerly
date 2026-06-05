@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260617806819869745055",
+    "date": "2026-06-05",
+    "description": "Cash given to mummy for RD",
+    "amount": 500,
+    "createdAt": "2026-06-05T17:53:06.974Z",
+    "updatedAt": "2026-06-05T17:53:06.974Z",
+    "category": "Given at Home"
+  },
+  {
     "id": "exp_20260617806814511569065",
     "date": "2026-06-03",
     "description": "Movie",
