@@ -9,15 +9,6 @@
     "category": "Food"
   },
   {
-    "id": "exp_2026061780727200928719",
-    "date": "2026-06-06",
-    "description": "Given to Mummy",
-    "amount": 500,
-    "createdAt": "2026-06-06T06:26:40.928Z",
-    "updatedAt": "2026-06-06T06:26:40.928Z",
-    "category": "Given at Home"
-  },
-  {
     "id": "exp_20260617810229557915471",
     "date": "2026-06-06",
     "description": "Given to Mummy",
