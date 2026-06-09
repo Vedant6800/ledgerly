@@ -9,6 +9,15 @@
     "category": "Food"
   },
   {
+    "id": "exp_2026061781023179418626",
+    "date": "2026-06-09",
+    "description": "Imli",
+    "amount": 130,
+    "createdAt": "2026-06-09T16:39:39.418Z",
+    "updatedAt": "2026-06-09T16:39:39.418Z",
+    "category": "Grocery"
+  },
+  {
     "id": "exp_20260617810230021579114",
     "date": "2026-06-07",
     "description": "Chips and all from pramod",
