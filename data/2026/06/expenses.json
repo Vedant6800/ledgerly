@@ -45,6 +45,15 @@
     "category": "Given at Home"
   },
   {
+    "id": "exp_20260617810234324122435",
+    "date": "2026-06-06",
+    "description": "Mummy recharge: Data pack",
+    "amount": 39,
+    "createdAt": "2026-06-09T16:43:52.412Z",
+    "updatedAt": "2026-06-09T16:43:52.412Z",
+    "category": "Utilities"
+  },
+  {
     "id": "exp_20260617806819869745055",
     "date": "2026-06-05",
     "description": "Cash given to mummy for RD",
