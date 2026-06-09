@@ -18,6 +18,15 @@
     "category": "Grocery"
   },
   {
+    "id": "exp_20260617810233521639502",
+    "date": "2026-06-08",
+    "description": "Mixer grinder repair",
+    "amount": 90,
+    "createdAt": "2026-06-09T16:42:32.163Z",
+    "updatedAt": "2026-06-09T16:42:32.163Z",
+    "category": "Miscellaneous"
+  },
+  {
     "id": "exp_20260617810230021579114",
     "date": "2026-06-07",
     "description": "Chips and all from pramod",
