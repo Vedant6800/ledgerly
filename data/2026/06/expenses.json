@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_202606178110595229476",
+    "date": "2026-06-14",
+    "description": "Papa Mobile Emi",
+    "amount": 2500,
+    "createdAt": "2026-06-10T15:39:12.294Z",
+    "updatedAt": "2026-06-10T15:39:12.294Z",
+    "category": "EMI"
+  },
+  {
     "id": "exp_20260617811055353321230",
     "date": "2026-06-10",
     "description": "Recharge",
