@@ -9,6 +9,15 @@
     "category": "Annual charges"
   },
   {
+    "id": "exp_20260617815842430586382",
+    "date": "2026-06-16",
+    "description": "Soap",
+    "amount": 124,
+    "createdAt": "2026-06-16T04:30:43.059Z",
+    "updatedAt": "2026-06-16T04:30:43.059Z",
+    "category": "Utilities"
+  },
+  {
     "id": "exp_202606178110595229476",
     "date": "2026-06-14",
     "description": "Papa Mobile Emi",
