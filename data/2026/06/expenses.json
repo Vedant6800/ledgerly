@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260617815811237575436",
+    "date": "2026-06-16",
+    "description": "SBI ATM annual maintainance charges",
+    "amount": 236,
+    "createdAt": "2026-06-16T03:38:43.757Z",
+    "updatedAt": "2026-06-16T03:38:43.757Z",
+    "category": "Annual charges"
+  },
+  {
     "id": "exp_202606178110595229476",
     "date": "2026-06-14",
     "description": "Papa Mobile Emi",
