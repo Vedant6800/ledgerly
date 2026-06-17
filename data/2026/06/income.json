@@ -1,5 +1,14 @@
 [
   {
+    "id": "inc_20260617817138342967978",
+    "date": "2026-06-15",
+    "description": "Salary for teaching",
+    "amount": 3000,
+    "createdAt": "2026-06-17T16:30:34.296Z",
+    "updatedAt": "2026-06-17T16:30:34.296Z",
+    "category": "Salary"
+  },
+  {
     "id": "inc_20260617806813924803360",
     "date": "2026-06-01",
     "description": "Salary",
