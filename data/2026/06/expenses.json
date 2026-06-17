@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260617817138747754232",
+    "date": "2026-06-17",
+    "description": "Jay vijay Birthday Gift",
+    "amount": 3200,
+    "createdAt": "2026-06-17T16:31:14.775Z",
+    "updatedAt": "2026-06-17T16:31:14.775Z",
+    "category": "Gifts"
+  },
+  {
     "id": "exp_20260617815811237575436",
     "date": "2026-06-16",
     "description": "SBI ATM annual maintainance charges",
