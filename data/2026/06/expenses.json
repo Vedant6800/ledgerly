@@ -27,6 +27,15 @@
     "category": "EMI"
   },
   {
+    "id": "exp_2026061781713791137739",
+    "date": "2026-06-14",
+    "description": "Taken by mummy for giving to aatya",
+    "amount": 200,
+    "createdAt": "2026-06-17T16:29:51.138Z",
+    "updatedAt": "2026-06-17T16:29:51.140Z",
+    "category": "Given at Home"
+  },
+  {
     "id": "exp_20260617811055353321230",
     "date": "2026-06-10",
     "description": "Recharge",
