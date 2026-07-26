@@ -36,6 +36,15 @@
     "category": "Transportation"
   },
   {
+    "id": "exp_20260617850699316667542",
+    "date": "2026-06-26",
+    "description": "Mutual Fund",
+    "amount": 500,
+    "createdAt": "2026-07-26T12:45:31.666Z",
+    "updatedAt": "2026-07-26T12:45:31.666Z",
+    "category": "Investment"
+  },
+  {
     "id": "exp_20260617850599120872112",
     "date": "2026-06-21",
     "description": "Week end with Friends",
