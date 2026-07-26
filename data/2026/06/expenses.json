@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260617850599120872112",
+    "date": "2026-06-21",
+    "description": "Week end with Friends",
+    "amount": 150,
+    "createdAt": "2026-07-26T09:58:32.087Z",
+    "updatedAt": "2026-07-26T09:58:32.087Z",
+    "category": "Leisure"
+  },
+  {
     "id": "exp_20260617850598229863372",
     "date": "2026-06-20",
     "description": "Zepto For Sam(She was ill)",
