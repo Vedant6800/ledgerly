@@ -88,5 +88,14 @@
     "createdAt": "2026-07-26T10:08:37.014Z",
     "updatedAt": "2026-07-26T10:08:37.014Z",
     "category": "Miscellaneous"
+  },
+  {
+    "id": "exp_20260717850630728451353",
+    "date": "2026-07-01",
+    "description": "RD",
+    "amount": 1500,
+    "createdAt": "2026-07-26T10:51:12.845Z",
+    "updatedAt": "2026-07-26T10:51:12.845Z",
+    "category": "Investment"
   }
 ]
