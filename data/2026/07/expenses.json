@@ -18,6 +18,15 @@
     "category": "Food"
   },
   {
+    "id": "exp_20260717850633000138586",
+    "date": "2026-07-19",
+    "description": "Weekend Out with Vijay and Friends",
+    "amount": 220,
+    "createdAt": "2026-07-26T10:55:00.013Z",
+    "updatedAt": "2026-07-26T10:55:00.013Z",
+    "category": "Leisure"
+  },
+  {
     "id": "exp_20260717850623290904290",
     "date": "2026-07-18",
     "description": "Petrol",
