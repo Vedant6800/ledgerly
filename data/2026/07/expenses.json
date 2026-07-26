@@ -7,5 +7,14 @@
     "createdAt": "2026-07-26T10:03:04.038Z",
     "updatedAt": "2026-07-26T10:03:04.038Z",
     "category": "Clothing"
+  },
+  {
+    "id": "exp_20260717850605170148150",
+    "date": "2026-07-03",
+    "description": "Playing Cards",
+    "amount": 162,
+    "createdAt": "2026-07-26T10:08:37.014Z",
+    "updatedAt": "2026-07-26T10:08:37.014Z",
+    "category": "Miscellaneous"
   }
 ]
