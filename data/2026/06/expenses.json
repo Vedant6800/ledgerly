@@ -18,6 +18,15 @@
     "category": "Grocery"
   },
   {
+    "id": "exp_20260617850604619005307",
+    "date": "2026-06-27",
+    "description": "Iodex for Jay",
+    "amount": 55,
+    "createdAt": "2026-07-26T10:07:41.900Z",
+    "updatedAt": "2026-07-26T10:07:41.900Z",
+    "category": "Given at Home"
+  },
+  {
     "id": "exp_20260617850600141534909",
     "date": "2026-06-26",
     "description": "Petrol",
