@@ -27,6 +27,15 @@
     "category": "Utilities"
   },
   {
+    "id": "exp_20260617850596300581127",
+    "date": "2026-06-16",
+    "description": "Petrol",
+    "amount": 190,
+    "createdAt": "2026-07-26T09:53:50.058Z",
+    "updatedAt": "2026-07-26T09:53:50.058Z",
+    "category": "Transportation"
+  },
+  {
     "id": "exp_202606178110595229476",
     "date": "2026-06-14",
     "description": "Papa Mobile Emi",
