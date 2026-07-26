@@ -63,6 +63,15 @@
     "category": "Grocery"
   },
   {
+    "id": "exp_20260717850629764995316",
+    "date": "2026-07-06",
+    "description": "Mutual Fund",
+    "amount": 500,
+    "createdAt": "2026-07-26T10:49:36.499Z",
+    "updatedAt": "2026-07-26T10:49:36.499Z",
+    "category": "Investment"
+  },
+  {
     "id": "exp_20260717850601840388551",
     "date": "2026-07-05",
     "description": "Track Pant By Amazon",
