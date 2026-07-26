@@ -27,6 +27,15 @@
     "category": "Given at Home"
   },
   {
+    "id": "exp_20260717850636199927411",
+    "date": "2026-07-20",
+    "description": "my 2 tshirt",
+    "amount": 500,
+    "createdAt": "2026-07-26T11:00:19.992Z",
+    "updatedAt": "2026-07-26T11:00:19.992Z",
+    "category": "Clothing"
+  },
+  {
     "id": "exp_20260717850633000138586",
     "date": "2026-07-19",
     "description": "Weekend Out with Vijay and Friends",
