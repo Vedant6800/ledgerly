@@ -18,6 +18,15 @@
     "category": "Food"
   },
   {
+    "id": "exp_20260717850635228588066",
+    "date": "2026-07-20",
+    "description": "Given to Mummy for mummy's shopping",
+    "amount": 500,
+    "createdAt": "2026-07-26T10:58:42.858Z",
+    "updatedAt": "2026-07-26T10:58:42.858Z",
+    "category": "Given at Home"
+  },
+  {
     "id": "exp_20260717850633000138586",
     "date": "2026-07-19",
     "description": "Weekend Out with Vijay and Friends",
