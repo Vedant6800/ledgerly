@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260717850605823711645",
+    "date": "2026-07-26",
+    "description": "Haircut",
+    "amount": 130,
+    "createdAt": "2026-07-26T10:09:42.371Z",
+    "updatedAt": "2026-07-26T10:09:42.371Z",
+    "category": "Personal Care"
+  },
+  {
     "id": "exp_20260717850601840388551",
     "date": "2026-07-05",
     "description": "Track Pant By Amazon",
