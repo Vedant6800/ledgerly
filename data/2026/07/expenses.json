@@ -9,6 +9,15 @@
     "category": "Personal Care"
   },
   {
+    "id": "exp_20260717850606640043064",
+    "date": "2026-07-15",
+    "description": "Papa Mobile EMI",
+    "amount": 2500,
+    "createdAt": "2026-07-26T10:11:04.004Z",
+    "updatedAt": "2026-07-26T10:11:04.004Z",
+    "category": "EMI"
+  },
+  {
     "id": "exp_20260717850601840388551",
     "date": "2026-07-05",
     "description": "Track Pant By Amazon",
