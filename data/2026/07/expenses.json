@@ -18,6 +18,15 @@
     "category": "Food"
   },
   {
+    "id": "exp_20260717850623290904290",
+    "date": "2026-07-18",
+    "description": "Petrol",
+    "amount": 160,
+    "createdAt": "2026-07-26T10:38:49.090Z",
+    "updatedAt": "2026-07-26T10:38:49.090Z",
+    "category": "Transportation"
+  },
+  {
     "id": "exp_20260717850606640043064",
     "date": "2026-07-15",
     "description": "Papa Mobile EMI",
