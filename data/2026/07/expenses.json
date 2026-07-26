@@ -45,6 +45,15 @@
     "category": "Food"
   },
   {
+    "id": "exp_20260717850625308425270",
+    "date": "2026-07-12",
+    "description": "Petrol",
+    "amount": 170,
+    "createdAt": "2026-07-26T10:42:10.842Z",
+    "updatedAt": "2026-07-26T10:42:10.842Z",
+    "category": "Transportation"
+  },
+  {
     "id": "exp_20260717850601840388551",
     "date": "2026-07-05",
     "description": "Track Pant By Amazon",
