@@ -36,6 +36,15 @@
     "category": "EMI"
   },
   {
+    "id": "exp_20260717850624235237771",
+    "date": "2026-07-13",
+    "description": "Zomato when Mummy was not home",
+    "amount": 210,
+    "createdAt": "2026-07-26T10:40:23.523Z",
+    "updatedAt": "2026-07-26T10:40:23.523Z",
+    "category": "Food"
+  },
+  {
     "id": "exp_20260717850601840388551",
     "date": "2026-07-05",
     "description": "Track Pant By Amazon",
