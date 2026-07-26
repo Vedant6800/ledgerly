@@ -90,6 +90,15 @@
     "category": "Clothing"
   },
   {
+    "id": "exp_20260717850632254105477",
+    "date": "2026-07-05",
+    "description": "Weekend With Vijay and friends",
+    "amount": 150,
+    "createdAt": "2026-07-26T10:53:45.410Z",
+    "updatedAt": "2026-07-26T10:53:45.410Z",
+    "category": "Leisure"
+  },
+  {
     "id": "exp_20260717850605170148150",
     "date": "2026-07-03",
     "description": "Playing Cards",
