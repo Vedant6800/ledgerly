@@ -54,6 +54,15 @@
     "category": "Transportation"
   },
   {
+    "id": "exp_20260717850626145528359",
+    "date": "2026-07-11",
+    "description": "Vegitables",
+    "amount": 500,
+    "createdAt": "2026-07-26T10:43:34.552Z",
+    "updatedAt": "2026-07-26T10:43:34.552Z",
+    "category": "Grocery"
+  },
+  {
     "id": "exp_20260717850601840388551",
     "date": "2026-07-05",
     "description": "Track Pant By Amazon",
