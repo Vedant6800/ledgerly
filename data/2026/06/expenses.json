@@ -9,6 +9,15 @@
     "category": "Given at Home"
   },
   {
+    "id": "exp_20260617850603656958692",
+    "date": "2026-06-27",
+    "description": "Pramod: Grocery",
+    "amount": 277,
+    "createdAt": "2026-07-26T10:06:05.695Z",
+    "updatedAt": "2026-07-26T10:06:05.695Z",
+    "category": "Grocery"
+  },
+  {
     "id": "exp_20260617850600141534909",
     "date": "2026-06-26",
     "description": "Petrol",
