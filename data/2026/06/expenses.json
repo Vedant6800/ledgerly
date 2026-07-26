@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260617850603005625559",
+    "date": "2026-06-27",
+    "description": "Mummy ST Bus Card",
+    "amount": 300,
+    "createdAt": "2026-07-26T10:05:00.562Z",
+    "updatedAt": "2026-07-26T10:05:00.562Z",
+    "category": "Given at Home"
+  },
+  {
     "id": "exp_20260617850600141534909",
     "date": "2026-06-26",
     "description": "Petrol",
