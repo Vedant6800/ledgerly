@@ -18,6 +18,15 @@
     "category": "Food"
   },
   {
+    "id": "exp_20260717850637139673224",
+    "date": "2026-07-23",
+    "description": "Zepto for sejal",
+    "amount": 103,
+    "createdAt": "2026-07-26T11:01:53.967Z",
+    "updatedAt": "2026-07-26T11:01:53.967Z",
+    "category": "Miscellaneous"
+  },
+  {
     "id": "exp_20260717850635228588066",
     "date": "2026-07-20",
     "description": "Given to Mummy for mummy's shopping",
