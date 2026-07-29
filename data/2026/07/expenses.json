@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260717853238080007312",
+    "date": "2026-07-29",
+    "description": "2nd Year college Fees",
+    "amount": 10000,
+    "createdAt": "2026-07-29T11:16:48.001Z",
+    "updatedAt": "2026-07-29T11:16:48.003Z",
+    "category": "Education"
+  },
+  {
     "id": "exp_20260717850605823711645",
     "date": "2026-07-26",
     "description": "Haircut",
