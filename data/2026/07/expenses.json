@@ -9,6 +9,15 @@
     "category": "Education"
   },
   {
+    "id": "exp_20260717853243094763285",
+    "date": "2026-07-28",
+    "description": "Rohit came home",
+    "amount": 200,
+    "createdAt": "2026-07-29T11:25:09.478Z",
+    "updatedAt": "2026-07-29T11:25:09.479Z",
+    "category": "Leisure"
+  },
+  {
     "id": "exp_20260717850605823711645",
     "date": "2026-07-26",
     "description": "Haircut",
