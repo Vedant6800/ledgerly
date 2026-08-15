@@ -45,6 +45,15 @@
     "category": "Rent"
   },
   {
+    "id": "exp_20260817867967011894184",
+    "date": "2026-08-11",
+    "description": "Movie+burger+gift for mummy+dagdusheth+petrol",
+    "amount": 700,
+    "createdAt": "2026-08-15T12:25:01.189Z",
+    "updatedAt": "2026-08-15T12:25:01.189Z",
+    "category": "Leisure"
+  },
+  {
     "id": "exp_20260817867959251541174",
     "date": "2026-08-08",
     "description": "Sinhgad(petrol+Food+entry+miscellaneous)",
