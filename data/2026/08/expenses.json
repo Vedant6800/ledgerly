@@ -9,6 +9,15 @@
     "category": "Rent"
   },
   {
+    "id": "exp_20260817867957893952689",
+    "date": "2026-08-02",
+    "description": "Given to Mummy for jay vijay hospital",
+    "amount": 500,
+    "createdAt": "2026-08-15T12:09:49.395Z",
+    "updatedAt": "2026-08-15T12:09:49.395Z",
+    "category": "Given at Home"
+  },
+  {
     "id": "exp_20260817857317731426035",
     "date": "2026-08-01",
     "description": "Travels to Pune",
