@@ -9,6 +9,15 @@
     "category": "Given at Home"
   },
   {
+    "id": "exp_20260817867962884305732",
+    "date": "2026-08-12",
+    "description": "Lunch(on an average 100Rs/day)",
+    "amount": 1200,
+    "createdAt": "2026-08-15T12:18:08.430Z",
+    "updatedAt": "2026-08-15T12:18:08.430Z",
+    "category": "Food"
+  },
+  {
     "id": "exp_20260817867957589599830",
     "date": "2026-08-11",
     "description": "PG rent",
