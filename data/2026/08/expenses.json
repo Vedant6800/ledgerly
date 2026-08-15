@@ -9,6 +9,15 @@
     "category": "Given at Home"
   },
   {
+    "id": "exp_20260817867964932928433",
+    "date": "2026-08-14",
+    "description": "Panipuri with friends",
+    "amount": 100,
+    "createdAt": "2026-08-15T12:21:33.292Z",
+    "updatedAt": "2026-08-15T12:21:33.292Z",
+    "category": "Food"
+  },
+  {
     "id": "exp_20260817867963644591519",
     "date": "2026-08-13",
     "description": "Mummy Earphone",
