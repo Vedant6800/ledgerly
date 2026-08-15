@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260817867957589599830",
+    "date": "2026-08-11",
+    "description": "PG rent",
+    "amount": 3000,
+    "createdAt": "2026-08-15T12:09:18.959Z",
+    "updatedAt": "2026-08-15T12:09:18.959Z",
+    "category": "Rent"
+  },
+  {
     "id": "exp_20260817857317731426035",
     "date": "2026-08-01",
     "description": "Travels to Pune",
