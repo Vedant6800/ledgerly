@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260717867960694744052",
+    "date": "2026-07-31",
+    "description": "Pizza",
+    "amount": 300,
+    "createdAt": "2026-08-15T12:14:29.474Z",
+    "updatedAt": "2026-08-15T12:14:29.474Z",
+    "category": "Food"
+  },
+  {
     "id": "exp_20260717853238080007312",
     "date": "2026-07-29",
     "description": "2nd Year college Fees",
