@@ -18,6 +18,15 @@
     "category": "Rent"
   },
   {
+    "id": "exp_20260817867959251541174",
+    "date": "2026-08-08",
+    "description": "Sinhgad(petrol+Food+entry+miscellaneous)",
+    "amount": 600,
+    "createdAt": "2026-08-15T12:12:05.155Z",
+    "updatedAt": "2026-08-15T12:12:05.155Z",
+    "category": "Leisure"
+  },
+  {
     "id": "exp_20260817867957893952689",
     "date": "2026-08-02",
     "description": "Given to Mummy for jay vijay hospital",
