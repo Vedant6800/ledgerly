@@ -106,5 +106,14 @@
     "createdAt": "2026-08-03T04:36:59.026Z",
     "updatedAt": "2026-08-03T04:36:59.026Z",
     "category": "Transportation"
+  },
+  {
+    "id": "exp_20260817868975320851667",
+    "date": "2026-08-01",
+    "description": "RD",
+    "amount": 1500,
+    "createdAt": "2026-08-16T16:25:32.085Z",
+    "updatedAt": "2026-08-16T16:25:32.085Z",
+    "category": "Investment"
   }
 ]
