@@ -90,6 +90,15 @@
     "category": "Leisure"
   },
   {
+    "id": "exp_20260817868977152373325",
+    "date": "2026-08-05",
+    "description": "SIP",
+    "amount": 500,
+    "createdAt": "2026-08-16T16:28:35.237Z",
+    "updatedAt": "2026-08-16T16:28:35.238Z",
+    "category": "Investment"
+  },
+  {
     "id": "exp_20260817867957893952689",
     "date": "2026-08-02",
     "description": "Given to Mummy for jay vijay hospital",
