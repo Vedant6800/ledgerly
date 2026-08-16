@@ -81,6 +81,15 @@
     "category": "Travel"
   },
   {
+    "id": "exp_20260817868977743181566",
+    "date": "2026-08-11",
+    "description": "Dinner ( on an average)",
+    "amount": 1400,
+    "createdAt": "2026-08-16T16:29:34.318Z",
+    "updatedAt": "2026-08-16T16:29:34.318Z",
+    "category": "Food"
+  },
+  {
     "id": "exp_20260817867959251541174",
     "date": "2026-08-08",
     "description": "Sinhgad(petrol+Food+entry+miscellaneous)",
