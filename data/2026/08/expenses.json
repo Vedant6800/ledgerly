@@ -63,6 +63,15 @@
     "category": "Leisure"
   },
   {
+    "id": "exp_20260817868974665298712",
+    "date": "2026-08-11",
+    "description": "Train Back to Latur",
+    "amount": 500,
+    "createdAt": "2026-08-16T16:24:26.529Z",
+    "updatedAt": "2026-08-16T16:24:26.529Z",
+    "category": "Travel"
+  },
+  {
     "id": "exp_20260817867959251541174",
     "date": "2026-08-08",
     "description": "Sinhgad(petrol+Food+entry+miscellaneous)",
