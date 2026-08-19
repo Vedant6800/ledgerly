@@ -9,6 +9,15 @@
     "category": "Healthcare"
   },
   {
+    "id": "exp_20260817871610330529091",
+    "date": "2026-08-18",
+    "description": "Jalebi, because vijay asked",
+    "amount": 40,
+    "createdAt": "2026-08-19T17:37:13.052Z",
+    "updatedAt": "2026-08-19T17:37:13.052Z",
+    "category": "Food"
+  },
+  {
     "id": "exp_20260817868974207397264",
     "date": "2026-08-15",
     "description": "Party to Amol sir and Jeve sir",
