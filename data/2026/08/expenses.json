@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260817871609275588533",
+    "date": "2026-08-19",
+    "description": "Mummy Hospital for eye",
+    "amount": 800,
+    "createdAt": "2026-08-19T17:35:27.558Z",
+    "updatedAt": "2026-08-19T17:35:27.572Z",
+    "category": "Healthcare"
+  },
+  {
     "id": "exp_20260817868974207397264",
     "date": "2026-08-15",
     "description": "Party to Amol sir and Jeve sir",
