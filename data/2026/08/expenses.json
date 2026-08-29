@@ -9,6 +9,15 @@
     "category": "Transportation"
   },
   {
+    "id": "exp_20260817880141377821650",
+    "date": "2026-08-29",
+    "description": "Given to Vijay",
+    "amount": 1500,
+    "createdAt": "2026-08-29T14:35:37.782Z",
+    "updatedAt": "2026-08-29T14:35:37.782Z",
+    "category": "Given at Home"
+  },
+  {
     "id": "exp_20260817873813384607857",
     "date": "2026-08-21",
     "description": "Petrol",
