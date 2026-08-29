@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260817880140958259128",
+    "date": "2026-08-29",
+    "description": "Petrol",
+    "amount": 180,
+    "createdAt": "2026-08-29T14:34:55.827Z",
+    "updatedAt": "2026-08-29T14:34:55.827Z",
+    "category": "Transportation"
+  },
+  {
     "id": "exp_20260817873813384607857",
     "date": "2026-08-21",
     "description": "Petrol",
