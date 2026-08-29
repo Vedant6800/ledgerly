@@ -18,6 +18,15 @@
     "category": "Given at Home"
   },
   {
+    "id": "exp_2026081788014227269649",
+    "date": "2026-08-27",
+    "description": "Pramod Super Market: corn floor, masala, etc.",
+    "amount": 200,
+    "createdAt": "2026-08-29T14:37:07.269Z",
+    "updatedAt": "2026-08-29T14:37:07.269Z",
+    "category": "Grocery"
+  },
+  {
     "id": "exp_20260817873813384607857",
     "date": "2026-08-21",
     "description": "Petrol",
