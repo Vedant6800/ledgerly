@@ -36,6 +36,15 @@
     "category": "Grocery"
   },
   {
+    "id": "exp_20260817883245383518073",
+    "date": "2026-08-27",
+    "description": "Given to Mummy",
+    "amount": 40,
+    "createdAt": "2026-09-02T04:48:58.354Z",
+    "updatedAt": "2026-09-02T04:48:58.354Z",
+    "category": "Given at Home"
+  },
+  {
     "id": "exp_20260817873813384607857",
     "date": "2026-08-21",
     "description": "Petrol",
