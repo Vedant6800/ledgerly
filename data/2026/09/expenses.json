@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260917883235241711264",
+    "date": "2026-09-02",
+    "description": "Hair removal cream",
+    "amount": 283,
+    "createdAt": "2026-09-02T04:32:04.171Z",
+    "updatedAt": "2026-09-02T04:32:04.171Z",
+    "category": "Personal Care"
+  },
+  {
     "id": "exp_20260917883233974194828",
     "date": "2026-09-01",
     "description": "Movie",
