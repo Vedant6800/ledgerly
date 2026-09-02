@@ -18,6 +18,15 @@
     "category": "Investment"
   },
   {
+    "id": "exp_20260917883467390765191",
+    "date": "2026-09-02",
+    "description": "Given to Vijay for Groceries for janmashtami and dabeli",
+    "amount": 250,
+    "createdAt": "2026-09-02T10:58:59.077Z",
+    "updatedAt": "2026-09-02T10:58:59.077Z",
+    "category": "Grocery"
+  },
+  {
     "id": "exp_20260917883233974194828",
     "date": "2026-09-01",
     "description": "Movie",
