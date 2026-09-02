@@ -9,6 +9,15 @@
     "category": "Personal Care"
   },
   {
+    "id": "exp_20260917883246605883404",
+    "date": "2026-09-02",
+    "description": "RD",
+    "amount": 1500,
+    "createdAt": "2026-09-02T04:51:00.588Z",
+    "updatedAt": "2026-09-02T04:51:00.588Z",
+    "category": "Investment"
+  },
+  {
     "id": "exp_20260917883233974194828",
     "date": "2026-09-01",
     "description": "Movie",
