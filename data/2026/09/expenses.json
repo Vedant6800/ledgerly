@@ -52,5 +52,14 @@
     "createdAt": "2026-09-02T04:29:57.419Z",
     "updatedAt": "2026-09-02T04:29:57.419Z",
     "category": "Entertainment"
+  },
+  {
+    "id": "exp_20260917888038287045603",
+    "date": "2026-09-01",
+    "description": "Hanuman Ansh Movie",
+    "amount": 220,
+    "createdAt": "2026-09-07T17:57:08.704Z",
+    "updatedAt": "2026-09-07T17:57:08.704Z",
+    "category": "Entertainment"
   }
 ]
