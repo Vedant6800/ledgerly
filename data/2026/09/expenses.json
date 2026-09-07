@@ -1,5 +1,14 @@
 [
   {
+    "id": "exp_20260917888036150514139",
+    "date": "2026-09-03",
+    "description": "Chocolate for Swara",
+    "amount": 50,
+    "createdAt": "2026-09-07T17:53:35.051Z",
+    "updatedAt": "2026-09-07T17:53:35.051Z",
+    "category": "Gifts"
+  },
+  {
     "id": "exp_20260917883235241711264",
     "date": "2026-09-02",
     "description": "Hair removal cream",
