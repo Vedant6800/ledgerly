@@ -9,6 +9,15 @@
     "category": "Investment"
   },
   {
+    "id": "exp_20260917888041184807808",
+    "date": "2026-09-07",
+    "description": "Papa tickit latur to pune",
+    "amount": 500,
+    "createdAt": "2026-09-07T18:01:58.481Z",
+    "updatedAt": "2026-09-07T18:01:58.481Z",
+    "category": "Given at Home"
+  },
+  {
     "id": "exp_20260917888038760968286",
     "date": "2026-09-05",
     "description": "Mirzapur Movie",
