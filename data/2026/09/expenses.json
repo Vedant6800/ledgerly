@@ -9,6 +9,15 @@
     "category": "Investment"
   },
   {
+    "id": "exp_20260917888038760968286",
+    "date": "2026-09-05",
+    "description": "Mirzapur Movie",
+    "amount": 312,
+    "createdAt": "2026-09-07T17:57:56.096Z",
+    "updatedAt": "2026-09-07T17:57:56.096Z",
+    "category": "Entertainment"
+  },
+  {
     "id": "exp_20260917888036150514139",
     "date": "2026-09-03",
     "description": "Chocolate for Swara",
