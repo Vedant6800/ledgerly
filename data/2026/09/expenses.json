@@ -27,6 +27,15 @@
     "category": "Transportation"
   },
   {
+    "id": "exp_20260917888040135989317",
+    "date": "2026-09-05",
+    "description": "Gift for Vijay Housewarming",
+    "amount": 200,
+    "createdAt": "2026-09-07T18:00:13.598Z",
+    "updatedAt": "2026-09-07T18:00:13.598Z",
+    "category": "Gifts"
+  },
+  {
     "id": "exp_20260917888036150514139",
     "date": "2026-09-03",
     "description": "Chocolate for Swara",
