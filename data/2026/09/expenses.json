@@ -18,6 +18,15 @@
     "category": "Given at Home"
   },
   {
+    "id": "exp_20260917888041865688940",
+    "date": "2026-09-07",
+    "description": "Given to Papa",
+    "amount": 3000,
+    "createdAt": "2026-09-07T18:03:06.568Z",
+    "updatedAt": "2026-09-07T18:03:06.568Z",
+    "category": "Given at Home"
+  },
+  {
     "id": "exp_20260917888038760968286",
     "date": "2026-09-05",
     "description": "Mirzapur Movie",
