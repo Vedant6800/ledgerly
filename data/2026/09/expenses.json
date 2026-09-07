@@ -18,6 +18,15 @@
     "category": "Entertainment"
   },
   {
+    "id": "exp_20260917888039478589622",
+    "date": "2026-09-05",
+    "description": "Petrol",
+    "amount": 160,
+    "createdAt": "2026-09-07T17:59:07.858Z",
+    "updatedAt": "2026-09-07T17:59:07.858Z",
+    "category": "Transportation"
+  },
+  {
     "id": "exp_20260917888036150514139",
     "date": "2026-09-03",
     "description": "Chocolate for Swara",
