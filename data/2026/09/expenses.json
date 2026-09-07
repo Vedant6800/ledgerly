@@ -63,6 +63,15 @@
     "category": "Gifts"
   },
   {
+    "id": "exp_20260917888043187991185",
+    "date": "2026-09-03",
+    "description": "Mobile Recharge",
+    "amount": 1099,
+    "createdAt": "2026-09-07T18:05:18.799Z",
+    "updatedAt": "2026-09-07T18:05:18.799Z",
+    "category": "Utilities"
+  },
+  {
     "id": "exp_20260917883235241711264",
     "date": "2026-09-02",
     "description": "Hair removal cream",
