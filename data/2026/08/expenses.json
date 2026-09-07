@@ -27,6 +27,15 @@
     "category": "Given at Home"
   },
   {
+    "id": "exp_20260817888035278387102",
+    "date": "2026-08-28",
+    "description": "Rakhi Gift to Kalpana",
+    "amount": 100,
+    "createdAt": "2026-09-07T17:52:07.838Z",
+    "updatedAt": "2026-09-07T17:52:07.839Z",
+    "category": "Gifts"
+  },
+  {
     "id": "exp_2026081788014227269649",
     "date": "2026-08-27",
     "description": "Pramod Super Market: corn floor, masala, etc.",
