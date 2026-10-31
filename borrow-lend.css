@@ -1,0 +1,21 @@
+.bl-panel { background: var(--bg-card); border: 2px solid var(--border-color); border-radius: var(--border-radius); padding: var(--spacing-xl); margin-bottom: var(--spacing-xl); box-shadow: var(--shadow-md); }
+.bl-panel .section-title { margin-bottom: var(--spacing-lg); }
+.bl-toolbar { display: flex; justify-content: space-between; gap: var(--spacing-md); align-items: center; margin-bottom: var(--spacing-lg); }
+.bl-record-filters { display: flex; gap: var(--spacing-sm); }
+.bl-record-filters .form-input { min-width: 190px; }
+.bl-record { border: 2px solid var(--border-color); border-radius: var(--border-radius); padding: var(--spacing-lg); margin-bottom: var(--spacing-md); background: var(--bg-secondary); }
+.bl-record-header, .bl-record-meta, .bl-repayment-header { display: flex; justify-content: space-between; gap: var(--spacing-md); flex-wrap: wrap; align-items: center; }
+.bl-record-header h3 { margin: 0; color: var(--text-primary); }
+.bl-record-meta { color: var(--text-secondary); font-size: 14px; margin: var(--spacing-sm) 0; }
+.bl-amount { font-size: 20px; font-weight: var(--font-weight-bold); }
+.bl-outstanding { color: var(--accent-expense); }
+.bl-receivable { color: var(--accent-income); }
+.bl-status { border-radius: 20px; padding: 3px 10px; font-size: 12px; background: var(--accent-income-bg); color: var(--accent-income); }
+.bl-status.active { background: var(--accent-expense-bg); color: var(--accent-expense); }
+.bl-status.partially { background: #fff8e1; color: #b26a00; }
+.bl-repayments { border-top: 1px solid var(--border-color); margin-top: var(--spacing-md); padding-top: var(--spacing-md); }
+.bl-repayment { display: flex; justify-content: space-between; gap: var(--spacing-sm); padding: 6px 0; color: var(--text-secondary); }
+.bl-repayment-form { display: grid; grid-template-columns: repeat(3, 1fr) auto; gap: var(--spacing-sm); margin-top: var(--spacing-sm); }
+.bl-actions { display: flex; gap: var(--spacing-sm); flex-wrap: wrap; }
+.bl-empty { text-align: center; color: var(--text-muted); padding: var(--spacing-xl); }
+@media (max-width: 768px) { .bl-repayment-form { grid-template-columns: 1fr; } .bl-toolbar { align-items: stretch; flex-direction: column; } .bl-record-filters { flex-direction: column; } .bl-record-filters .form-input { min-width: 0; width: 100%; } }

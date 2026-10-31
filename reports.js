@@ -109,6 +109,12 @@ class LedgerlyReports {
         this.updateFinancialPosition().catch(err =>
             console.warn('Financial Position update failed silently:', err)
         );
+
+        if (window.loadBorrowLendReport) {
+            window.loadBorrowLendReport(this.githubClient).catch(err =>
+                console.error('Borrow & Lend report update failed:', err)
+            );
+        }
     }
 
     // Update summary cards
@@ -1346,5 +1352,4 @@ class LedgerlyReports {
 document.addEventListener('DOMContentLoaded', () => {
     window.ledgerlyReports = new LedgerlyReports();
 });
-
 

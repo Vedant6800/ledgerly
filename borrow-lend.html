@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borrow & Lend - Ledgerly</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="borrow-lend.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="header-text">
+                    <h1 class="app-name">Borrow & Lend</h1>
+                    <p class="app-subtitle">Track money you owe and money owed to you</p>
+                </div>
+                <div class="header-actions">
+                    <a href="index.html" class="btn-icon" title="Back to Ledger">🏠</a>
+                    <a href="reports.html" class="btn-icon" title="View Reports">📊</a>
+                    <button class="theme-toggle" id="theme-toggle" title="Toggle theme"><span class="theme-icon">🌙</span></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="loading-overlay" id="loading-overlay">
+                <div class="loading-spinner"></div>
+                <p class="loading-text">Loading Borrow & Lend data...</p>
+            </div>
+
+            <section class="summary-cards bl-summary">
+                <div class="summary-card expense-card"><p class="card-label">You Owe</p><p class="card-value" id="bl-liabilities">₹0.00</p></div>
+                <div class="summary-card income-card"><p class="card-label">You're Owed</p><p class="card-value" id="bl-receivables">₹0.00</p></div>
+                <div class="summary-card balance-card"><p class="card-label">Net Position</p><p class="card-value" id="bl-net-position">₹0.00</p></div>
+            </section>
+
+            <section class="bl-panel">
+                <h2 class="section-title">Add Borrow & Lend Record</h2>
+                <form id="record-form" class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label" for="record-type">Type</label>
+                        <select id="record-type" class="form-input"><option value="borrowed">Borrowed</option><option value="lent">Lent</option></select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="person-name">Person</label>
+                        <input id="person-name" class="form-input" list="people-list" placeholder="Search or enter a person" autocomplete="off" required>
+                        <datalist id="people-list"></datalist>
+                    </div>
+                    <div class="form-group"><label class="form-label" for="record-amount">Amount</label><input id="record-amount" class="form-input" type="number" min="0.01" step="0.01" required></div>
+                    <div class="form-group"><label class="form-label" for="record-date">Date</label><input id="record-date" class="form-input" type="date" required></div>
+                    <div class="form-group form-group-wide"><label class="form-label" for="record-description">Description</label><input id="record-description" class="form-input"></div>
+                    <div class="form-group form-group-wide"><label class="form-label" for="record-notes">Notes</label><textarea id="record-notes" class="form-input" rows="2"></textarea></div>
+                    <div class="form-actions form-group-wide"><button class="btn btn-primary" type="submit">Save Record</button></div>
+                </form>
+            </section>
+
+            <section class="bl-panel">
+                <div class="bl-toolbar">
+                    <h2 class="section-title">Records</h2>
+                    <div class="bl-record-filters">
+                        <label class="sr-only" for="record-person-filter">Filter by person</label>
+                        <select id="record-person-filter" class="form-input">
+                            <option value="">All people</option>
+                        </select>
+                        <label class="sr-only" for="record-search">Search records</label>
+                        <input id="record-search" class="form-input" placeholder="Search person or description">
+                    </div>
+                </div>
+                <div id="record-list"></div>
+                <p id="record-empty" class="bl-empty">No Borrow & Lend records yet.</p>
+            </section>
+        </div>
+    </main>
+
+    <script src="github-api.js"></script>
+    <script src="borrow-lend.js"></script>
+</body>
+</html>

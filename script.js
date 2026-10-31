@@ -54,6 +54,7 @@ class Ledgerly {
 
             // Load initial month data
             await this.loadCurrentMonth();
+
         } catch (error) {
             console.error('Initialization error:', error);
             this.hideLoading();
@@ -1247,4 +1248,3 @@ let app;
 document.addEventListener('DOMContentLoaded', () => {
     app = new Ledgerly();
 });
-
