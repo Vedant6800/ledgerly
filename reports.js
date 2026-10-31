@@ -907,7 +907,7 @@ class LedgerlyReports {
     applyTheme() {
         document.documentElement.setAttribute('data-theme', this.theme);
         const themeIcon = document.querySelector('.theme-icon');
-        themeIcon.textContent = this.theme === 'light' ? '🌙' : '☀️';
+        themeIcon.setAttribute('data-mode', this.theme);
     }
 
     saveThemePreference() {
@@ -1352,4 +1352,3 @@ class LedgerlyReports {
 document.addEventListener('DOMContentLoaded', () => {
     window.ledgerlyReports = new LedgerlyReports();
 });
-

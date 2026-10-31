@@ -150,8 +150,83 @@ body {
 
 .header-actions {
     display: flex;
-    gap: var(--spacing-md);
+    gap: var(--spacing-sm);
     align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.primary-nav {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 4px;
+    background: rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
+}
+
+.nav-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 12px;
+    border-radius: 7px;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 13px;
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+}
+
+.nav-tab svg,
+.utility-button svg,
+.theme-icon {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.nav-tab:hover,
+.nav-tab.active {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.sync-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 10px;
+    border-radius: 999px;
+    color: rgba(255, 255, 255, 0.86);
+    background: rgba(0, 0, 0, 0.12);
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.sync-status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #71c58a;
+    box-shadow: 0 0 0 3px rgba(113, 197, 138, 0.18);
+}
+
+.sync-status--syncing .sync-status-dot {
+    background: #f2c14e;
+    box-shadow: 0 0 0 3px rgba(242, 193, 78, 0.18);
+    animation: syncPulse 1.2s ease-in-out infinite;
+}
+
+.sync-status--error .sync-status-dot { background: #ff8a80; }
+
+@keyframes syncPulse {
+    50% { opacity: 0.45; transform: scale(0.8); }
 }
 
 .app-name {
@@ -184,6 +259,12 @@ body {
     backdrop-filter: blur(10px);
     font-size: 24px;
     text-decoration: none;
+}
+
+.utility-button {
+    width: 40px;
+    height: 40px;
+    font-size: inherit;
 }
 
 .btn-icon:hover {
@@ -220,7 +301,6 @@ body {
 }
 
 .theme-icon {
-    font-size: 24px;
     transition: transform var(--transition-normal);
 }
 
@@ -940,8 +1020,13 @@ body {
     }
 
     .theme-icon {
-        font-size: 20px;
+        width: 18px;
+        height: 18px;
     }
+
+    .nav-tab span { display: none; }
+    .nav-tab { padding: 9px 10px; }
+    .sync-status-label { display: none; }
 
     .summary-cards {
         grid-template-columns: 1fr;

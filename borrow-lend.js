@@ -231,7 +231,7 @@
             document.getElementById('theme-toggle').addEventListener('click', () => {
                 const current = document.documentElement.getAttribute('data-theme') || 'light';
                 document.documentElement.setAttribute('data-theme', current === 'light' ? 'dark' : 'light');
-                document.querySelector('.theme-icon').textContent = current === 'light' ? '☀️' : '🌙';
+                document.querySelector('.theme-icon').setAttribute('data-mode', current === 'light' ? 'dark' : 'light');
             });
         }
 

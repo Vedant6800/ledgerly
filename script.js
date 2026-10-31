@@ -123,7 +123,7 @@ class Ledgerly {
     applyTheme() {
         document.documentElement.setAttribute('data-theme', this.theme);
         const themeIcon = document.querySelector('.theme-icon');
-        themeIcon.textContent = this.theme === 'light' ? '🌙' : '☀️';
+        themeIcon.setAttribute('data-mode', this.theme);
     }
 
     saveThemePreference() {
@@ -725,6 +725,12 @@ class Ledgerly {
         if (!statusEl) return;
 
         const friendly = this.friendlyErrorMessage(message);
+        const headerStatus = document.getElementById('header-sync-status');
+        if (headerStatus) {
+            headerStatus.classList.remove('sync-status--syncing');
+            headerStatus.classList.add('sync-status--error');
+            headerStatus.querySelector('.sync-status-label').textContent = 'Sync error';
+        }
 
         statusEl.style.display = 'flex';
         statusEl.innerHTML = `<span>⚠️</span><span>${this.escapeHtml(friendly)}</span>`;
@@ -747,6 +753,7 @@ class Ledgerly {
 
         const queuedCount = this.txnQueue.length;
         const totalPending = queuedCount + (this.isProcessing ? 1 : 0);
+        this.updateHeaderSyncStatus(totalPending);
 
         // Disable the submit button only during the brief debounce window
         // (isSubmitLocked). We intentionally keep it enabled while the queue
@@ -777,6 +784,21 @@ class Ledgerly {
 
         statusEl.style.display = 'flex';
         statusEl.innerHTML = `${spinner}<span>${label}</span>`;
+    }
+
+    updateHeaderSyncStatus(totalPending) {
+        const status = document.getElementById('header-sync-status');
+        if (!status) return;
+        const label = status.querySelector('.sync-status-label');
+        status.classList.remove('sync-status--syncing', 'sync-status--error');
+        if (totalPending > 0) {
+            status.classList.add('sync-status--syncing');
+            label.textContent = this.isProcessing
+                ? `Syncing${this.txnQueue.length ? ` ${this.txnQueue.length} queued` : ''}...`
+                : `${this.txnQueue.length} queued`;
+        } else {
+            label.textContent = 'Synced to GitHub';
+        }
     }
 
     /**
