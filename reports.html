@@ -17,14 +17,23 @@
                     <p class="app-subtitle">Financial Analytics Dashboard</p>
                 </div>
                 <div class="header-actions">
-                    <button class="btn-icon" id="refresh-reports-btn" title="Refresh Analytics Data">
-                        <span>🔄</span>
+                    <nav class="primary-nav" aria-label="Primary navigation">
+                        <a href="index.html" class="nav-tab">
+                            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5M9 21v-6h6v6"/></svg><span>Ledger</span>
+                        </a>
+                        <a href="reports.html" class="nav-tab active" aria-current="page">
+                            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 19V5M4 19h16"/><path d="m7 15 3-4 3 2 5-7"/></svg><span>Reports</span>
+                        </a>
+                        <a href="borrow-lend.html" class="nav-tab">
+                            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M8 11V7a2 2 0 1 1 4 0v4M12 11V5a2 2 0 1 1 4 0v7M16 12V8a2 2 0 1 1 4 0v6c0 4-2 7-7 7h-1c-3 0-5-1-7-4l-2-3a2 2 0 0 1 3-2l2 2V7a2 2 0 1 1 4 0v4"/></svg><span>Debts / Lending</span>
+                        </a>
+                    </nav>
+                    <span class="sync-status sync-status--idle" id="header-sync-status" role="status"><span class="sync-status-dot"></span><span class="sync-status-label">GitHub sync ready</span></span>
+                    <button class="btn-icon utility-button" id="refresh-reports-btn" title="Refresh Analytics Data" aria-label="Refresh Analytics Data">
+                        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.9-3M4 5v4h4M4 13a8 8 0 0 0 14.9 3M20 19v-4h-4"/></svg>
                     </button>
-                    <a href="index.html" class="btn-icon" title="Back to Home">
-                        <span>🏠</span>
-                    </a>
                     <button class="theme-toggle" id="theme-toggle" title="Toggle theme">
-                        <span class="theme-icon">🌙</span>
+                        <svg class="theme-icon" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
                     </button>
                 </div>
             </div>
@@ -144,6 +153,20 @@
                     </div>
 
                 </div><!-- /.fp-content -->
+            </section>
+
+            <section class="report-section" id="borrow-lend-report">
+                <h2 class="report-section-title">🤝 Borrowing, Lending & Financial Position</h2>
+                <div class="summary-cards">
+                    <div class="summary-card expense-card"><p class="card-label">Outstanding Liabilities</p><p class="card-value" id="report-bl-liabilities">₹0.00</p></div>
+                    <div class="summary-card balance-card"><p class="card-label">Outstanding Receivables</p><p class="card-value" id="report-bl-receivables">₹0.00</p></div>
+                </div>
+                <div class="net-position-result" id="report-bl-net-position-card">
+                    <p class="net-position-label">Net Financial Position</p>
+                    <p class="net-position-value" id="report-bl-net-position">₹0.00</p>
+                    <p class="net-position-status" id="report-bl-net-position-status">Loading position...</p>
+                    <p class="net-position-note">Overall balance + receivables − liabilities</p>
+                </div>
             </section>
 
             <!-- Expense Ratio Indicator -->
@@ -299,6 +322,21 @@
                 </div>
             </section>
 
+            <!-- Outstanding Borrow & Lend balances by person -->
+            <section class="report-section" id="borrow-lend-people-report">
+                <h2 class="report-section-title">👥 Outstanding by Person</h2>
+                <div class="chart-controls">
+                    <button class="chart-toggle-btn active" data-bl-person-chart="bar">📊 Bar Chart</button>
+                    <button class="chart-toggle-btn" data-bl-person-chart="pie">🥧 Pie Chart</button>
+                </div>
+                <div class="chart-container">
+                    <canvas id="borrow-lend-person-chart"></canvas>
+                </div>
+                <div class="no-data-message" id="borrow-lend-person-no-data" style="display:none;">
+                    <p>📭 No outstanding person balances</p>
+                </div>
+            </section>
+
         </div>
     </main>
 
@@ -319,8 +357,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <!-- Load GitHub API -->
     <script src="github-api.js"></script>
+    <script src="borrow-lend.js"></script>
     <!-- Load Reports Script -->
     <script src="reports.js"></script>
 </body>
 </html>
-

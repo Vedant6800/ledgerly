@@ -24,6 +24,53 @@
     gap: var(--spacing-sm);
 }
 
+.net-position-result {
+    margin-top: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background: var(--bg-secondary);
+    text-align: center;
+}
+
+.net-position-result.positive {
+    border-color: var(--accent-income);
+}
+
+.net-position-result.negative {
+    border-color: var(--accent-expense);
+}
+
+.net-position-label,
+.net-position-note {
+    color: var(--text-secondary);
+}
+
+.net-position-value {
+    margin: var(--spacing-sm) 0;
+    font-size: 32px;
+    font-weight: var(--font-weight-bold);
+}
+
+.net-position-value.positive,
+.net-position-status.positive {
+    color: var(--accent-income);
+}
+
+.net-position-value.negative,
+.net-position-status.negative {
+    color: var(--accent-expense);
+}
+
+.net-position-status {
+    font-weight: var(--font-weight-bold);
+}
+
+.net-position-note {
+    margin-top: var(--spacing-sm);
+    font-size: 13px;
+}
+
 /* Expense Ratio Indicator */
 .expense-ratio-container {
     display: grid;

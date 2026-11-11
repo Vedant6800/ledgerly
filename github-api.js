@@ -191,6 +191,96 @@ class GitHubAPIClient {
         return `${this.config.basePath}/category.json`;
     }
 
+    getBorrowLendPath(relativePath) {
+        return `${this.config.basePath}/borrow-lend/${relativePath}`;
+    }
+
+    async getDataFile(path, cacheKey) {
+        const url = `${this.baseURL}/repos/${this.config.owner}/${this.config.repo}/contents/${path}?ref=${this.config.branch}`;
+
+        try {
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: this.getHeaders()
+            });
+
+            if (response.status === 404) {
+                return { content: null, sha: null, exists: false };
+            }
+            if (!response.ok) {
+                throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
+            }
+
+            const data = await response.json();
+            const content = JSON.parse(atob(data.content));
+            this.cache.set(cacheKey, data.sha);
+            return { content, sha: data.sha, exists: true };
+        } catch (error) {
+            console.error(`Error fetching data file ${path}:`, error);
+            throw error;
+        }
+    }
+
+    async updateDataFile(path, cacheKey, content, message) {
+        const url = `${this.baseURL}/repos/${this.config.owner}/${this.config.repo}/contents/${path}`;
+        let sha = this.cache.get(cacheKey);
+
+        if (!sha) {
+            const existing = await this.getDataFile(path, cacheKey);
+            sha = existing.sha;
+        }
+
+        const body = {
+            message: message || `Update ${path}`,
+            content: btoa(JSON.stringify(content, null, 2)),
+            branch: this.config.branch
+        };
+        if (sha) body.sha = sha;
+
+        const response = await fetch(url, {
+            method: 'PUT',
+            headers: this.getHeaders(),
+            body: JSON.stringify(body)
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(this.buildApiError(response.status, errorData.message));
+        }
+
+        const data = await response.json();
+        this.cache.set(cacheKey, data.content.sha);
+        return data;
+    }
+
+    async listDataFiles(path) {
+        const url = `${this.baseURL}/repos/${this.config.owner}/${this.config.repo}/contents/${path}?ref=${this.config.branch}`;
+        const response = await fetch(url, { method: 'GET', headers: this.getHeaders() });
+        if (response.status === 404) return [];
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(this.buildApiError(response.status, errorData.message));
+        }
+        return await response.json();
+    }
+
+    async deleteDataFile(path, cacheKey, message) {
+        const url = `${this.baseURL}/repos/${this.config.owner}/${this.config.repo}/contents/${path}`;
+        const sha = this.cache.get(cacheKey) || (await this.getDataFile(path, cacheKey)).sha;
+        if (!sha) throw new Error('Cannot delete a record that is not present on GitHub');
+        const response = await fetch(url, {
+            method: 'DELETE',
+            headers: this.getHeaders(),
+            body: JSON.stringify({ message, sha, branch: this.config.branch })
+        });
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(this.buildApiError(response.status, errorData.message));
+        }
+        this.cache.delete(cacheKey);
+        return response.json();
+    }
+
     // Get category file from GitHub
     async getCategoryFile() {
         const path = this.getCategoryFilePath();
@@ -591,6 +681,319 @@ class GitHubDataManager {
         this.loadingStates = new Map(); // Track loading states
     }
 
+    // ==========================================
+    // BORROW & LEND DATA MANAGER
+    // ==========================================
+    static BorrowLendDataManager = class BorrowLendDataManager {
+        constructor(githubClient) {
+            this.github = githubClient;
+            this.people = [];
+            this.records = [];
+            this.loaded = false;
+            this.loadingPromise = null;
+            this.writeQueue = Promise.resolve();
+        }
+
+        static normalizePersonName(name) {
+            return String(name || '').trim().replace(/\s+/g, ' ').toLocaleLowerCase();
+        }
+
+        static cents(value) {
+            const number = Number(value);
+            if (!Number.isFinite(number)) throw new Error('Amount must be a valid number');
+            return Math.round(number * 100);
+        }
+
+        static amount(cents) {
+            return cents / 100;
+        }
+
+        static status(record) {
+            const repaid = (record.repayments || []).reduce((sum, item) => sum + this.cents(item.amount), 0);
+            const principal = this.cents(record.amount);
+            if (repaid === 0) return 'Active';
+            if (repaid >= principal) return 'Settled';
+            return 'Partially Settled';
+        }
+
+        calculateRecord(record) {
+            const principal = BorrowLendDataManager.cents(record.amount);
+            const repaid = (record.repayments || []).reduce(
+                (sum, item) => sum + BorrowLendDataManager.cents(item.amount), 0
+            );
+            return {
+                ...record,
+                repayments: record.repayments || [],
+                totalRepaid: BorrowLendDataManager.amount(repaid),
+                outstanding: BorrowLendDataManager.amount(Math.max(0, principal - repaid)),
+                status: BorrowLendDataManager.status(record)
+            };
+        }
+
+        async load() {
+            if (this.loaded) return this.getSnapshot();
+            if (this.loadingPromise) return this.loadingPromise;
+
+            this.loadingPromise = (async () => {
+                const peopleFile = await this.github.getDataFile(
+                    this.github.getBorrowLendPath('people.json'), 'borrow-lend-people'
+                );
+                this.people = Array.isArray(peopleFile.content) ? peopleFile.content : [];
+
+                let files = [];
+                try {
+                    files = await this.github.listDataFiles(this.github.getBorrowLendPath('records'));
+                } catch (error) {
+                    if (!String(error.message).includes('404')) throw error;
+                }
+
+                const recordFiles = Array.isArray(files)
+                    ? files.filter(file => file.type === 'file' && file.name.endsWith('.json'))
+                    : [];
+                const loadedRecords = await Promise.all(recordFiles.map(file =>
+                    this.github.getDataFile(file.path, `borrow-lend-record-${file.name}`)
+                ));
+                this.records = loadedRecords
+                    .map(file => file.content)
+                    .filter(record => record && record.id)
+                    .map(record => ({ ...record, repayments: Array.isArray(record.repayments) ? record.repayments : [] }));
+                this.loaded = true;
+                return this.getSnapshot();
+            })();
+
+            try {
+                return await this.loadingPromise;
+            } finally {
+                this.loadingPromise = null;
+            }
+        }
+
+        getSnapshot() {
+            return {
+                people: [...this.people],
+                records: this.records.map(record => this.calculateRecord(record))
+            };
+        }
+
+        async enqueueWrite(operation) {
+            const next = this.writeQueue.then(operation, operation);
+            this.writeQueue = next.catch(() => {});
+            return next;
+        }
+
+        async savePeople() {
+            return this.github.updateDataFile(
+                this.github.getBorrowLendPath('people.json'),
+                'borrow-lend-people',
+                this.people,
+                'Update Borrow & Lend people'
+            );
+        }
+
+        async ensurePerson(name) {
+            const displayName = String(name || '').trim().replace(/\s+/g, ' ');
+            if (!displayName) throw new Error('Person name is required');
+            const normalized = BorrowLendDataManager.normalizePersonName(displayName);
+            let person = this.people.find(item => item.normalizedName === normalized);
+            if (person) return person;
+
+            person = {
+                id: `person_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
+                name: displayName,
+                normalizedName: normalized,
+                createdAt: new Date().toISOString()
+            };
+            this.people.push(person);
+            await this.enqueueWrite(() => this.savePeople());
+            return person;
+        }
+
+        validateRecordInput(input) {
+            if (!input.personName || !String(input.personName).trim()) throw new Error('Person name is required');
+            if (!input.date || !/^\d{4}-\d{2}-\d{2}$/.test(input.date)) throw new Error('A valid date is required');
+            if (BorrowLendDataManager.cents(input.amount) <= 0) throw new Error('Amount must be greater than zero');
+            if (!['borrowed', 'lent'].includes(input.type)) throw new Error('Invalid Borrow & Lend record type');
+        }
+
+        recordPath(id) {
+            return this.github.getBorrowLendPath(`records/${id}.json`);
+        }
+
+        async addRecord(input) {
+            await this.load();
+            this.validateRecordInput(input);
+            const person = await this.ensurePerson(input.personName);
+            const prefix = input.type === 'borrowed' ? 'bor' : 'len';
+            const record = {
+                id: `${prefix}_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
+                personId: person.id,
+                type: input.type,
+                amount: BorrowLendDataManager.amount(BorrowLendDataManager.cents(input.amount)),
+                date: input.date,
+                description: String(input.description || '').trim(),
+                notes: String(input.notes || '').trim(),
+                repayments: [],
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString()
+            };
+            await this.enqueueWrite(() => this.github.updateDataFile(
+                this.recordPath(record.id),
+                `borrow-lend-record-${record.id}.json`,
+                record,
+                `Add ${input.type} record for ${person.name}`
+            ));
+            this.records.push(record);
+            return this.calculateRecord(record);
+        }
+
+        findRecord(id) {
+            const record = this.records.find(item => item.id === id);
+            if (!record) throw new Error('Borrow & Lend record not found');
+            return record;
+        }
+
+        async updateRecord(id, updates) {
+            await this.load();
+            const record = this.findRecord(id);
+            const next = {
+                ...record,
+                ...updates,
+                personId: record.personId,
+                type: record.type,
+                id: record.id,
+                amount: BorrowLendDataManager.amount(BorrowLendDataManager.cents(
+                    updates.amount !== undefined ? updates.amount : record.amount
+                )),
+                date: updates.date || record.date,
+                description: String(updates.description !== undefined ? updates.description : record.description).trim(),
+                notes: String(updates.notes !== undefined ? updates.notes : record.notes).trim(),
+                repayments: record.repayments,
+                updatedAt: new Date().toISOString()
+            };
+            this.validateRecordInput({
+                ...next,
+                personName: this.people.find(person => person.id === next.personId)?.name
+            });
+            const total = this.calculateRecord(next);
+            const repaymentCents = next.repayments.reduce((sum, item) => sum + BorrowLendDataManager.cents(item.amount), 0);
+            if (repaymentCents > BorrowLendDataManager.cents(next.amount)) {
+                throw new Error('Original amount cannot be less than repayments');
+            }
+            await this.enqueueWrite(() => this.github.updateDataFile(
+                this.recordPath(id), `borrow-lend-record-${id}.json`, next, `Update Borrow & Lend record ${id}`
+            ));
+            this.records[this.records.findIndex(item => item.id === id)] = next;
+            return total;
+        }
+
+        async addRepayment(recordId, input) {
+            await this.load();
+            const record = this.findRecord(recordId);
+            const amount = BorrowLendDataManager.amount(BorrowLendDataManager.cents(input.amount));
+            if (!input.date || !/^\d{4}-\d{2}-\d{2}$/.test(input.date)) throw new Error('A valid repayment date is required');
+            if (amount <= 0) throw new Error('Repayment must be greater than zero');
+            const current = this.calculateRecord(record);
+            if (BorrowLendDataManager.cents(amount) > BorrowLendDataManager.cents(current.outstanding)) {
+                throw new Error('Repayment cannot exceed the outstanding amount');
+            }
+            const repayment = {
+                id: `rep_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
+                amount,
+                date: input.date,
+                notes: String(input.notes || '').trim()
+            };
+            const next = { ...record, repayments: [...record.repayments, repayment], updatedAt: new Date().toISOString() };
+            await this.enqueueWrite(() => this.github.updateDataFile(
+                this.recordPath(recordId), `borrow-lend-record-${recordId}.json`, next, `Add repayment to ${recordId}`
+            ));
+            this.records[this.records.findIndex(item => item.id === recordId)] = next;
+            return this.calculateRecord(next);
+        }
+
+        async updateRepayment(recordId, repaymentId, input) {
+            await this.load();
+            const record = this.findRecord(recordId);
+            const existing = record.repayments.find(item => item.id === repaymentId);
+            if (!existing) throw new Error('Repayment not found');
+            const remaining = this.calculateRecord({
+                ...record,
+                repayments: record.repayments.filter(item => item.id !== repaymentId)
+            }).outstanding;
+            const amount = BorrowLendDataManager.amount(BorrowLendDataManager.cents(input.amount));
+            if (!input.date || !/^\d{4}-\d{2}-\d{2}$/.test(input.date)) {
+                throw new Error('A valid repayment date is required');
+            }
+            if (amount <= 0 || BorrowLendDataManager.cents(amount) > BorrowLendDataManager.cents(remaining)) {
+                throw new Error('Repayment must be positive and cannot exceed the outstanding amount');
+            }
+            const next = {
+                ...record,
+                repayments: record.repayments.map(item => item.id === repaymentId
+                    ? { ...item, amount, date: input.date, notes: String(input.notes || '').trim() } : item),
+                updatedAt: new Date().toISOString()
+            };
+            await this.enqueueWrite(() => this.github.updateDataFile(
+                this.recordPath(recordId), `borrow-lend-record-${recordId}.json`, next, `Correct repayment on ${recordId}`
+            ));
+            this.records[this.records.findIndex(item => item.id === recordId)] = next;
+            return this.calculateRecord(next);
+        }
+
+        async deleteRepayment(recordId, repaymentId) {
+            await this.load();
+            const record = this.findRecord(recordId);
+            const next = {
+                ...record,
+                repayments: record.repayments.filter(item => item.id !== repaymentId),
+                updatedAt: new Date().toISOString()
+            };
+            await this.enqueueWrite(() => this.github.updateDataFile(
+                this.recordPath(recordId), `borrow-lend-record-${recordId}.json`, next, `Delete repayment on ${recordId}`
+            ));
+            this.records[this.records.findIndex(item => item.id === recordId)] = next;
+            return this.calculateRecord(next);
+        }
+
+        async deleteRecord(id) {
+            await this.load();
+            const record = this.findRecord(id);
+            if (record.repayments.length > 0) throw new Error('Records with repayment history cannot be deleted. Correct the repayments instead.');
+            await this.enqueueWrite(() => this.github.deleteDataFile(
+                this.recordPath(id), `borrow-lend-record-${id}.json`, `Delete Borrow & Lend record ${id}`
+            ));
+            this.records = this.records.filter(item => item.id !== id);
+            return true;
+        }
+
+        getSummary() {
+            const records = this.records.map(record => this.calculateRecord(record));
+            const totals = records.reduce((result, record) => {
+                const principal = BorrowLendDataManager.cents(record.amount);
+                const repaid = BorrowLendDataManager.cents(record.totalRepaid);
+                if (record.type === 'borrowed') {
+                    result.totalBorrowed += principal;
+                    result.totalRepaid += repaid;
+                } else {
+                    result.totalLent += principal;
+                    result.totalReceivedBack += repaid;
+                }
+                return result;
+            }, { totalBorrowed: 0, totalRepaid: 0, totalLent: 0, totalReceivedBack: 0 });
+            totals.outstandingLiabilities = totals.totalBorrowed - totals.totalRepaid;
+            totals.outstandingReceivables = totals.totalLent - totals.totalReceivedBack;
+            return Object.fromEntries(Object.entries(totals).map(([key, value]) => [key, BorrowLendDataManager.amount(value)]));
+        }
+
+        getPersonName(personId) {
+            return this.people.find(person => person.id === personId)?.name || 'Unknown person';
+        }
+
+        getSnapshotWithSummary() {
+            const snapshot = this.getSnapshot();
+            return { ...snapshot, summary: this.getSummary() };
+        }
+    }
+
     // Extract year and month from date
     extractYearMonth(date) {
         const [year, month] = date.split('-');
@@ -932,6 +1335,6 @@ class GitHubDataManager {
 // Export for use in main application
 window.GitHubAPIClient = GitHubAPIClient;
 window.GitHubDataManager = GitHubDataManager;
+window.BorrowLendDataManager = GitHubDataManager.BorrowLendDataManager;
 window.GITHUB_CONFIG = GITHUB_CONFIG;
 window.TokenManager = TokenManager;
-

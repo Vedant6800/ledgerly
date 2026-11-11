@@ -661,3 +661,34 @@ SOFTWARE.
 [⬆ Back to Top](#-ledgerly---personal-finance-tracker)
 
 </div>
+## Borrow & Lend
+
+Ledgerly includes an optional Borrow & Lend module at `borrow-lend.html`. It
+tracks borrowed and lent principal separately from monthly income and expense
+transactions, including multiple dated repayments, reusable people, automatic
+settlement status, and outstanding balances.
+
+Borrow & Lend data is stored independently in the configured GitHub repository:
+
+```text
+data/
+└── borrow-lend/
+    ├── people.json
+    └── records/
+        ├── bor_<unique-id>.json
+        └── len_<unique-id>.json
+```
+
+Missing Borrow & Lend files are treated as an empty dataset and do not affect
+existing income, expense, category, or monthly report data. The reports page
+shows outstanding liabilities and receivables. The underlying data layer also
+supports an estimated adjusted available balance using:
+
+```text
+Existing all-time balance
++ total borrowed - total repaid
+- total lent + total received back
+```
+
+This estimate is not a verified bank balance. Principal movements are not
+included in income, expense, category, or expense-ratio calculations.
